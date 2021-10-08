@@ -1,7 +1,7 @@
-### 完成度 🚀🚀🚀
-# 2021.10.8
-- 1. 按需加载 [complete: finished~](https://)
-- 2. axios 封装 类 [complete： working~](https://)
+# 完成度 🚀🚀🚀
+## 2021.10.8
+- ### 按需加载 [Complete: finished~](https://)
+- ### axios 封装 类 [Complete： working~](https://)
  
 
 # Vue 3 + Typescript + Vite
