@@ -2,6 +2,7 @@
 ## 2021.10.8
 - ### 按需加载 [Complete: finished~](https://)
 - ### axios 封装 类 [Complete： working~](https://)
+- ### 添加tailwindcss npx tailwindcss init -p [Complete: finished~](https://)
  
 
 # Vue 3 + Typescript + Vite + naive-ui 🧑🏼‍🚀🧑🏼‍🚀🧑🏼‍🚀
