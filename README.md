@@ -1,8 +1,9 @@
 # 完成度 🚀🚀🚀
 ## 2021.10.8
-- ### 按需加载 [Complete: finished~](https://)
-- ### axios 封装 类 [Complete： working~](https://)
-- ### 添加tailwindcss npx tailwindcss init -p [Complete: finished~](https://)
+- ### 按需加载 [Complete: Finished~](https://) 🧑🏼‍🚀
+- ### axios 封装 类 [Complete： Working](https://) 🧑🏼
+- ### 添加tailwindcss npx tailwindcss init -p [Complete: Finished~](https://) 🧑🏼‍🚀
+- ### prettier ESlint [Complete： Working](https://) 🧑🏼
  
 
 # Vue 3 + Typescript + Vite + naive-ui 🧑🏼‍🚀🧑🏼‍🚀🧑🏼‍🚀
