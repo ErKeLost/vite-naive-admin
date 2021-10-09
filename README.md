@@ -1,12 +1,13 @@
 # 完成度 🚀🚀🚀
+
 ## 2021.10.8
+
 - ### 按需加载 [Complete: Finished~](https://) 🧑🏼‍🚀
 - ### axios 封装 类 [Complete： Working](https://) 🧑🏼
-- ### 添加tailwindcss npx tailwindcss init -p [Complete: Finished~](https://) 🧑🏼‍🚀
+- ### 添加 tailwindcss npx tailwindcss init -p [Complete: Finished~](https://) 🧑🏼‍🚀
 - ### prettier ESlint [Complete： Working](https://) 🧑🏼
- 
 
-# Vue 3 + Typescript + Vite + naive-ui 🧑🏼‍🚀🧑🏼‍🚀🧑🏼‍🚀
+# Vue 3 + Typescript + Vite + naive-ui 🚀🚀🚀
 
 <!-- This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 

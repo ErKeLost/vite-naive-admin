@@ -3,9 +3,7 @@ import { components } from '../src/components'
 // for ergodic components
 
 const pluginRegisterComponents = create({
-    components
+  components
 })
 
-export {
-    pluginRegisterComponents,
-}
+export { pluginRegisterComponents }

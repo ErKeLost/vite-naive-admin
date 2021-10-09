@@ -1,11 +1,13 @@
 <script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import HelloWorld from './components/HelloWorld.vue';
+  // This starter template is using Vue 3 <script setup> SFCs
+  // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
+  import HelloWorld from './components/HelloWorld.vue'
+  const a = 'asdawd'
 </script>
 
 <template>
-  <h1 class="text-9xl text-left text-blue-600">hello world</h1>
+  <h1 class="text-9xl text-center text-pink-600">hello world</h1>
+  {{ a }}
   <img alt="Vue logo" src="./assets/logo.png" />
   <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
   <n-button>按钮</n-button>
@@ -36,20 +38,20 @@ import HelloWorld from './components/HelloWorld.vue';
 </template>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-.n-card {
-  max-width: 300px;
-}
-.carousel-img {
-  width: 80%;
-  height: 240px;
-  object-fit: cover;
-}
+  #app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
+  }
+  .n-card {
+    max-width: 300px;
+  }
+  .carousel-img {
+    width: 80%;
+    height: 240px;
+    object-fit: cover;
+  }
 </style>

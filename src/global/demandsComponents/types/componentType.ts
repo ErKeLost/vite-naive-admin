@@ -1,12 +1,9 @@
 interface comp {
-    components: []
+  components: []
 }
 interface api {
-    forEach: Function
-    components: []
+  forEach: Function
+  components: []
 }
 
-export {
-    comp,
-    api
-}
+export { comp, api }
