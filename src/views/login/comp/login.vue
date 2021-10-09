@@ -28,11 +28,21 @@
       <n-form-item>
         <n-button type="primary" size="large" block>登录</n-button>
       </n-form-item>
+      <n-form-item>
+        <n-button type="primary" size="large" block @click="pushRegister"
+          >没有账号？ 可以注册~</n-button
+        >
+      </n-form-item>
     </n-form>
   </div>
 </template>
 
 <script setup lang="ts">
+import { setLoginType } from '@/hooks/login/isLoginComponent'
+
+const pushRegister = () => {
+  setLoginType(true)
+}
 </script>
 
 <style lang="scss" scoped>

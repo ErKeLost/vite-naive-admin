@@ -9,11 +9,11 @@
     <template v-if="!showLogin">
       <div class="lock-box">
         <div class="lock">
-          <span class="lock-icon" title="解锁屏幕" @click="onLockLogin(true)">
+          <!-- <span class="lock-icon" title="解锁屏幕" @click="onLockLogin(true)">
             <n-icon>
               <lock-outlined />
             </n-icon>
-          </span>
+          </span> -->
         </div>
       </div>
       <!--充电-->
@@ -78,14 +78,14 @@
   import { defineComponent, reactive, toRefs } from 'vue'
   import { ResultEnum } from '@/enums/httpEnum'
   import recharge from './Recharge.vue'
-  import {
-    LockOutlined,
-    LoadingOutlined,
-    UserOutlined,
-    ApiOutlined,
-    ArrowRightOutlined,
-    WifiOutlined
-  } from '@vicons/antd'
+  // import {
+  //   LockOutlined,
+  //   LoadingOutlined,
+  //   UserOutlined,
+  //   ApiOutlined,
+  //   ArrowRightOutlined,
+  //   WifiOutlined
+  // } from '@vicons/antd'
 
   import { useRouter, useRoute } from 'vue-router'
   import { useOnline } from '@/hooks/useOnline'
