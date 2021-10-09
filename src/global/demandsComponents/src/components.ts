@@ -1,3 +1,24 @@
-import { NButton, NCard, NCarousel, create } from 'naive-ui'
+import {
+  NButton,
+  NCard,
+  NCarousel,
+  NConfigProvider,
+  NInput,
+  NForm,
+  NFormItem,
+  NIcon,
+  NCheckbox
+} from 'naive-ui'
 
-export const components = [NButton, NCard, NCarousel]
+
+export const components = [
+  NButton,
+  NCard,
+  NCarousel,
+  NConfigProvider,
+  NInput,
+  NForm,
+  NFormItem,
+  NIcon,
+  NCheckbox
+]
