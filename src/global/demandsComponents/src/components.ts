@@ -7,7 +7,11 @@ import {
   NForm,
   NFormItem,
   NIcon,
-  NCheckbox
+  NCheckbox,
+  NGrid,
+  NGridItem,
+  NSelect,
+  NDatePicker
 } from 'naive-ui'
 
 
@@ -20,5 +24,9 @@ export const components = [
   NForm,
   NFormItem,
   NIcon,
-  NCheckbox
+  NCheckbox,
+  NGrid,
+  NGridItem,
+  NSelect,
+  NDatePicker
 ]

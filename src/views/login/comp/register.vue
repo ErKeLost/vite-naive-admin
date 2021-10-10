@@ -4,35 +4,36 @@
       <n-form-item path="username">
         <n-input placeholder="请输入用户名">
           <template #prefix>
-            <i class="mdi mdi-github"></i>
+            <i class="mdi mdi-account mr-3"></i>
+          </template>
+        </n-input>
+      </n-form-item>
+      <n-form-item path="phoneValue">
+        <n-input placeholder="请输入手机号码">
+          <template #prefix>
+            <i class="mdi mdi-phone mr-3"></i>
+          </template>
+        </n-input>
+        <n-button class="ml-10">获取验证码</n-button>
+      </n-form-item>
+      <n-form-item path="usernamae">
+        <n-input placeholder="请输入验证码">
+          <template #prefix>
+            <i class="mdi mdi-security mr-3"></i>
           </template>
         </n-input>
       </n-form-item>
       <n-form-item path="password">
-        <n-form-item path="username">
-          <n-input placeholder="请输入手机号码">
-            <template #prefix>
-              <i class="mdi mdi-github"></i>
-            </template>
-          </n-input>
-        </n-form-item>
-        <n-form-item path="usernamae">
-          <n-input placeholder="请输入电话号码">
-            <template #prefix>
-              <i class="mdi mdi-github"></i>
-            </template>
-          </n-input>
-        </n-form-item>
         <n-input type="password" showPasswordOn placeholder="请设置密码">
           <template #prefix>
-            <i class="mdi mdi-lock"></i>
+            <i class="mdi mdi-lock mr-3"></i>
           </template>
         </n-input>
       </n-form-item>
       <n-form-item path="password">
         <n-input type="password" showPasswordOn placeholder="再次输入密码">
           <template #prefix>
-            <i class="mdi mdi-lock"></i>
+            <i class="mdi mdi-lock mr-3"></i>
           </template>
         </n-input>
       </n-form-item>

@@ -36,9 +36,9 @@
           <div class="max-w-md w-full mx-auto space-y-8">
             <login-right></login-right>
             <component :is="isLogin === true ? Register : Login"></component>
-            <other-login-type></other-login-type>
+            <other-login-type v-if="!isLogin"></other-login-type>
           </div>
-          <img class="absolute img-responsive" src="~@/assets/images/girl.png" />
+          <img class="absolute w-60 img-responsive" src="~@/assets/images/love-black.svg" />
         </div>
       </div>
     </div>
@@ -54,12 +54,15 @@ import LoginAnimate from './comp/login-animate.vue'
 import LoginRight from './comp/login-right.vue'
 import OtherLoginType from './comp/other-login-type.vue'
 import { isLogin } from '@/hooks/login/isLoginComponent'
-const a = ref(true)
+const enter = () => {
+  console.log(272872)
+}
 </script>
 
 <style lang="scss" scoped>
 .img-responsive {
   right: 0%;
   bottom: 0%;
+  z-index: 999;
 }
 </style>
