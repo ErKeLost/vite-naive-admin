@@ -59,7 +59,8 @@ const enter = () => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
+@import '@/styles/index.less';
 .img-responsive {
   right: 0%;
   bottom: 0%;

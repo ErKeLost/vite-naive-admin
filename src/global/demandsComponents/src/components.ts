@@ -11,7 +11,15 @@ import {
   NGrid,
   NGridItem,
   NSelect,
-  NDatePicker
+  NDatePicker,
+  NLayout,
+  NLayoutSider,
+  NDropdown,
+  NSpace,
+  NSwitch,
+  NMenu,
+  NLayoutFooter,
+  NLayoutHeader
 } from 'naive-ui'
 
 
@@ -28,5 +36,13 @@ export const components = [
   NGrid,
   NGridItem,
   NSelect,
-  NDatePicker
+  NDatePicker,
+  NLayout,
+  NLayoutSider,
+  NDropdown,
+  NSpace,
+  NSwitch,
+  NMenu,
+  NLayoutFooter,
+  NLayoutHeader
 ]

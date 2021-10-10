@@ -13,6 +13,7 @@
     "pinia": "^2.0.0-rc.12",
     "vue": "^3.2.16",
     "vue-router": "^4.0.11",
+    "vuedraggable": "^2.24.3",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
@@ -24,6 +25,8 @@
     "eslint-define-config": "^1.1.1",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.0",
+    "less": "^4.1.2",
+    "less-loader": "^10.0.1",
     "naive-ui": "^2.19.5",
     "postcss": "^8.3.9",
     "prettier": "^2.4.1",
