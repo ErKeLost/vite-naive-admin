@@ -39,42 +39,42 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, ref, watch } from 'vue'
-import { IFormItem } from '../types'
-const props = withDefaults(
-  defineProps<{
-    formItems: IFormItem
-    labelPlacement: string
-    labelWidth?: string
-    labelAlign?: string
-    layout?: string
-    modelValue: any
-  }>(),
-  {
-    formItems: () => [],
-    labelPlacement: 'left',
-    labelWidth: '100',
-    labelAlign: 'left',
-    layout: '1 s:2 m:3 l:4 xl:4 2xl:4'
+  import { PropType, ref, watch } from 'vue'
+  import { IFormItem } from '../types'
+  const props = withDefaults(
+    defineProps<{
+      formItems: IFormItem
+      labelPlacement: string
+      labelWidth?: string
+      labelAlign?: string
+      layout?: string
+      modelValue: any
+    }>(),
+    {
+      formItems: () => [],
+      labelPlacement: 'left',
+      labelWidth: '100',
+      labelAlign: 'left',
+      layout: '1 s:2 m:3 l:4 xl:4 2xl:4'
+    }
+  )
+  const emit = defineEmits(['update:modelValue'])
+  const formData = ref({ ...props.modelValue })
+  watch(
+    formData,
+    (newValue) => {
+      console.log(newValue)
+      emit('update:modelValue', newValue)
+    },
+    { deep: true }
+  )
+  const handler = () => {
+    console.log(formData.value)
   }
-)
-const emit = defineEmits(['update:modelValue'])
-const formData = ref({ ...props.modelValue })
-watch(
-  formData,
-  (newValue) => {
-    console.log(newValue)
-    emit('update:modelValue', newValue)
-  },
-  { deep: true }
-)
-const handler = () => {
-  console.log(formData.value)
-}
 </script>
 
 <style lang="scss" scoped>
-.adny-form {
-  padding-top: 24px;
-}
+  .adny-form {
+    padding-top: 24px;
+  }
 </style>

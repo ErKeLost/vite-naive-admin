@@ -1,7 +1,9 @@
 #  多人协同开发前端配置
+# 表示是最顶层的 EditorConfig 配置文件
 root = true
 
-[*]
+
+[*] # 所有文件适用
 charset = utf-8
 end_of_line = LF
 insert_final_newline = true

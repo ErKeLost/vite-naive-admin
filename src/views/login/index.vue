@@ -34,8 +34,10 @@
           "
         >
           <div class="max-w-md w-full mx-auto space-y-8">
-            <login-right></login-right>
-            <component :is="isLogin === true ? Register : Login"></component>
+            <!-- <login-right></login-right> -->
+            <transition :name="getTransitionName" mode="out-in" appear>
+              <component :is="isLogin === true ? Register : Login"></component>
+            </transition>
             <other-login-type v-if="!isLogin"></other-login-type>
           </div>
           <img class="absolute w-60 img-responsive" src="~@/assets/images/love-black.svg" />
@@ -46,7 +48,7 @@
 </template>
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { ref } from 'vue'
+import { ref, unref, computed } from 'vue'
 import AdnyIcon from '@/adny-ui/icon'
 import Login from './comp/login.vue'
 import Register from './comp/register.vue'
@@ -54,9 +56,12 @@ import LoginAnimate from './comp/login-animate.vue'
 import LoginRight from './comp/login-right.vue'
 import OtherLoginType from './comp/other-login-type.vue'
 import { isLogin } from '@/hooks/login/isLoginComponent'
-const enter = () => {
-  console.log(272872)
-}
+import { useProjectSetting } from '@/hooks/setting/useProjectSetting'
+const { getIsPageAnimate, getPageAnimateType } = useProjectSetting()
+const getTransitionName = computed(() => {
+  return unref(getIsPageAnimate) ? unref(getPageAnimateType) : ''
+})
+console.log(getTransitionName.value)
 </script>
 
 <style lang="less" scoped>

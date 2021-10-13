@@ -1,19 +1,14 @@
 <template>
   <div class="logo">
-    <img src="~@/assets/images/logo.png" alt="" :class="{ 'mr-2': !collapsed }" />
-    <h2 v-show="!collapsed" class="title">NaiveUiAdmin</h2>
+    <img src="~@/assets/images/unknown.svg" alt="" :class="{ 'mr-2': !collapsed }" />
+    <h2 v-show="!collapsed" class="title">ADNY DESIGN</h2>
   </div>
 </template>
 
-<script>
-  export default {
-    name: 'Index',
-    props: {
-      collapsed: {
-        type: Boolean,
-      },
-    },
-  };
+<script lang="ts" setup>
+  defineProps<{
+    collapsed: boolean
+  }>()
 </script>
 
 <style lang="less" scoped>

@@ -1,2 +1,1 @@
-const allModules = import.meta.globEager('./*/index.ts');
-
+const allModules = import.meta.globEager('./*/index.ts')

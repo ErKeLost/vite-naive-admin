@@ -21,6 +21,7 @@ module.exports = defineConfig({
     'plugin:vue/vue3-recommended',
     'plugin:@typescript-eslint/recommended',
     'prettier',
+    // 优先级prettier 大于 eslint  eslint 配置 由 prettier 添加 🚀🚀🚀
     'plugin:prettier/recommended',
     'plugin:vue/vue3-essential',
     'eslint:recommended',

@@ -15,8 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { isLogin } from '@/hooks/login/isLoginComponent'
+  import { isLogin } from '@/hooks/login/isLoginComponent'
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

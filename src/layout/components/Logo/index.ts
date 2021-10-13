@@ -1,3 +1,3 @@
-import Logo from './index.vue';
+import AdnyLogo from './index.vue'
 
-export { Logo };
+export default AdnyLogo
