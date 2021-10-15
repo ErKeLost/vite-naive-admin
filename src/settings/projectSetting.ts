@@ -28,7 +28,7 @@ const setting = {
     //最小宽度
     minMenuWidth: 64,
     //菜单宽度
-    menuWidth: 240,
+    menuWidth: 205,
     //固定菜单
     fixed: true,
     //分割菜单
@@ -46,6 +46,6 @@ const setting = {
   //是否开启路由动画
   isPageAnimate: true,
   //路由动画类型
-  pageAnimateType: 'zoom-fade'
+  pageAnimateType: 'bounceInDown'
 }
 export default setting

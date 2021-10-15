@@ -1,7 +1,7 @@
-import { RouteRecordRaw } from 'vue-router';
-import { Layout } from '@/router/constant';
-import { ProjectOutlined } from '@vicons/antd';
-import { renderIcon, renderNew } from '@/utils/index';
+import { RouteRecordRaw } from 'vue-router'
+import { Layout } from '@/router/constant'
+import { ProjectOutlined } from '@vicons/antd'
+import { renderIcon, renderNew } from '@/utils/index'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -9,24 +9,25 @@ const routes: Array<RouteRecordRaw> = [
     name: 'about',
     component: Layout,
     meta: {
+      title: '库',
       sort: 10,
       isRoot: true,
       activeMenu: 'about_index',
-      icon: renderIcon(ProjectOutlined),
+      icon: renderIcon(ProjectOutlined)
     },
     children: [
       {
         path: 'index',
         name: `about_index`,
         meta: {
-          title: '关于',
+          title: '库',
           extra: renderNew(),
-          activeMenu: 'about_index',
+          activeMenu: 'about_index'
         },
-        component: () => import('@/views/about/index.vue'),
-      },
-    ],
-  },
-];
+        component: () => import('@/views/about/index.vue')
+      }
+    ]
+  }
+]
 
-export default routes;
+export default routes

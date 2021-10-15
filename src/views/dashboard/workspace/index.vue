@@ -5,13 +5,12 @@
   </div>
 </template>
 
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <style scoped lang="less">
-.container {
-  width: 100%;
-  height: 50vh;
-  background-color: #fba;
-}
+  .container {
+    width: 100%;
+    height: 50vh;
+    background-color: #fba;
+  }
 </style>

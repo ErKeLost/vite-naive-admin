@@ -17,9 +17,7 @@
         <login-animate></login-animate>
         <div
           class="
-            md:flex
-            md:items-center
-            md:justify-center
+            md:flex md:items-center md:justify-center
             w-full
             sm:w-auto
             md:h-full
@@ -47,28 +45,27 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
-import { ref, unref, computed } from 'vue'
-import AdnyIcon from '@/adny-ui/icon'
-import Login from './comp/login.vue'
-import Register from './comp/register.vue'
-import LoginAnimate from './comp/login-animate.vue'
-import LoginRight from './comp/login-right.vue'
-import OtherLoginType from './comp/other-login-type.vue'
-import { isLogin } from '@/hooks/login/isLoginComponent'
-import { useProjectSetting } from '@/hooks/setting/useProjectSetting'
-const { getIsPageAnimate, getPageAnimateType } = useProjectSetting()
-const getTransitionName = computed(() => {
-  return unref(getIsPageAnimate) ? unref(getPageAnimateType) : ''
-})
-console.log(getTransitionName.value)
+  import { useRouter } from 'vue-router'
+  import { ref, unref, computed } from 'vue'
+  import AdnyIcon from '@/adny-ui/icon'
+  import Login from './comp/login.vue'
+  import Register from './comp/register.vue'
+  import LoginAnimate from './comp/login-animate.vue'
+  import LoginRight from './comp/login-right.vue'
+  import OtherLoginType from './comp/other-login-type.vue'
+  import { isLogin } from '@/hooks/login/isLoginComponent'
+  import { useProjectSetting } from '@/hooks/setting/useProjectSetting'
+  const { getIsPageAnimate, getPageAnimateType } = useProjectSetting()
+  const getTransitionName = computed(() => {
+    return unref(getIsPageAnimate) ? unref(getPageAnimateType) : ''
+  })
 </script>
 
 <style lang="less" scoped>
-@import '@/styles/index.less';
-.img-responsive {
-  right: 0%;
-  bottom: 0%;
-  z-index: 999;
-}
+  @import '@/styles/index.less';
+  .img-responsive {
+    right: 0%;
+    bottom: 0%;
+    z-index: 999;
+  }
 </style>

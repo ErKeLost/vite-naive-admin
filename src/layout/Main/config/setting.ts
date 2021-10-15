@@ -31,6 +31,4 @@ const ThemeConfig: any = [
   }
 ]
 
-export {
-  ThemeConfig
-}
+export { ThemeConfig }

@@ -3,8 +3,8 @@
     <LoginRight />
     <div class="view-account-form">
       <n-form ref="formRef" label-placement="left" size="large" :model="model" :rules="rules">
-        <n-form-item path="username">
-          <n-input placeholder="请输入用户名" v-model:value="model.username">
+        <n-form-item path="name">
+          <n-input placeholder="请输入用户名" v-model:value="model.name">
             <template #prefix>
               <i class="mdi mdi-github mr-3"></i>
             </template>
@@ -46,47 +46,50 @@
 </template>
 
 <script setup lang="ts">
-import { setLoginType } from '@/hooks/login/isLoginComponent'
-import { useRouter } from 'vue-router'
-import { ref } from 'vue'
-import { useMessage } from 'naive-ui'
-import LoginRight from './login-right.vue'
-const message = useMessage()
-const formRef = ref(null)
-const model = ref({
-  username: null,
-  password: null
-})
-const rules = {
-  username: {
-    required: true,
-    message: '请输入用户名',
-    trigger: ['input', 'blur']
-  },
-  password: {
-    required: true,
-    message: '请输入密码',
-    trigger: ['input', 'blur']
-  }
-}
-const router = useRouter()
-const pushRegister = () => {
-  setLoginType(true)
-}
-const handleClickLogin = () => {
-  formRef.value.validate((err: any) => {
-    if (!err) {
-      message.success('Valid')
-      router.push({ path: '/main' })
-    } else {
-      message.error('Invalid')
-    }
+  import { useLoginStore } from '@/store/modules/login'
+  import { setLoginType } from '@/hooks/login/isLoginComponent'
+  import { useRouter } from 'vue-router'
+  import { ref } from 'vue'
+  import { useMessage } from 'naive-ui'
+  import LoginRight from './login-right.vue'
+  const loginStore = useLoginStore()
+
+  const message = useMessage()
+  const formRef = ref(null)
+  const model = ref({
+    name: null,
+    password: null
   })
-}
+  const rules = {
+    name: {
+      required: true,
+      message: '请输入用户名',
+      trigger: ['input', 'blur']
+    },
+    password: {
+      required: true,
+      message: '请输入密码',
+      trigger: ['input', 'blur']
+    }
+  }
+  const router = useRouter()
+  const pushRegister = () => {
+    setLoginType(true)
+  }
+  const handleClickLogin = () => {
+    formRef.value.validate((err: any) => {
+      if (!err) {
+        loginStore.accountLoginAction(model.value)
+        message.success('Valid')
+      } else {
+        message.error('Invalid')
+      }
+    })
+  }
 </script>
 
 <style lang="scss" scoped>
-.container {
-  justify-content: space-between;
-}
+  .container {
+    justify-content: space-between;
+  }
 </style>

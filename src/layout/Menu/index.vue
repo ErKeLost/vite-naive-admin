@@ -11,94 +11,45 @@
       @update:value="clickMenuItem"
       @update:expanded-keys="menuExpanded"
     /> -->
-  <!-- <NMenu
+  <NMenu
     class="menu-class"
     :inverted="inverted"
-    :options="menuOptions"
-    :collapsed="collapsed"
+    :options="result"
     :collapsed-width="64"
     :collapsed-icon-size="20"
     :indent="24"
-  /> -->
+    :accordion="true"
+    @update:value="changeRouter"
+  />
 </template>
 
 <script setup lang="ts">
-  import { computed } from 'vue'
+  import { useRouter, useRoute } from 'vue-router'
+  import { useLoginStore } from '@/store/modules/login'
+  import { computed, ref } from 'vue'
   import { useProjectSettingStore } from '@/store/modules/projectSetting'
   import { useProjectSetting } from '@/hooks/setting/useProjectSetting'
+  import { useAsyncRouteStore } from '@/store/modules/asyncRoute'
+  import { generatorMenu, generatorMenuMix } from '@/utils'
+  import { constantRouterList } from '@/router'
   defineProps<{}>()
+  const constantMenu = generatorMenu(constantRouterList)
+  const loginStore = useLoginStore()
+  // const menus = computed(() => loginStore.userMenus)
+  const result = constantMenu
   const settingStore = useProjectSettingStore()
+
+  // const asyncRouteStore = useAsyncRouteStore()
   const { getNavMode } = useProjectSetting()
+  const router = useRouter()
+  const route = useRoute()
   const inverted = computed(() => {
     return ['dark', 'header-dark'].includes(settingStore.navTheme)
   })
-  const menuOptions = [
-    {
-      label: '且听风吟',
-      key: 'hear-the-wind-sing'
-    },
-    {
-      label: '1973年的弹珠玩具',
-      key: 'pinball-1973',
-      disabled: true,
-      children: [
-        {
-          label: '鼠',
-          key: 'rat'
-        }
-      ]
-    },
-    {
-      label: '寻羊冒险记',
-      key: 'a-wild-sheep-chase',
-      disabled: true
-    },
-    {
-      label: '舞，舞，舞',
-      key: 'dance-dance-dance',
-      children: [
-        {
-          type: 'group',
-          label: '人物',
-          key: 'people',
-          children: [
-            {
-              label: '叙事者',
-              key: 'narrator'
-            },
-            {
-              label: '羊男',
-              key: 'sheep-man'
-            }
-          ]
-        },
-        {
-          label: '饮品',
-          key: 'beverage',
-          children: [
-            {
-              label: '威士忌',
-              key: 'whisky'
-            }
-          ]
-        },
-        {
-          label: '食物',
-          key: 'food',
-          children: [
-            {
-              label: '三明治',
-              key: 'sandwich'
-            }
-          ]
-        },
-        {
-          label: '过去增多，未来减少',
-          key: 'the-past-increases-the-future-recedes'
-        }
-      ]
-    }
-  ]
+  const changeRouter = (key, item) => {
+    console.log(key)
+    router.push({ name: key })
+  }
 </script>
 
 <style scoped>

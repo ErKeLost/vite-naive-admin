@@ -30,6 +30,7 @@ module.exports = defineConfig({
     '@vue/prettier/@typescript-eslint'
   ],
   rules: {
+    'no-unused-vars': 'off',
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     '@typescript-eslint/ban-ts-ignore': 'off',

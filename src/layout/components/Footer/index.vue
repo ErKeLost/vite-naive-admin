@@ -15,10 +15,10 @@
     components: {},
     props: {
       collapsed: {
-        type: Boolean,
-      },
-    },
-  };
+        type: Boolean
+      }
+    }
+  }
 </script>
 
 <style lang="less" scoped>

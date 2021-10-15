@@ -6,7 +6,7 @@ const request = new AdnyRequest({
   interceptors: {
     requestInterceptor: (config) => {
       // console.log('请求成功的拦截')
-      const token = ''
+      const token = localStorage.getItem('TOKEN')
       if (token) {
         config.headers!.Authorization = `Bearer ${token}`
       }

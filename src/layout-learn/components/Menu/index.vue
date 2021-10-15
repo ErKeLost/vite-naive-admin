@@ -109,6 +109,7 @@
       function updateMenu() {
         if (!settingStore.menuSetting.mixMenu) {
           menus.value = generatorMenu(asyncRouteStore.getMenus)
+          console.log(menus.value)
         } else {
           //混合菜单
           const firstRouteName: string = (currentRoute.matched[0].name as string) || ''
@@ -150,7 +151,8 @@
       onMounted(() => {
         updateMenu()
       })
-
+      console.log(45646)
+      console.log(menus.value)
       return {
         ...toRefs(state),
         inverted,

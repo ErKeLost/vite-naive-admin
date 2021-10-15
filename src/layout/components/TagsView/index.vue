@@ -5,7 +5,7 @@
       'tabs-view-fix': multiTabsSetting.fixed,
       'tabs-view-fixed-header': isMultiHeaderFixed,
       'tabs-view-default-background': getDarkTheme === false,
-      'tabs-view-dark-background': getDarkTheme === true,
+      'tabs-view-dark-background': getDarkTheme === true
     }"
     :style="getChangeStyle"
   >
@@ -90,18 +90,18 @@
     provide,
     watch,
     onMounted,
-    nextTick,
-  } from 'vue';
-  import { useRoute, useRouter } from 'vue-router';
-  import { storage } from '@/utils/Storage';
-  import { TABS_ROUTES } from '@/store/mutation-types';
-  import { useTabsViewStore } from '@/store/modules/tabsView';
-  import { useAsyncRouteStore } from '@/store/modules/asyncRoute';
-  import { RouteItem } from '@/store/modules/tabsView';
-  import { useProjectSetting } from '@/hooks/setting/useProjectSetting';
-  import { useMessage } from 'naive-ui';
-  import Draggable from 'vuedraggable';
-  import { PageEnum } from '@/enums/pageEnum';
+    nextTick
+  } from 'vue'
+  import { useRoute, useRouter } from 'vue-router'
+  import { storage } from '@/utils/Storage'
+  import { TABS_ROUTES } from '@/store/mutation-types'
+  import { useTabsViewStore } from '@/store/modules/tabsView'
+  import { useAsyncRouteStore } from '@/store/modules/asyncRoute'
+  import { RouteItem } from '@/store/modules/tabsView'
+  import { useProjectSetting } from '@/hooks/setting/useProjectSetting'
+  import { useMessage } from 'naive-ui'
+  import Draggable from 'vuedraggable'
+  import { PageEnum } from '@/enums/pageEnum'
   import {
     DownOutlined,
     ReloadOutlined,
@@ -109,12 +109,12 @@
     ColumnWidthOutlined,
     MinusOutlined,
     LeftOutlined,
-    RightOutlined,
-  } from '@vicons/antd';
-  import { renderIcon } from '@/utils';
-  import elementResizeDetectorMaker from 'element-resize-detector';
-  import { useDesignSetting } from '@/hooks/setting/useDesignSetting';
-  import { useProjectSettingStore } from '@/store/modules/projectSetting';
+    RightOutlined
+  } from '@vicons/antd'
+  import { renderIcon } from '@/utils'
+  import elementResizeDetectorMaker from 'element-resize-detector'
+  import { useDesignSetting } from '@/hooks/setting/useDesignSetting'
+  import { useProjectSettingStore } from '@/store/modules/projectSetting'
 
   export default defineComponent({
     name: 'TabsView',
@@ -123,27 +123,27 @@
       CloseOutlined,
       LeftOutlined,
       RightOutlined,
-      Draggable,
+      Draggable
     },
     props: {
       collapsed: {
-        type: Boolean,
-      },
+        type: Boolean
+      }
     },
     setup(props) {
-      const { getDarkTheme, getAppTheme } = useDesignSetting();
+      const { getDarkTheme, getAppTheme } = useDesignSetting()
       const { getNavMode, getHeaderSetting, getMenuSetting, getMultiTabsSetting } =
-        useProjectSetting();
-      const settingStore = useProjectSettingStore();
+        useProjectSetting()
+      const settingStore = useProjectSettingStore()
 
-      const message = useMessage();
-      const route = useRoute();
-      const router = useRouter();
-      const tabsViewStore = useTabsViewStore();
-      const asyncRouteStore = useAsyncRouteStore();
-      const navScroll: any = ref(null);
-      const navWrap: any = ref(null);
-      const isCurrent = ref(false);
+      const message = useMessage()
+      const route = useRoute()
+      const router = useRouter()
+      const tabsViewStore = useTabsViewStore()
+      const asyncRouteStore = useAsyncRouteStore()
+      const navScroll: any = ref(null)
+      const navWrap: any = ref(null)
+      const isCurrent = ref(false)
 
       const state = reactive({
         activeKey: route.fullPath,
@@ -152,82 +152,82 @@
         dropdownY: 0,
         showDropdown: false,
         isMultiHeaderFixed: false,
-        multiTabsSetting: getMultiTabsSetting,
-      });
+        multiTabsSetting: getMultiTabsSetting
+      })
 
       // 获取简易的路由对象
       const getSimpleRoute = (route): RouteItem => {
-        const { fullPath, hash, meta, name, params, path, query } = route;
-        return { fullPath, hash, meta, name, params, path, query };
-      };
+        const { fullPath, hash, meta, name, params, path, query } = route
+        return { fullPath, hash, meta, name, params, path, query }
+      }
 
       const isMixMenuNoneSub = computed(() => {
-        const mixMenu = settingStore.menuSetting.mixMenu;
-        const currentRoute = useRoute();
-        const navMode = unref(getNavMode);
-        if (unref(navMode) != 'horizontal-mix') return true;
-        return !(unref(navMode) === 'horizontal-mix' && mixMenu && currentRoute.meta.isRoot);
-      });
+        const mixMenu = settingStore.menuSetting.mixMenu
+        const currentRoute = useRoute()
+        const navMode = unref(getNavMode)
+        if (unref(navMode) != 'horizontal-mix') return true
+        return !(unref(navMode) === 'horizontal-mix' && mixMenu && currentRoute.meta.isRoot)
+      })
 
       //动态组装样式 菜单缩进
       const getChangeStyle = computed(() => {
-        const { collapsed } = props;
-        const navMode = unref(getNavMode);
-        const { minMenuWidth, menuWidth }: any = unref(getMenuSetting);
-        const { fixed }: any = unref(getMultiTabsSetting);
+        const { collapsed } = props
+        const navMode = unref(getNavMode)
+        const { minMenuWidth, menuWidth }: any = unref(getMenuSetting)
+        const { fixed }: any = unref(getMultiTabsSetting)
         let lenNum =
           navMode === 'horizontal' || !isMixMenuNoneSub.value
             ? '0px'
             : collapsed
             ? `${minMenuWidth}px`
-            : `${menuWidth}px`;
+            : `${menuWidth}px`
         return {
           left: lenNum,
-          width: `calc(100% - ${!fixed ? '0px' : lenNum})`,
-        };
-      });
+          width: `calc(100% - ${!fixed ? '0px' : lenNum})`
+        }
+      })
 
       //tags 右侧下拉菜单
       const TabsMenuOptions = computed(() => {
-        const isDisabled = unref(tabsList).length <= 1;
+        const isDisabled = unref(tabsList).length <= 1
         return [
           {
             label: '刷新当前',
             key: '1',
-            icon: renderIcon(ReloadOutlined),
+            icon: renderIcon(ReloadOutlined)
           },
           {
             label: `关闭当前`,
             key: '2',
             disabled: unref(isCurrent) || isDisabled,
-            icon: renderIcon(CloseOutlined),
+            icon: renderIcon(CloseOutlined)
           },
           {
             label: '关闭其他',
             key: '3',
             disabled: isDisabled,
-            icon: renderIcon(ColumnWidthOutlined),
+            icon: renderIcon(ColumnWidthOutlined)
           },
           {
             label: '关闭全部',
             key: '4',
             disabled: isDisabled,
-            icon: renderIcon(MinusOutlined),
-          },
-        ];
-      });
+            icon: renderIcon(MinusOutlined)
+          }
+        ]
+      })
 
-      let routes: RouteItem[] = [];
+      let routes: RouteItem[] = []
 
       try {
-        const routesStr = storage.get(TABS_ROUTES) as string | null | undefined;
-        routes = routesStr ? JSON.parse(routesStr) : [getSimpleRoute(route)];
+        const routesStr = storage.get(TABS_ROUTES) as string | null | undefined
+        routes = routesStr ? JSON.parse(routesStr) : [getSimpleRoute(route)]
       } catch (e) {
-        routes = [getSimpleRoute(route)];
+        routes = [getSimpleRoute(route)]
       }
 
       // 初始化标签页
-      tabsViewStore.initTabs(routes);
+      tabsViewStore.initTabs(routes)
 
       //监听滚动条
       function onScroll(e) {
@@ -235,241 +235,241 @@
           e.target.scrollTop ||
           document.documentElement.scrollTop ||
           window.pageYOffset ||
-          document.body.scrollTop; // 滚动条偏移量
+          document.body.scrollTop // 滚动条偏移量
         state.isMultiHeaderFixed = !!(
           !getHeaderSetting.fixed &&
           getMultiTabsSetting.fixed &&
           scrollTop >= 64
-        );
+        )
       }
 
-      window.addEventListener('scroll', onScroll, true);
+      window.addEventListener('scroll', onScroll, true)
 
       // 移除缓存组件名称
       const delKeepAliveCompName = () => {
         if (route.meta.keepAlive) {
           const name = router.currentRoute.value.matched.find((item) => item.name == route.name)
-            ?.components?.default.name;
+            ?.components?.default.name
           if (name) {
             asyncRouteStore.keepAliveComponents = asyncRouteStore.keepAliveComponents.filter(
               (item) => item != name
-            );
+            )
           }
         }
-      };
+      }
 
       // 标签页列表
-      const tabsList: any = computed(() => tabsViewStore.tabsList);
+      const tabsList: any = computed(() => tabsViewStore.tabsList)
       const whiteList: string[] = [
         PageEnum.BASE_LOGIN_NAME,
         PageEnum.REDIRECT_NAME,
-        PageEnum.ERROR_PAGE_NAME,
-      ];
+        PageEnum.ERROR_PAGE_NAME
+      ]
 
       watch(
         () => route.fullPath,
         (to) => {
-          if (whiteList.includes(route.name as string)) return;
-          state.activeKey = to;
-          tabsViewStore.addTabs(getSimpleRoute(route));
-          updateNavScroll(true);
+          if (whiteList.includes(route.name as string)) return
+          state.activeKey = to
+          tabsViewStore.addTabs(getSimpleRoute(route))
+          updateNavScroll(true)
         },
         { immediate: true }
-      );
+      )
 
       // 在页面关闭或刷新之前，保存数据
       window.addEventListener('beforeunload', () => {
-        storage.set(TABS_ROUTES, JSON.stringify(tabsList.value));
-      });
+        storage.set(TABS_ROUTES, JSON.stringify(tabsList.value))
+      })
 
       // 关闭当前页面
       const removeTab = (route) => {
         if (tabsList.value.length === 1) {
-          return message.warning('这已经是最后一页，不能再关闭了！');
+          return message.warning('这已经是最后一页，不能再关闭了！')
         }
-        delKeepAliveCompName();
-        tabsViewStore.closeCurrentTab(route);
+        delKeepAliveCompName()
+        tabsViewStore.closeCurrentTab(route)
         // 如果关闭的是当前页
         if (state.activeKey === route.fullPath) {
-          const currentRoute = tabsList.value[Math.max(0, tabsList.value.length - 1)];
-          state.activeKey = currentRoute.fullPath;
-          router.push(currentRoute);
+          const currentRoute = tabsList.value[Math.max(0, tabsList.value.length - 1)]
+          state.activeKey = currentRoute.fullPath
+          router.push(currentRoute)
         }
-        updateNavScroll();
-      };
+        updateNavScroll()
+      }
 
       // 刷新页面
       const reloadPage = () => {
-        delKeepAliveCompName();
+        delKeepAliveCompName()
         router.push({
-          path: '/redirect' + unref(route).fullPath,
-        });
-      };
+          path: '/redirect' + unref(route).fullPath
+        })
+      }
 
       // 注入刷新页面方法
-      provide('reloadPage', reloadPage);
+      provide('reloadPage', reloadPage)
 
       // 关闭左侧
       const closeLeft = (route) => {
-        tabsViewStore.closeLeftTabs(route);
-        state.activeKey = route.fullPath;
-        router.replace(route.fullPath);
-        updateNavScroll();
-      };
+        tabsViewStore.closeLeftTabs(route)
+        state.activeKey = route.fullPath
+        router.replace(route.fullPath)
+        updateNavScroll()
+      }
 
       // 关闭右侧
       const closeRight = (route) => {
-        tabsViewStore.closeRightTabs(route);
-        state.activeKey = route.fullPath;
-        router.replace(route.fullPath);
-        updateNavScroll();
-      };
+        tabsViewStore.closeRightTabs(route)
+        state.activeKey = route.fullPath
+        router.replace(route.fullPath)
+        updateNavScroll()
+      }
 
       // 关闭其他
       const closeOther = (route) => {
-        tabsViewStore.closeOtherTabs(route);
-        state.activeKey = route.fullPath;
-        router.replace(route.fullPath);
-        updateNavScroll();
-      };
+        tabsViewStore.closeOtherTabs(route)
+        state.activeKey = route.fullPath
+        router.replace(route.fullPath)
+        updateNavScroll()
+      }
 
       // 关闭全部
       const closeAll = () => {
-        localStorage.removeItem('routes');
-        tabsViewStore.closeAllTabs();
-        router.replace(PageEnum.BASE_HOME);
-        updateNavScroll();
-      };
+        localStorage.removeItem('routes')
+        tabsViewStore.closeAllTabs()
+        router.replace(PageEnum.BASE_HOME)
+        updateNavScroll()
+      }
 
       //tab 操作
       const closeHandleSelect = (key) => {
         switch (key) {
           //刷新
           case '1':
-            reloadPage();
-            break;
+            reloadPage()
+            break
           //关闭
           case '2':
-            removeTab(route);
-            break;
+            removeTab(route)
+            break
           //关闭其他
           case '3':
-            closeOther(route);
-            break;
+            closeOther(route)
+            break
           //关闭所有
           case '4':
-            closeAll();
-            break;
+            closeAll()
+            break
         }
-        updateNavScroll();
-        state.showDropdown = false;
-      };
+        updateNavScroll()
+        state.showDropdown = false
+      }
 
       /**
        * @param value 要滚动到的位置
        * @param amplitude 每次滚动的长度
        */
       function scrollTo(value: number, amplitude: number) {
-        const currentScroll = navScroll.value.scrollLeft;
+        const currentScroll = navScroll.value.scrollLeft
         const scrollWidth =
           (amplitude > 0 && currentScroll + amplitude >= value) ||
           (amplitude < 0 && currentScroll + amplitude <= value)
             ? value
-            : currentScroll + amplitude;
-        navScroll.value && navScroll.value.scrollTo(scrollWidth, 0);
-        if (scrollWidth === value) return;
-        return window.requestAnimationFrame(() => scrollTo(value, amplitude));
+            : currentScroll + amplitude
+        navScroll.value && navScroll.value.scrollTo(scrollWidth, 0)
+        if (scrollWidth === value) return
+        return window.requestAnimationFrame(() => scrollTo(value, amplitude))
       }
 
       function scrollPrev() {
-        const containerWidth = navScroll.value.offsetWidth;
-        const currentScroll = navScroll.value.scrollLeft;
+        const containerWidth = navScroll.value.offsetWidth
+        const currentScroll = navScroll.value.scrollLeft
 
-        if (!currentScroll) return;
-        const scrollLeft = currentScroll > containerWidth ? currentScroll - containerWidth : 0;
-        scrollTo(scrollLeft, (scrollLeft - currentScroll) / 20);
+        if (!currentScroll) return
+        const scrollLeft = currentScroll > containerWidth ? currentScroll - containerWidth : 0
+        scrollTo(scrollLeft, (scrollLeft - currentScroll) / 20)
       }
 
       function scrollNext() {
-        const containerWidth = navScroll.value.offsetWidth;
-        const navWidth = navScroll.value.scrollWidth;
-        const currentScroll = navScroll.value.scrollLeft;
+        const containerWidth = navScroll.value.offsetWidth
+        const navWidth = navScroll.value.scrollWidth
+        const currentScroll = navScroll.value.scrollLeft
 
-        if (navWidth - currentScroll <= containerWidth) return;
+        if (navWidth - currentScroll <= containerWidth) return
         const scrollLeft =
           navWidth - currentScroll > containerWidth * 2
             ? currentScroll + containerWidth
-            : navWidth - containerWidth;
-        scrollTo(scrollLeft, (scrollLeft - currentScroll) / 20);
+            : navWidth - containerWidth
+        scrollTo(scrollLeft, (scrollLeft - currentScroll) / 20)
       }
 
       /**
        * @param autoScroll 是否开启自动滚动功能
        */
       async function updateNavScroll(autoScroll?: boolean) {
-        await nextTick();
-        if (!navScroll.value) return;
-        const containerWidth = navScroll.value.offsetWidth;
-        const navWidth = navScroll.value.scrollWidth;
+        await nextTick()
+        if (!navScroll.value) return
+        const containerWidth = navScroll.value.offsetWidth
+        const navWidth = navScroll.value.scrollWidth
 
         if (containerWidth < navWidth) {
-          state.scrollable = true;
+          state.scrollable = true
           if (autoScroll) {
-            let tagList = navScroll.value.querySelectorAll('.tabs-card-scroll-item') || [];
-            [...tagList].forEach((tag: HTMLElement) => {
+            let tagList = navScroll.value.querySelectorAll('.tabs-card-scroll-item') || []
+            ;[...tagList].forEach((tag: HTMLElement) => {
               // fix SyntaxError
               if (tag.id === `tag${state.activeKey.split('/').join('\/')}`) {
-                tag.scrollIntoView && tag.scrollIntoView();
+                tag.scrollIntoView && tag.scrollIntoView()
               }
-            });
+            })
           }
         } else {
-          state.scrollable = false;
+          state.scrollable = false
         }
       }
 
       function handleResize() {
-        updateNavScroll(true);
+        updateNavScroll(true)
       }
 
       function handleContextMenu(e, item) {
-        e.preventDefault();
-        isCurrent.value = PageEnum.BASE_HOME_REDIRECT === item.path;
-        state.showDropdown = false;
+        e.preventDefault()
+        isCurrent.value = PageEnum.BASE_HOME_REDIRECT === item.path
+        state.showDropdown = false
         nextTick().then(() => {
-          state.showDropdown = true;
-          state.dropdownX = e.clientX;
-          state.dropdownY = e.clientY;
-        });
+          state.showDropdown = true
+          state.dropdownX = e.clientX
+          state.dropdownY = e.clientY
+        })
       }
 
       function onClickOutside() {
-        state.showDropdown = false;
+        state.showDropdown = false
       }
 
       //tags 跳转页面
       function goPage(e) {
-        const { fullPath } = e;
-        if (fullPath === route.fullPath) return;
-        state.activeKey = fullPath;
-        router.push({ path: fullPath });
+        const { fullPath } = e
+        if (fullPath === route.fullPath) return
+        state.activeKey = fullPath
+        router.push({ path: fullPath })
       }
 
       //删除tab
       function closeTabItem(e) {
-        const { fullPath } = e;
-        const routeInfo = tabsList.value.find((item) => item.fullPath == fullPath);
-        removeTab(routeInfo);
+        const { fullPath } = e
+        const routeInfo = tabsList.value.find((item) => item.fullPath == fullPath)
+        removeTab(routeInfo)
       }
 
       onMounted(() => {
-        onElementResize();
-      });
+        onElementResize()
+      })
 
       function onElementResize() {
-        let observer;
-        observer = elementResizeDetectorMaker();
-        observer.listenTo(navWrap.value, handleResize);
+        let observer
+        observer = elementResizeDetectorMaker()
+        observer.listenTo(navWrap.value, handleResize)
       }
 
       return {
@@ -494,10 +494,10 @@
         handleContextMenu,
         onClickOutside,
         getDarkTheme,
-        getAppTheme,
-      };
-    },
-  });
+        getAppTheme
+      }
+    }
+  })
 </script>
 
 <style lang="less" scoped>

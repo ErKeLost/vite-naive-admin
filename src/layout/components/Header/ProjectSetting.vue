@@ -233,13 +233,13 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, reactive, toRefs, unref, watch, computed } from 'vue';
-  import { useProjectSettingStore } from '@/store/modules/projectSetting';
-  import { useDesignSettingStore } from '@/store/modules/designSetting';
-  import { CheckOutlined } from '@vicons/antd';
-  import { Moon, SunnySharp } from '@vicons/ionicons5';
-  import { darkTheme } from 'naive-ui';
-  import { animates as animateOptions } from '@/settings/animateSetting';
+  import { defineComponent, reactive, toRefs, unref, watch, computed } from 'vue'
+  import { useProjectSettingStore } from '@/store/modules/projectSetting'
+  import { useDesignSettingStore } from '@/store/modules/designSetting'
+  import { CheckOutlined } from '@vicons/antd'
+  import { Moon, SunnySharp } from '@vicons/ionicons5'
+  import { darkTheme } from 'naive-ui'
+  import { animates as animateOptions } from '@/settings/animateSetting'
 
   export default defineComponent({
     name: 'ProjectSetting',
@@ -247,16 +247,16 @@
     props: {
       title: {
         type: String,
-        default: '项目配置',
+        default: '项目配置'
       },
       width: {
         type: Number,
-        default: 280,
-      },
+        default: 280
+      }
     },
     setup(props) {
-      const settingStore = useProjectSettingStore();
-      const designStore = useDesignSettingStore();
+      const settingStore = useProjectSettingStore()
+      const designStore = useDesignSettingStore()
       const state = reactive({
         width: props.width,
         title: props.title,
@@ -264,42 +264,42 @@
         placement: 'right',
         alertText:
           '该功能主要实时预览各种布局效果，更多完整配置在 projectSetting.ts 中设置，建议在生产环境关闭该布局预览功能。',
-        appThemeList: designStore.appThemeList,
-      });
+        appThemeList: designStore.appThemeList
+      })
 
       watch(
         () => designStore.darkTheme,
         (to) => {
-          settingStore.navTheme = to ? 'header-dark' : 'dark';
+          settingStore.navTheme = to ? 'header-dark' : 'dark'
         }
-      );
+      )
 
       const directionsOptions = computed(() => {
-        return animateOptions.find((item) => item.value == unref(settingStore.pageAnimateType));
-      });
+        return animateOptions.find((item) => item.value == unref(settingStore.pageAnimateType))
+      })
 
       function openDrawer() {
-        state.isDrawer = true;
+        state.isDrawer = true
       }
 
       function closeDrawer() {
-        state.isDrawer = false;
+        state.isDrawer = false
       }
 
       function togNavTheme(theme) {
-        settingStore.navTheme = theme;
+        settingStore.navTheme = theme
         if (settingStore.navMode === 'horizontal' && ['light'].includes(theme)) {
-          settingStore.navTheme = 'dark';
+          settingStore.navTheme = 'dark'
         }
       }
 
       function togTheme(color) {
-        designStore.appTheme = color;
+        designStore.appTheme = color
       }
 
       function togNavMode(mode) {
-        settingStore.navMode = mode;
-        settingStore.menuSetting.mixMenu = false;
+        settingStore.navMode = mode
+        settingStore.menuSetting.mixMenu = false
       }
 
       return {
@@ -313,10 +313,10 @@
         openDrawer,
         closeDrawer,
         animateOptions,
-        directionsOptions,
-      };
-    },
-  });
+        directionsOptions
+      }
+    }
+  })
 </script>
 
 <style lang="less" scoped>

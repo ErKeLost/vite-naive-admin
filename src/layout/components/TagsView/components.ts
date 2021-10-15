@@ -5,9 +5,9 @@ import {
   VerticalRightOutlined,
   VerticalLeftOutlined,
   ColumnWidthOutlined,
-  MinusOutlined,
-} from '@ant-design/icons-vue';
-import { Dropdown, Tabs, Card } from 'ant-design-vue';
+  MinusOutlined
+} from '@ant-design/icons-vue'
+import { Dropdown, Tabs, Card } from 'ant-design-vue'
 
 export default {
   [Tabs.name]: Tabs,
@@ -20,5 +20,5 @@ export default {
   CloseOutlined,
   VerticalRightOutlined,
   VerticalLeftOutlined,
-  ColumnWidthOutlined,
-};
+  ColumnWidthOutlined
+}

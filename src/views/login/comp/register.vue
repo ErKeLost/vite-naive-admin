@@ -1,7 +1,6 @@
 <template>
   <div>
     <LoginRight />
-
     <div class="view-account-form">
       <n-form ref="formRef" label-placement="left" size="large">
         <n-form-item path="username">
@@ -61,16 +60,16 @@
 </template>
 
 <script setup lang="ts">
-import LoginRight from './login-right.vue'
+  import LoginRight from './login-right.vue'
 
-import { setLoginType } from '@/hooks/login/isLoginComponent'
-const pushLoginComponent = () => {
-  setLoginType(false)
-}
+  import { setLoginType } from '@/hooks/login/isLoginComponent'
+  const pushLoginComponent = () => {
+    setLoginType(false)
+  }
 </script>
 
 <style lang="scss" scoped>
-.container {
-  justify-content: space-between;
-}
+  .container {
+    justify-content: space-between;
+  }
 </style>

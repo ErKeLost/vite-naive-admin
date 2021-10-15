@@ -7,7 +7,7 @@
   </div>
   <div class="flex items-center justify-center space-x-2">
     <span class="h-px w-16 bg-gray-200"></span>
-    <span class="text-gray-300 font-normal">{{
+    <span class="text-gray-300 font-normal mb-10 mt-10">{{
       isLogin === false ? '使用账号密码登录' : '使用手机号码注册'
     }}</span>
     <span class="h-px w-16 bg-gray-200"></span>

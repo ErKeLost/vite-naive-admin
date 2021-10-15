@@ -125,6 +125,7 @@
   const avatarSelect = (value) => {
     if (value === 2) {
       router.push({ path: '/login' })
+      localStorage.clear()
     }
   }
   const { navMode, navTheme, headerSetting, crumbsSetting } = toRefs(

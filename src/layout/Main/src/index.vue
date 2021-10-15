@@ -10,16 +10,16 @@
 </template>
 
 <script setup lang="ts">
-import { unref, computed } from 'vue'
-import { useAsyncRouteStore } from '@/store/modules/asyncRoute'
-import { useProjectSetting } from '@/hooks/setting/useProjectSetting'
+  import { unref, computed } from 'vue'
+  import { useAsyncRouteStore } from '@/store/modules/asyncRoute'
+  import { useProjectSetting } from '@/hooks/setting/useProjectSetting'
 
-import AdnyThemeMenu from '../components/themeMenu.vue'
-const { getIsPageAnimate, getPageAnimateType } = useProjectSetting()
-// 需要缓存的路由组件
-const getTransitionName = computed(() => {
-  return unref(getIsPageAnimate) ? unref(getPageAnimateType) : ''
-})
+  import AdnyThemeMenu from '../components/themeMenu.vue'
+  const { getIsPageAnimate, getPageAnimateType } = useProjectSetting()
+  // 需要缓存的路由组件
+  const getTransitionName = computed(() => {
+    return unref(getIsPageAnimate) ? unref(getPageAnimateType) : ''
+  })
 </script>
 
 <style scoped lang="less"></style>

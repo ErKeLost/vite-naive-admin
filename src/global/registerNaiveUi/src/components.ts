@@ -28,7 +28,8 @@ import {
   NDivider,
   NAlert,
   NGradientText,
-  NBadge
+  NBadge,
+  NColorPicker
 } from 'naive-ui'
 
 export const components = [
@@ -62,5 +63,6 @@ export const components = [
   NDivider,
   NAlert,
   NGradientText,
-  NBadge
+  NBadge,
+  NColorPicker
 ]

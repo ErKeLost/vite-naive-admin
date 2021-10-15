@@ -27,17 +27,11 @@
         <n-divider title-placement="center">系统主题</n-divider>
 
         <div class="drawer-setting-item align-items-top">
-          <span
-            class="theme-item"
-            v-for="(item, index) in appThemeList"
-            :key="index"
-            :style="{ 'background-color': item }"
-            @click="togTheme(item)"
-          >
-            <n-icon size="12" v-if="item === designStore.appTheme">
-              <CheckOutlined />
-            </n-icon>
-          </span>
+          <n-color-picker
+            :value="designStore.appTheme"
+            :modes="['hex']"
+            @update:value="changeTheme"
+          />
         </div>
 
         <n-divider title-placement="center">导航栏模式</n-divider>
@@ -57,7 +51,7 @@
                 v-if="settingStore.navMode === item.navMode"
               />
             </div>
-          <n-divider title-placement="center" v-if="index === 2"></n-divider>
+            <n-divider title-placement="center" v-if="index === 2"></n-divider>
           </template>
         </div>
         <n-divider title-placement="center">导航栏风格</n-divider>
@@ -224,14 +218,15 @@ export default defineComponent({
         '该功能主要实时预览各种布局效果，更多完整配置在 projectSetting.ts 中设置，建议在生产环境关闭该布局预览功能。',
       appThemeList: designStore.appThemeList
     })
-
+    const changeTheme = (value: string) => {
+      designStore.appTheme = value
+    }
     watch(
       () => designStore.darkTheme,
       (to) => {
         settingStore.navTheme = to ? 'header-dark' : 'dark'
       }
     )
-
     const directionsOptions = computed(() => {
       return animateOptions.find((item) => item.value == unref(settingStore.pageAnimateType))
     })
@@ -253,6 +248,7 @@ export default defineComponent({
     }
 
     function togTheme(color) {
+      console.log(color)
       designStore.appTheme = color
     }
 
@@ -273,7 +269,8 @@ export default defineComponent({
       closeDrawer,
       animateOptions,
       directionsOptions,
-      ThemeConfig
+      ThemeConfig,
+      changeTheme
     }
   }
 })

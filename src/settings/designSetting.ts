@@ -17,14 +17,14 @@ export const appThemeList: string[] = [
   '#78DEC7',
   '#1768AC',
   '#FB9300',
-  '#FC5404',
+  '#FC5404'
 ]
 
 const setting = {
   //深色主题
   darkTheme: false,
   //系统主题色
-  appTheme: '#171010',
+  appTheme: '#5AC5B5FF',
   //系统内置主题色列表
   appThemeList
 }
