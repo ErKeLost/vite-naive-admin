@@ -21,34 +21,37 @@ const routes: Array<RouteRecordRaw> = [
     redirect: '/exception/403',
     component: Layout,
     meta: {
-      title: '异常页面',
+      title: '异常页',
       icon: renderIcon(ExclamationCircleOutlined),
       sort: 3
     },
     children: [
       {
-        path: '403',
+        path: '/main/403',
         name: 'exception-403',
         meta: {
-          title: '403'
+          title: '403',
+          url: '/main/403',
         },
-        component: () => import('@/views/exception/403.vue')
+        component: () => import('@/views/modules/exception/403/index.vue')
       },
       {
-        path: '404',
+        path: '/main/404',
         name: 'exception-404',
         meta: {
-          title: '404'
+          title: '404',
+          url: '/main/404'
         },
-        component: () => import('@/views/exception/404.vue')
+        component: () => import('@/views/modules/exception/404/index.vue')
       },
       {
-        path: '500',
+        path: '/main/500',
         name: 'exception-500',
         meta: {
-          title: '500'
+          title: '500',
+          url: '/main/500'
         },
-        component: () => import('@/views/exception/500.vue')
+        component: () => import('@/views/modules/exception/500/index.vue')
       }
     ]
   }

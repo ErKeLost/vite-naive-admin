@@ -9,9 +9,11 @@ import '@mdi/font/css/materialdesignicons.css'
 import { pluginRegisterComponents } from '@/global/registerNaiveUi/utils/registerApp'
 import { setupStore } from '@/store'
 import registerAdnyUi from './global/registerAdnyUi'
+import { setUpLoginStore } from '@/hooks/menu/useMenu'
 const app = createApp(App)
 registerAdnyUi(app)
-app.use(router)
 setupStore(app)
+setUpLoginStore()
+app.use(router)
 app.use(pluginRegisterComponents)
 app.mount('#app')

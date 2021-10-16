@@ -54,7 +54,8 @@ export function generatorMenu(routerMap: Array<any>) {
       ...info.meta,
       label: info.meta?.title,
       key: info.name,
-      icon: isRoot ? item.meta?.icon : info.meta?.icon
+      icon: isRoot ? item.meta?.icon : info.meta?.icon,
+      url: item.meta?.url
     }
     // 是否有子菜单，并递归处理
     if (info.children && info.children.length > 0) {

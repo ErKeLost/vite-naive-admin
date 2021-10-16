@@ -16,39 +16,41 @@ import { renderIcon } from '@/utils/index'
  * */
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/form',
+    path: '/main/form',
     name: 'Form',
-    redirect: '/form/basic-form',
-    component: Layout,
+    redirect: '/main/form/basic-form',
     meta: {
-      title: '表单页面',
+      title: '表单页',
       icon: renderIcon(ProfileOutlined),
-      sort: 3
+      sort: 1
     },
     children: [
       {
-        path: 'basic-form',
+        path: '/main/form/basic-form',
         name: 'form-basic-form',
         meta: {
-          title: '基础表单'
+          title: '基础表单',
+          url: '/main/form/basic-form'
         },
-        component: () => import('@/views/form/basicForm/index.vue')
+        component: () => import('@/views/modules/form/basicForm/index.vue')
       },
       {
-        path: 'step-form',
+        path: '/main/form/step-form',
         name: 'form-step-form',
         meta: {
-          title: '分步表单'
+          title: '分步表单',
+          url: '/main/form/step-form'
         },
-        component: () => import('@/views/form/stepForm/stepForm.vue')
+        component: () => import('@/views/modules/form/stepForm/index.vue')
       },
       {
-        path: 'detail',
-        name: 'form-detail',
+        path: '/main/form/senior-form',
+        name: 'form-senior',
         meta: {
-          title: '表单详情'
+          title: '高级表单',
+          url: '/main/form/senior-form'
         },
-        component: () => import('@/views/form/detail/index.vue')
+        component: () => import('@/views/modules/form/seriorForm/index.vue')
       }
     ]
   }

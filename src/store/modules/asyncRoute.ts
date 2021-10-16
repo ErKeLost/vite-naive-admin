@@ -2,7 +2,7 @@ import { toRaw, unref } from 'vue'
 import { defineStore } from 'pinia'
 import { RouteRecordRaw } from 'vue-router'
 import { store } from '@/store'
-import { asyncRoutes, constantRouter } from '@/router/index'
+// import { asyncRoutes, constantRouter } from '@/router/index'
 import { generatorDynamicRouter } from '@/router/generator-routers'
 import { useProjectSetting } from '@/hooks/setting/useProjectSetting'
 

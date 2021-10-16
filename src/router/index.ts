@@ -2,7 +2,6 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import { App } from 'vue'
 import { sortRoute } from '@/utils/sort/sort'
 import { RouteRecordRaw } from 'vue-router'
-import { setUpLoginStore } from '@/hooks/menu/useMenu'
 const modules = import.meta.globEager('./modules/**/*.ts')
 
 // 获取路由列表
@@ -13,36 +12,69 @@ Object.values(modules).forEach((item) => {
   const routerItem = Array.isArray(routerObject) ? [...routerObject] : [routerObject]
   constantRouterList.push(...routerItem)
 })
+const constRouter = []
 constantRouterList.sort(sortRoute)
-// console.log(constantRouterList)
+for (var item of constantRouterList) {
+  if (item.children) {
+    constRouter.push(item.children)
+    for (var li of item.children) {
+      // constRouter.push(li.children)
+      if (li.children) {
+        constRouter.push(li.children)
+      }
+    }
+  }
+}
+console.log(constRouter)
+const arr = constRouter.flat()
+console.log(constRouter.flat())
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    redirect: '/dashboard'
+    redirect: '/main'
   },
   {
     path: '/login',
     component: () => import('../views/login/index.vue')
-  }
+  },
+  {
+    path: '/main',
+    name: 'main',
+    component: () => import('@/layout/index.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('../views/login/index.vue')
+      }
+    ]
+  },
 ]
 
 const router = createRouter({
-  routes: [...routes, ...constantRouterList],
+  routes,
   // routes,
   history: createWebHashHistory()
 })
+arr.forEach((route) => {
+  router.addRoute('main', route)
+})
+// router.addRoute('main', constantRouterList)
+console.log(router.options.routes)
+
 router.beforeEach((to, form) => {
   // if (form.path === '/login') {
-  setUpLoginStore()
   // }
   if (to.path !== '/login') {
     if (!localStorage.getItem('TOKEN')) {
       return '/login'
     }
   }
+
+  if (to.path === '/main') {
+    // return '/main/analysis/overview'
+  }
 })
-console.log(router)
 
 export { constantRouterList }
 export default router

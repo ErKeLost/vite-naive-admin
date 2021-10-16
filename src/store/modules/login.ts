@@ -32,7 +32,6 @@ export const useLoginStore = defineStore({
     // 登录
     async accountLoginAction(info: any) {
       // 登录逻辑
-      // console.log(constantRouterList)
       const loginResult = await accountLoginRequest(info)
       const { id, token } = loginResult.data
       this.token = token
@@ -42,16 +41,22 @@ export const useLoginStore = defineStore({
       localStorage.setItem('USER_INFO', JSON.stringify(this.userInfo))
       const loginUserMenus = await accountUserMenusRequest(id)
       const clone = resolveRouter(loginUserMenus.data)
+      // 给第一次菜单 添加 图标
       this.userMenus = [...clone]
-      // const result = mapMenusToRoutes(this.userMenus)
-      // console.log(result)
-      // result.forEach((route: RouteRecordRaw[]) => {
-      //   console.log(route)
-      //   router.addRoute('main', route)
-      // })
-      // console.log(router)
+      // this.userMenus = loginUserMenus.data
+      const result = mapMenusToRoutes(this.userMenus)
+      result.forEach((route: RouteRecordRaw[]) => {
+        router.addRoute('main', route)
+      })
+      // 屏蔽函数 对象 只能解析字符串  防止 用户刷新 图标消失
       localStorage.setItem('USER_MENUS', JSON.stringify(this.userMenus))
-      router.push({ path: '/dashboard' })
+      router.push({ path: '/main' })
+    },
+    logOut() {
+      const result = mapMenusToRoutes(this.userMenus)
+      result.forEach((route: RouteRecordRaw[]) => {
+        router.removeRoute(route.name)
+      })
     }
   }
 })

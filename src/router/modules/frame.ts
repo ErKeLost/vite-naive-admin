@@ -3,7 +3,7 @@ import { Layout } from '@/router/constant'
 import { DesktopOutline } from '@vicons/ionicons5'
 import { renderIcon } from '@/utils/index'
 
-const IFrame = () => import('@/views/iframe/index.vue')
+const IFrame = () => import('@/views/modules/iframe/index.vue')
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -18,20 +18,22 @@ const routes: Array<RouteRecordRaw> = [
     },
     children: [
       {
-        path: 'docs',
+        path: '/main/docs',
         name: 'frame-docs',
         meta: {
-          title: '项目文档(内嵌)',
-          frameSrc: 'https://naive-ui-admin-docs.vercel.app'
+          title: 'adny-cli文档(内嵌)',
+          frameSrc: 'https://naive-ui-admin-docs.vercel.app',
+          url: '/main/docs'
         },
         component: IFrame
       },
       {
-        path: 'naive',
+        path: '/main/naive',
         name: 'frame-naive',
         meta: {
-          title: 'NaiveUi(内嵌)',
-          frameSrc: 'https://www.naiveui.com'
+          title: 'ADNY-github(内嵌)',
+          frameSrc: 'https://www.naiveui.com',
+          url: '/main/naive'
         },
         component: IFrame
       }

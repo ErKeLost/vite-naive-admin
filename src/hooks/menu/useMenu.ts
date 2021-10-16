@@ -7,7 +7,8 @@ import {
   SettingsOutline,
   OptionsOutline
 } from '@vicons/ionicons5'
-
+import { mapMenusToRoutes } from '@/utils/router/mapMenus'
+import  router from '@/router'
 function renderIcon(icon: any) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
@@ -22,9 +23,9 @@ const routerIcon = [
 function resolveRouter(routerList: any) {
   routerList.forEach((item: any, index: number) => {
     // item.
-    item.label = item.name
-    item.path = item.url
-    item.icon = routerIcon[index]
+    if (item.type === 1) {
+      item.icon = routerIcon[index]
+    }
     if (item.children && item.children.length > 0 && item.type === 1) {
       resolveRouter(item.children)
     }
@@ -42,6 +43,12 @@ function setUpLoginStore() {
   if (loginStore.userMenus !== null) {
     loginStore.userMenus.forEach((item: any, index: number) => {
       item.icon = routerIcon[index]
+    })
+  }
+  if (loginStore.userMenus !== null) {
+    const result = mapMenusToRoutes([...loginStore.userMenus])
+    result.forEach((route) => {
+      router.addRoute('main', route)
     })
   }
 }

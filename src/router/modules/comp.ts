@@ -29,100 +29,72 @@ const routes: Array<RouteRecordRaw> = [
     },
     children: [
       {
-        path: 'table',
-        name: `${routeName}_table`,
-        redirect: '/comp/table/basic',
-        component: ParentLayout,
-        meta: {
-          title: '表格'
-        },
-        children: [
-          {
-            path: 'basic',
-            name: `${routeName}_table_basic`,
-            meta: {
-              title: '基础表格'
-            },
-            component: () => import('@/views/comp/table/basic.vue')
-          },
-          {
-            path: 'editCell',
-            name: `${routeName}_table_editCell`,
-            meta: {
-              title: '单元格编辑'
-            },
-            component: () => import('@/views/comp/table/editCell.vue')
-          },
-          {
-            path: 'editRow',
-            name: `${routeName}_table_editRow`,
-            meta: {
-              title: '整行编辑'
-            },
-            component: () => import('@/views/comp/table/editRow.vue')
-          }
-        ]
-      },
-      {
-        path: 'form',
+        path: '/main/useForm',
         name: `${routeName}_form`,
         redirect: '/comp/form/basic',
         component: ParentLayout,
         meta: {
-          title: '表单'
+          title: '表单',
+          url: '/main/useForm'
         },
         children: [
           {
-            path: 'basic',
+            path: '/main/basicUseForm',
             name: `${routeName}_form_basic`,
             meta: {
-              title: '基础使用'
+              title: '基础使用',
+              url: '/main/basicUseForm'
             },
-            component: () => import('@/views/comp/form/basic.vue')
+            component: () => import('@/views/modules/comp/form/basic/index.vue')
           },
           {
-            path: 'useForm',
+            path: '/main/useFormComponent',
             name: `useForm`,
             meta: {
-              title: 'useForm'
+              title: 'useForm',
+              url: '/main/useFormComponent'
             },
-            component: () => import('@/views/comp/form/useForm.vue')
+            component: () => import('@/views/modules/comp/form/useForm/index.vue')
           }
         ]
       },
       {
-        path: 'upload',
+        path: '/main/upload',
         name: `${routeName}_upload`,
         meta: {
-          title: '上传图片'
+          title: '上传图片',
+          url: '/main/upload'
         },
-        component: () => import('@/views/comp/upload/index.vue')
+        component: () => import('@/views/modules/comp/upload/index.vue')
       },
       {
-        path: 'modal',
+        path: '/main/modal',
         name: `${routeName}_modal`,
         meta: {
-          title: '弹窗扩展'
+          title: '弹窗扩展',
+          url: '/main/modal'
         },
-        component: () => import('@/views/comp/modal/index.vue')
+        component: () => import('@/views/modules/comp/modal/index.vue')
       },
       {
-        path: 'richtext',
+        path: '/main/richtext',
         name: `richtext`,
         meta: {
           title: '富文本',
-          extra: renderNew()
+          extra: renderNew(),
+          url: '/main/richtext'
         },
-        component: () => import('@/views/comp/richtext/vue-quill.vue')
+        component: () => import('@/views/modules/comp/richtext/index.vue')
       },
       {
-        path: 'drag',
+        path: '/main/drag',
         name: `Drag`,
         meta: {
           title: '拖拽',
-          extra: renderNew()
+          extra: renderNew(),
+          url: '/main/drag'
         },
-        component: () => import('@/views/comp/drag/index.vue')
+        component: () => import('@/views/modules/comp/drag/index.vue')
       }
     ]
   }

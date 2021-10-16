@@ -21,34 +21,37 @@ const routes: Array<RouteRecordRaw> = [
     redirect: '/result/success',
     component: Layout,
     meta: {
-      title: '结果页面',
+      title: '结果页',
       icon: renderIcon(CheckCircleOutlined),
       sort: 4
     },
     children: [
       {
-        path: 'success',
+        path: '/main/success',
         name: 'result-success',
         meta: {
-          title: '成功页'
+          title: '成功页',
+          url: '/main/success'
         },
-        component: () => import('@/views/result/success.vue')
+        component: () => import('@/views/modules/result/success/index.vue')
       },
       {
-        path: 'fail',
+        path: '/main/fail',
         name: 'result-fail',
         meta: {
-          title: '失败页'
+          title: '失败页',
+          url: '/main/fail'
         },
-        component: () => import('@/views/result/fail.vue')
+        component: () => import('@/views/modules/result/fail/index.vue')
       },
       {
-        path: 'info',
+        path: '/main/info',
         name: 'result-info',
         meta: {
-          title: '信息页'
+          title: '信息页',
+          url: '/main/info'
         },
-        component: () => import('@/views/result/info.vue')
+        component: () => import('@/views/modules/result/info/index.vue')
       }
     ]
   }

@@ -16,33 +16,46 @@ import { renderIcon } from '@/utils/index'
  * */
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/list',
+    path: '/main/list',
     name: 'List',
-    redirect: '/list/basic-list',
-    component: Layout,
+    redirect: 'main/list/basic-list',
     meta: {
-      title: '列表页面',
+      title: '列表页',
       icon: renderIcon(TableOutlined),
       sort: 2
     },
     children: [
       {
-        path: 'basic-list',
+        path: '/main/list/basic-list',
         name: 'basic-list',
         meta: {
-          title: '基础列表'
+          title: '查询表格',
+          url: '/main/list/basic-list'
         },
-        component: () => import('@/views/list/basicList/index.vue')
+        component: () => import('@/views/modules/list/basicList/index.vue')
       },
       {
-        path: 'basic-info/:id?',
-        name: 'basic-info',
+        path: '/main/list/static-list',
+        name: 'static-list',
         meta: {
-          title: '基础详情',
-          hidden: true,
-          activeMenu: 'basic-list'
+          title: '标准列表',
+          hidden: false,
+          activeMenu: 'static-list',
+          url: '/main/list/static-list'
+
         },
-        component: () => import('@/views/list/basicList/info.vue')
+        component: () => import('@/views/modules/list/staticList/index.vue')
+      },
+      {
+        path: '/main/list/card-list',
+        name: 'card-list',
+        meta: {
+          title: '卡片列表',
+          hidden: false,
+          activeMenu: 'card-list',
+          url: '/main/list/card-list'
+        },
+        component: () => import('@/views/modules/list/cardList/index.vue')
       }
     ]
   }

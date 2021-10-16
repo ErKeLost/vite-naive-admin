@@ -27,20 +27,22 @@ const routes: Array<RouteRecordRaw> = [
     },
     children: [
       {
-        path: 'account',
+        path: '/main/account',
         name: 'setting-account',
         meta: {
-          title: '个人设置'
+          title: '个人设置',
+          url: '/main/account'
         },
-        component: () => import('@/views/setting/account/account.vue')
+        component: () => import('@/views/modules/setting/account/index.vue')
       },
       {
-        path: 'system',
+        path: '/main/system',
         name: 'setting-system',
         meta: {
-          title: '系统设置'
+          title: '系统设置',
+          url: '/main/system'
         },
-        component: () => import('@/views/setting/system/system.vue')
+        component: () => import('@/views/modules/setting/system/index.vue')
       }
     ]
   }

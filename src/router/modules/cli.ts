@@ -5,7 +5,7 @@ import { renderIcon, renderCli } from '@/utils/index'
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/cli',
+    path: '/main/cli',
     name: 'cli',
     component: Layout,
     meta: {
@@ -13,18 +13,20 @@ const routes: Array<RouteRecordRaw> = [
       sort: 10,
       isRoot: true,
       activeMenu: 'cli_index',
-      icon: renderIcon(ProjectOutlined)
+      icon: renderIcon(ProjectOutlined),
+      url: '/main/cli'
     },
     children: [
       {
-        path: 'cli',
+        path: '/main/cli',
         name: `cli_index`,
         meta: {
           title: '脚手架',
           extra: renderCli(),
-          activeMenu: 'about_index'
+          activeMenu: 'about_index',
+          url: '/main/cli'
         },
-        component: () => import('@/views/cli/index.vue')
+        component: () => import('@/views/modules/adny/cli/index.vue')
       }
     ]
   }
