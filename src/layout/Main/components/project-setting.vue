@@ -115,7 +115,12 @@
             />
           </div>
         </div>
-
+        <div class="drawer-setting-item">
+          <div class="drawer-setting-item-title"> 背景色为主题色 </div>
+          <div class="drawer-setting-item-action">
+            <n-switch v-model:value="settingStore.headerSetting.fixed" />
+          </div>
+        </div>
         <div class="drawer-setting-item">
           <div class="drawer-setting-item-title"> 固定顶栏 </div>
           <div class="drawer-setting-item-action">

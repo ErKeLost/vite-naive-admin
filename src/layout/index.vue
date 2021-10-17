@@ -66,6 +66,7 @@ import { useDesignSetting } from '@/hooks/setting/useDesignSetting'
 import { useLoadingBar } from 'naive-ui'
 import { useRoute } from 'vue-router'
 import { useProjectSettingStore } from '@/store/modules/projectSetting'
+import { useDesignSettingStore } from '@/store/modules/designSetting'
 const collapsed = ref<boolean>(false)
 const { getDarkTheme } = useDesignSetting()
 const {
@@ -78,7 +79,8 @@ const {
 } = useProjectSetting()
 
 const settingStore = useProjectSettingStore()
-
+const designStore = useDesignSettingStore()
+const color = computed(() => designStore.appTheme)
 const navMode = getNavMode
 const fixedHeader = computed(() => {
   const { fixed } = unref(getHeaderSetting)
@@ -165,6 +167,8 @@ onMounted(() => {
     position: relative;
     z-index: 13;
     transition: all 0.2s ease-in-out;
+    // background: v-bind(color);
+    background-image: url(https://w.wallhaven.cc/full/e7/wallhaven-e7ek7k.jpg);
   }
 
   .layout-sider-fix {
@@ -199,7 +203,7 @@ onMounted(() => {
 }
 
 .layout-content-main {
-  margin: 0 10px 10px;
+  margin: 10px;
   position: relative;
   padding-top: 64px;
 }
@@ -215,7 +219,7 @@ onMounted(() => {
 }
 
 .main-view-fix {
-  padding-top: 44px;
+  padding-top: 14px;
 }
 
 .noMultiTabs {

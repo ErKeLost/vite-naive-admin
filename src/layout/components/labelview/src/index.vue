@@ -30,7 +30,7 @@
               @click.stop="changePage(element)"
             >
               <span>{{ element.meta.title }}</span>
-              <n-icon size="14">
+              <n-icon size="14" v-if="element.fullPath !== home">
                 <CloseOutlined />
               </n-icon>
             </div>
@@ -38,29 +38,22 @@
         </Draggable>
       </div>
     </div>
-    <!-- <div class="tabs-close">
-      <n-dropdown
-        trigger="hover"
-        @select="closeHandleSelect"
-        placement="bottom-end"
-        :options="TabsMenuOptions"
-      >
+    <div class="tabs-close">
+      <n-dropdown trigger="hover" placement="bottom-end" :options="TabsMenuOptions">
         <div class="tabs-close-btn">
           <n-icon size="16" color="#515a6e">
             <DownOutlined />
           </n-icon>
         </div>
       </n-dropdown>
-    </div> -->
-    <!-- <n-dropdown
+    </div>
+    <n-dropdown
       :show="showDropdown"
       :x="dropdownX"
       :y="dropdownY"
-      @clickoutside="onClickOutside"
       placement="bottom-start"
-      @select="closeHandleSelect"
       :options="TabsMenuOptions"
-    /> -->
+    />
   </div>
 </template>
 
@@ -71,6 +64,7 @@ import { storage } from '@/utils/Storage'
 import { TABS_ROUTES } from '@/store/mutation-types'
 import { useMessage } from 'naive-ui'
 import { useTabsViewStore } from '@/store/modules/tabsView'
+import { PageEnum } from '@/enums/pageEnum'
 import {
   DownOutlined,
   ReloadOutlined,
@@ -94,16 +88,50 @@ const color = computed(() => designStore.appTheme)
 const handleClose = () => {}
 const tabsViewStore = useTabsViewStore()
 const route = useRoute()
+const isCurrent = ref(false)
 const scrollable = ref(false)
 console.log(route)
+const dropdownX = ref(0)
+const dropdownY = ref(0)
+const showDropdown = ref(false)
 const navScroll: any = ref(null)
 const checked = ref(false)
 const router = useRouter()
+const home = PageEnum.BASE_HOME
 const getSimpleRoute = (route) => {
   const { fullPath, hash, meta, name, params, path, query } = route
   return { fullPath, hash, meta, name, params, path, query }
 }
 let routes = []
+const TabsMenuOptions = computed(() => {
+  const isDisabled = unref(tabsList).length <= 1
+  return [
+    {
+      label: '刷新当前',
+      key: '1',
+      icon: renderIcon(ReloadOutlined)
+    },
+    {
+      label: `关闭当前`,
+      key: '2',
+      disabled: unref(isCurrent) || isDisabled,
+      icon: renderIcon(CloseOutlined)
+    },
+    {
+      label: '关闭其他',
+      key: '3',
+      disabled: isDisabled,
+      icon: renderIcon(ColumnWidthOutlined)
+    },
+    {
+      label: '关闭全部',
+      key: '4',
+      disabled: isDisabled,
+      icon: renderIcon(MinusOutlined)
+    }
+  ]
+})
+
 try {
   const routesStr = storage.get(TABS_ROUTES) as string | null | undefined
   routes = routesStr ? JSON.parse(routesStr) : [getSimpleRoute(route)]
