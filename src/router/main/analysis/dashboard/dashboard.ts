@@ -8,7 +8,8 @@ export default {
   name: 'dashboard',
   component: dashboard,
   meta: {
-    icon: renderIcon(DashboardOutlined)
+    icon: renderIcon(DashboardOutlined),
+    title: '商品统计'
   },
   children: []
 }

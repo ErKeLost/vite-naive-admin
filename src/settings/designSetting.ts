@@ -24,7 +24,7 @@ const setting = {
   //深色主题
   darkTheme: false,
   //系统主题色
-  appTheme: '#5AC5B5FF',
+  appTheme: '#f8a5c2',
   //系统内置主题色列表
   appThemeList
 }

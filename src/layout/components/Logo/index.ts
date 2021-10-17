@@ -1,3 +1,3 @@
-import AdnyLogo from './index.vue'
+import AdnyLogo from './src/index.vue'
 
 export default AdnyLogo

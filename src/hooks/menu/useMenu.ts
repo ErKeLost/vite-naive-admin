@@ -5,9 +5,9 @@ import { h } from 'vue'
 import {
   SpeedometerOutline,
   ChatboxEllipsesOutline,
-  SettingsOutline,
-  OptionsOutline
+  SettingsOutline
 } from '@vicons/ionicons5'
+import { AccountBookOutlined } from '@vicons/antd'
 import { mapMenusToRoutes } from '@/utils/router/mapMenus'
 import { createAddRouter } from '@/hooks/router'
 import router from '@/router'
@@ -17,8 +17,8 @@ function renderIcon(icon: any) {
 const routerIcon = [
   renderIcon(SpeedometerOutline),
   renderIcon(SettingsOutline),
-  renderIcon(ChatboxEllipsesOutline),
-  renderIcon(OptionsOutline)
+  renderIcon(AccountBookOutlined),
+  renderIcon(ChatboxEllipsesOutline)
 ]
 
 // 解析路由 不好！！！！！

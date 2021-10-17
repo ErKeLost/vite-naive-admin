@@ -29,7 +29,8 @@ import {
   NAlert,
   NGradientText,
   NBadge,
-  NColorPicker
+  NColorPicker,
+  NTag
 } from 'naive-ui'
 
 export const components = [
@@ -64,5 +65,6 @@ export const components = [
   NAlert,
   NGradientText,
   NBadge,
-  NColorPicker
+  NColorPicker,
+  NTag
 ]

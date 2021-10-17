@@ -45,6 +45,24 @@ export function renderCli(type = 'warning', text = 'adny-cli', color: object = n
 /**
  * 递归组装菜单格式
  */
+export function generatorMenuDynamic(routerList: any[]) {
+  return filterRouter(routerList).map((item) => {
+    const info = item
+    const currentMenu = {
+      ...info,
+      meta: {
+        title: info.name
+      },
+      fullPath: info.url
+    }
+    // 是否有子菜单，并递归处理
+    if (info.children && info.children.length > 0) {
+      // Recursion
+      currentMenu.children = generatorMenuDynamic(info.children)
+    }
+    return currentMenu
+  })
+}
 export function generatorMenu(routerMap: Array<any>) {
   return filterRouter(routerMap).map((item) => {
     const isRoot = isRootRouter(item)
@@ -55,7 +73,8 @@ export function generatorMenu(routerMap: Array<any>) {
       label: info.meta?.title,
       key: info.name,
       icon: isRoot ? item.meta?.icon : info.meta?.icon,
-      url: item.meta?.url
+      url: item.meta?.url,
+      fullPath: item.meta?.url
     }
     // 是否有子菜单，并递归处理
     if (info.children && info.children.length > 0) {

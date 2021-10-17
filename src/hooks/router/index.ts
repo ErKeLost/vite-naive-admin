@@ -36,5 +36,8 @@ export function createRouterGuards(router: Router) {
         return '/login'
       }
     }
+    if (to.path === '/main') {
+      return '/main/analysis/overview'
+    }
   })
 }

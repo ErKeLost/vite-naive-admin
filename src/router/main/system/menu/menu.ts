@@ -3,5 +3,8 @@ export default {
   path: '/main/system/menu',
   name: 'menut',
   component: menut,
+  meta: {
+    title: '菜单管理'
+  },
   children: []
 }

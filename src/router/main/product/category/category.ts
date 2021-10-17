@@ -3,6 +3,9 @@ const category = (): any =>
 export default {
   path: '/main/product/category',
   name: 'category',
+  meta: {
+    title: '商品类别'
+  },
   component: category,
   children: []
 }

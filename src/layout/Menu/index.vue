@@ -31,17 +31,22 @@ import { computed, ref } from 'vue'
 import { useProjectSettingStore } from '@/store/modules/projectSetting'
 import { useProjectSetting } from '@/hooks/setting/useProjectSetting'
 import { useAsyncRouteStore } from '@/store/modules/asyncRoute'
-import { generatorMenu, generatorMenuMix } from '@/utils'
+import { generatorMenu, generatorMenuMix, generatorMenuDynamic } from '@/utils'
 import { constantRouterList } from '@/router'
+import { useTabsViewStore } from '@/store/modules/tabsView'
 defineProps<{}>()
-const constantMenu = generatorMenu(constantRouterList)
 const loginStore = useLoginStore()
+const dynamicMenu = generatorMenuDynamic(loginStore.userMenus)
+const constantMenu = generatorMenu(constantRouterList)
 const menus = computed(() => {
-  return [...loginStore.userMenus, ...constantMenu]
+  return [...dynamicMenu, ...constantMenu]
 })
+console.log(loginStore.userMenus)
+console.log(dynamicMenu)
 
 // const result = constantMenu
 const settingStore = useProjectSettingStore()
+const tabsViewStore = useTabsViewStore()
 
 // const asyncRouteStore = useAsyncRouteStore()
 const { getNavMode } = useProjectSetting()
@@ -52,6 +57,8 @@ const inverted = computed(() => {
 })
 const changeRouter = (key: any, item: any) => {
   router.push({ path: item.url })
+  tabsViewStore.addTabs(item)
+  console.log(item)
 }
 </script>
 
