@@ -3,31 +3,32 @@
 
 ## 2021.10.17
 
-- ### 结构化路由 后续 考虑 重构路由  重构脚手架 adny-cli
-- ### 继续 采集动画 
-
+- ### 新增tagview 组件 drag  [Complete: 37%](https://) 🚀
+- ### 结构化路由 后续 考虑 重构路由  重构脚手架 adny-cli 🚀
+- ### 继续 采集动画 🚀
+ 
 ## 2021.10.14
 
-- ### transiton 动画 效果添加至 20 种
-- ### 预添加 布局样式 使用色彩选择器修改全局主题
-- ### 基本静态路由完成 [Complete: 100%](https://)
-- ### 删除图片 全部改用 css [Complete: 50%](https://)
-- ### 重构底层逻辑 eslint preitter config 配置文件 重新布局 文件架构 修改逻辑代码 [Complete: 22%](https://)
+- ### transiton 动画 效果添加至 20 种 🚀🚀
+- ### 预添加 布局样式 使用色彩选择器修改全局主题 🚀
+- ### 基本静态路由完成 [Complete: 100%](https://) 🚀
+- ### 删除图片 全部改用 css [Complete: 50%](https://) 🚀
+- ### 重构底层逻辑 eslint preitter config 配置文件 重新布局 文件架构 修改逻辑代码 [Complete: 22%](https://) 🚀
 
 ## 2021.10.13
 
-- ### 用 css 代替 图片 布局架构 重置 所有 代码 全部 拉出配置项 [Complete: 37%](https://)
+- ### 用 css 代替 图片 布局架构 重置 所有 代码 全部 拉出配置项 [Complete: 37%](https://) 🚀 
 
 ## 2021.10.12
 
-- ### 深度优化 layout 布局结构 样式 [Complete: 67%](https://)
-- ### 优化 layout [Complete: 50%](https://)
-- ### 布局 初始化 [Complete: Finished~](https://)
+- ### 深度优化 layout 布局结构 样式 [Complete: 67%](https://) 🚀
+- ### 优化 layout [Complete: 50%](https://) 🚀
+- ### 布局 初始化 [Complete: Finished~](https://) 🚀
 
 ## 2021.10.9
 
-- ### 登录 暗黑风格页面
-- ### 构造登录页面 架构 布局 组件细化
+- ### 登录 暗黑风格页面 🚀
+- ### 构造登录页面 架构 布局 组件细化 🚀
 
 ## 2021.10.8
 
