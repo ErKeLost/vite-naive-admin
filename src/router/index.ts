@@ -1,33 +1,17 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { App } from 'vue'
-import { sortRoute } from '@/utils/sort/sort'
 import { RouteRecordRaw } from 'vue-router'
-const modules = import.meta.globEager('./modules/**/*.ts')
+import { getAllRouter, _recurseClidrenRouter, createRouterGuards } from '@/hooks/router/index'
 
+// 定义module模块  和  路由
+const modules = import.meta.globEager('./modules/**/*.ts')
+const constRouter: any[] = []
 // 获取路由列表
 const constantRouterList: RouteRecordRaw[] = []
-Object.values(modules).forEach((item) => {
-  // 数组转 || 对象  需要结构  如果为空 则转为 空对象
-  const routerObject = item.default || {}
-  const routerItem = Array.isArray(routerObject) ? [...routerObject] : [routerObject]
-  constantRouterList.push(...routerItem)
-})
-const constRouter = []
-constantRouterList.sort(sortRoute)
-for (var item of constantRouterList) {
-  if (item.children) {
-    constRouter.push(item.children)
-    for (var li of item.children) {
-      // constRouter.push(li.children)
-      if (li.children) {
-        constRouter.push(li.children)
-      }
-    }
-  }
-}
-console.log(constRouter)
-const arr = constRouter.flat()
-console.log(constRouter.flat())
+// 拿到 路由 进行递归
+const constantRouter = getAllRouter(modules, constantRouterList)
+// 获取需要添加到路由中的 所有路由
+const fiallyRouter = _recurseClidrenRouter(constantRouter, constRouter)
 
 const routes: RouteRecordRaw[] = [
   {
@@ -53,28 +37,12 @@ const routes: RouteRecordRaw[] = [
 
 const router = createRouter({
   routes,
-  // routes,
   history: createWebHashHistory()
 })
-arr.forEach((route) => {
-  router.addRoute('main', route)
-})
-// router.addRoute('main', constantRouterList)
-console.log(router.options.routes)
 
-router.beforeEach((to, form) => {
-  // if (form.path === '/login') {
-  // }
-  if (to.path !== '/login') {
-    if (!localStorage.getItem('TOKEN')) {
-      return '/login'
-    }
-  }
-
-  if (to.path === '/main') {
-    // return '/main/analysis/overview'
-  }
-})
-
-export { constantRouterList }
+export { constantRouterList, fiallyRouter }
+export function setupRouter(app: App) {
+  app.use(router)
+  createRouterGuards(router)
+}
 export default router

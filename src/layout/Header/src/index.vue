@@ -79,10 +79,9 @@ const loginStore = useLoginStore()
 const { getNavMode, getNavTheme, getHeaderSetting, getMenuSetting, getCrumbsSetting } =
   useProjectSetting()
 
-const props =
-  defineProps<{
-    collapsed: boolean
-  }>()
+const props = defineProps<{
+  collapsed: boolean
+}>()
 const emit = defineEmits(['update:collapsed'])
 const drawerSetting = ref(null)
 // const userStore = useUserStore()

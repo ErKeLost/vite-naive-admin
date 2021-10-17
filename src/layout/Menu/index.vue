@@ -39,7 +39,6 @@ const loginStore = useLoginStore()
 const menus = computed(() => {
   return [...loginStore.userMenus, ...constantMenu]
 })
-console.log(menus.value)
 
 // const result = constantMenu
 const settingStore = useProjectSettingStore()
@@ -51,9 +50,7 @@ const route = useRoute()
 const inverted = computed(() => {
   return ['dark', 'header-dark'].includes(settingStore.navTheme)
 })
-const changeRouter = (key, item) => {
-  console.log(item)
-  console.log(key)
+const changeRouter = (key: any, item: any) => {
   router.push({ path: item.url })
 }
 </script>

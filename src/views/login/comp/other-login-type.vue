@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-  import AdnyIcon from '@/adny-ui/icon'
+import AdnyIcon from '@/adny-ui/icon'
 </script>
 
 <style lang="scss" scoped></style>

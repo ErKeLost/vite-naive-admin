@@ -4,30 +4,30 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  export default defineComponent({
-    name: 'AdnyIcon'
-  })
+import { defineComponent } from 'vue'
+export default defineComponent({
+  name: 'AdnyIcon'
+})
 </script>
 <script setup lang="ts">
-  withDefaults(
-    defineProps<{
-      icon?: string
-      size?: string
-      color?: string
-      turn?: boolean
-    }>(),
-    {
-      turn: false
-    }
-  )
-  defineExpose({
-    name: 'AdnyIcon'
-  })
+withDefaults(
+  defineProps<{
+    icon?: string
+    size?: string
+    color?: string
+    turn?: boolean
+  }>(),
+  {
+    turn: false
+  }
+)
+defineExpose({
+  name: 'AdnyIcon'
+})
 </script>
 
 <style scoped>
-  .filp {
-    transform: rotate(180deg);
-  }
+.filp {
+  transform: rotate(180deg);
+}
 </style>

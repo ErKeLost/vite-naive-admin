@@ -1,6 +1,7 @@
 import { store } from '@/store'
-import router, { constantRouterList } from '@/router'
+import router, { constantRouterList, fiallyRouter } from '@/router'
 import { mapMenusToRoutes } from '@/utils/router/mapMenus'
+import { createAddRouter } from '@/hooks/router'
 import {
   accountLoginRequest,
   accountUserInfoRequest,
@@ -45,9 +46,9 @@ export const useLoginStore = defineStore({
       this.userMenus = [...clone]
       // this.userMenus = loginUserMenus.data
       const result = mapMenusToRoutes(this.userMenus)
-      result.forEach((route: RouteRecordRaw[]) => {
-        router.addRoute('main', route)
-      })
+      // 登录添加所有路由 路径 以供访问 动态路径
+      createAddRouter(router, 'main', result)
+      createAddRouter(router, 'main', fiallyRouter)
       // 屏蔽函数 对象 只能解析字符串  防止 用户刷新 图标消失
       localStorage.setItem('USER_MENUS', JSON.stringify(this.userMenus))
       router.push({ path: '/main' })

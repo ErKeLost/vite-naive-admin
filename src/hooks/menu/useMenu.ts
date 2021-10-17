@@ -1,4 +1,5 @@
 import { useLoginStore } from '@/store/modules/login'
+import { fiallyRouter } from '@/router'
 import { NIcon } from 'naive-ui'
 import { h } from 'vue'
 import {
@@ -8,7 +9,8 @@ import {
   OptionsOutline
 } from '@vicons/ionicons5'
 import { mapMenusToRoutes } from '@/utils/router/mapMenus'
-import  router from '@/router'
+import { createAddRouter } from '@/hooks/router'
+import router from '@/router'
 function renderIcon(icon: any) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
@@ -47,9 +49,14 @@ function setUpLoginStore() {
   }
   if (loginStore.userMenus !== null) {
     const result = mapMenusToRoutes([...loginStore.userMenus])
-    result.forEach((route) => {
-      router.addRoute('main', route)
-    })
+    createAddRouter(router, 'main', result)
+    createAddRouter(router, 'main', fiallyRouter)
+    // result.forEach((route) => {
+    //   router.addRoute('main', route)
+    // })
+    // fiallyRouter.forEach((route) => {
+    //   router.addRoute('main', route)
+    // })
   }
 }
 
