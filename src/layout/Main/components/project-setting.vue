@@ -259,7 +259,12 @@ export default defineComponent({
     const directionsOptions = computed(() => {
       return animateOptions.find((item) => item.value == unref(settingStore.pageAnimateType))
     })
-
+    watch(bgThemeOpen, (newValue, oldValue) => {
+      if (!newValue) {
+        designStore.bgTheme = ''
+      }
+      return
+    })
     function openDrawer() {
       state.isDrawer = true
     }
@@ -268,7 +273,7 @@ export default defineComponent({
       state.isDrawer = false
     }
 
-    function togNavTheme(theme) {
+    function togNavTheme(theme: any) {
       settingStore.navTheme = theme
       if (settingStore.navMode === 'horizontal' && ['light'].includes(theme)) {
         settingStore.navTheme = 'dark'
