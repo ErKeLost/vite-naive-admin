@@ -133,7 +133,7 @@
             <n-switch v-model:value="bgThemeOpen" />
           </div>
         </div>
-        <div class="drawer-setting-item">
+        <!-- <div class="drawer-setting-item">
           <div class="drawer-setting-item-title"> 分割菜单 </div>
           <div class="drawer-setting-item-action">
             <n-switch
@@ -141,7 +141,7 @@
               v-model:value="settingStore.menuSetting.mixMenu"
             />
           </div>
-        </div>
+        </div> -->
         <div class="drawer-setting-item">
           <div class="drawer-setting-item-title"> 固定顶栏 </div>
           <div class="drawer-setting-item-action">
@@ -286,6 +286,7 @@ export default defineComponent({
       settingStore.menuSetting.mixMenu = false
     }
     const changeThemeBg = (item: any) => {
+      settingStore.navTheme = item.navTheme
       if (!bgThemeOpen.value) {
         notification.info({
           content: `请先选择背景主题色`,
