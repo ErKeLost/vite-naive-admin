@@ -11,6 +11,8 @@ interface DesignSettingState {
   appTheme: string
   //系统内置风格
   appThemeList: string[]
+  // 背景主题风格
+  bgTheme: string
 }
 
 export const useDesignSettingStore = defineStore({
@@ -18,7 +20,8 @@ export const useDesignSettingStore = defineStore({
   state: (): DesignSettingState => ({
     darkTheme,
     appTheme,
-    appThemeList
+    appThemeList,
+    bgTheme: ''
   }),
   getters: {
     getDarkTheme(): boolean {
@@ -29,6 +32,9 @@ export const useDesignSettingStore = defineStore({
     },
     getAppThemeList(): string[] {
       return this.appThemeList
+    },
+    getBgTheme(): string {
+      return this.bgTheme
     }
   },
   actions: {}

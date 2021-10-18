@@ -104,6 +104,34 @@
           </div>
         </div>
 
+        <n-divider title-placement="center">背景主题</n-divider>
+
+        <div class="drawer-setting-item align-items-top menu-mode">
+          <div
+            v-for="item in bgConfig"
+            :key="item.imgUrl"
+            class="drawer-setting-item-style align-items-top theme-bg"
+            @click="changeThemeBg(item)"
+          >
+            <n-tooltip placement="bottom">
+              <template #trigger>
+                <img :src="item.imgUrl" alt="" />
+              </template>
+              <span>{{ item.themeName }}</span>
+            </n-tooltip>
+            <!-- <n-badge
+              class="absolute top-7 right-2"
+              dot
+              color="#19be6b"
+              v-if="settingStore.navTheme === 'dark'"
+            /> -->
+          </div>
+        </div>
+
+        <n-alert type="info" :showIcon="true">
+          <p>注意在使用背景主题时 请先选中背景主题色</p>
+        </n-alert>
+
         <n-divider title-placement="center">界面功能</n-divider>
 
         <div class="drawer-setting-item">
@@ -116,9 +144,9 @@
           </div>
         </div>
         <div class="drawer-setting-item">
-          <div class="drawer-setting-item-title"> 背景色为主题色 </div>
+          <div class="drawer-setting-item-title"> 背景主题色 </div>
           <div class="drawer-setting-item-action">
-            <n-switch v-model:value="settingStore.headerSetting.fixed" />
+            <n-switch v-model:value="bgThemeOpen" />
           </div>
         </div>
         <div class="drawer-setting-item">
@@ -190,14 +218,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, unref, watch, computed } from 'vue'
+import { defineComponent, reactive, toRefs, ref, unref, watch, computed } from 'vue'
 import { useProjectSettingStore } from '@/store/modules/projectSetting'
 import { useDesignSettingStore } from '@/store/modules/designSetting'
 import { CheckOutlined } from '@vicons/antd'
 import { Moon, SunnySharp } from '@vicons/ionicons5'
 import { darkTheme } from 'naive-ui'
+import { useNotification } from 'naive-ui'
 import { animates as animateOptions } from '@/settings/animateSetting'
-import { ThemeConfig } from '../config/setting'
+import { ThemeConfig, bgConfig } from '../config/setting'
 export default defineComponent({
   name: 'ProjectSetting',
   components: { CheckOutlined, Moon, SunnySharp },
@@ -214,6 +243,8 @@ export default defineComponent({
   setup(props) {
     const settingStore = useProjectSettingStore()
     const designStore = useDesignSettingStore()
+    const notification = useNotification()
+    const bgThemeOpen = ref(false)
     const state = reactive({
       width: props.width,
       title: props.title,
@@ -261,7 +292,17 @@ export default defineComponent({
       settingStore.navMode = mode
       settingStore.menuSetting.mixMenu = false
     }
-
+    const changeThemeBg = (item: any) => {
+      if (!bgThemeOpen.value) {
+        notification.info({
+          content: `请先选择背景主题色`,
+          meta: `${new Date()}`,
+          duration: 2000
+        })
+      } else {
+        designStore.bgTheme = item.imgUrl
+      }
+    }
     return {
       ...toRefs(state),
       settingStore,
@@ -275,13 +316,33 @@ export default defineComponent({
       animateOptions,
       directionsOptions,
       ThemeConfig,
-      changeTheme
+      changeTheme,
+      bgConfig,
+      changeThemeBg,
+      bgThemeOpen
     }
   }
 })
 </script>
 
 <style lang="less" scoped>
+.change-theme-bg {
+  border: 1px solid #fba;
+}
+.theme-bg {
+  margin: 10px 0;
+  width: 50px;
+  height: 50px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+    &:hover {
+      box-shadow: 0 0 5px 5px rgb(149, 211, 219);
+    }
+  }
+}
 .drawer {
   .n-divider:not(.n-divider--vertical) {
     margin: 10px 0;

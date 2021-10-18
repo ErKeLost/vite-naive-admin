@@ -17,6 +17,7 @@
       :native-scrollbar="false"
       :inverted="inverted"
       class="layout-sider"
+      :style="{ backgroundImage: `url(${designStore.bgTheme})` }"
     >
       <AdnyLogo :collapsed="collapsed" />
       <AdnySlideMenu />
@@ -80,6 +81,7 @@ const {
 
 const settingStore = useProjectSettingStore()
 const designStore = useDesignSettingStore()
+const bgTheme = computed(() => designStore.bgTheme)
 const color = computed(() => designStore.appTheme)
 const navMode = getNavMode
 const fixedHeader = computed(() => {
@@ -168,7 +170,12 @@ onMounted(() => {
     z-index: 13;
     transition: all 0.2s ease-in-out;
     // background: v-bind(color);
-    background-image: url(https://w.wallhaven.cc/full/e7/wallhaven-e7ek7k.jpg);
+    // background-image: url(https://w.wallhaven.cc/full/e7/wallhaven-e7ek7k.jpg);
+    // background-image: url(https://w.wallhaven.cc/full/wq/wallhaven-wqdglr.jpg);
+    // background-image: url(https://w.wallhaven.cc/full/6o/wallhaven-6ow9xw.jpg);
+    // background-image: url(https://w.wallhaven.cc/full/x8/wallhaven-x8d56o.jpg);
+    // background-image: url(https://w.wallhaven.cc/full/9m/wallhaven-9m9p1x.png);
+    // background-image: url(https://w.wallhaven.cc/full/y8/wallhaven-y826gd.png);
   }
 
   .layout-sider-fix {
