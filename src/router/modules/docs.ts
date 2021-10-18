@@ -11,7 +11,8 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       title: '项目文档',
       icon: renderIcon(DocumentTextOutline),
-      sort: 9
+      sort: 9,
+      url: '/main/docs'
     }
   }
 ]

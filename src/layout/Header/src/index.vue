@@ -9,6 +9,7 @@
         <img src="~@/assets/images/unknown.svg" alt="" />
         <h2 v-show="!collapsed" class="title">ERKELOST DESIGN</h2>
       </div>
+      <AdnySlideMenu mode="horizontal" :inverted="getInverted" />
     </div>
     <!-- 左边的菜单 collapsed-->
     <div class="layout-header-left flex" v-else>
@@ -67,6 +68,7 @@
 </template>
 
 <script setup lang="ts">
+import { AdnySlideMenu } from '@/layout'
 import { useProjectSetting } from '@/hooks/setting/useProjectSetting'
 import { NDialogProvider, useDialog, useMessage } from 'naive-ui'
 import { reactive, toRefs, ref, computed, unref } from 'vue'
@@ -81,6 +83,7 @@ const { getNavMode, getNavTheme, getHeaderSetting, getMenuSetting, getCrumbsSett
 
 const props = defineProps<{
   collapsed: boolean
+  inverted: boolean
 }>()
 const emit = defineEmits(['update:collapsed'])
 const drawerSetting = ref(null)

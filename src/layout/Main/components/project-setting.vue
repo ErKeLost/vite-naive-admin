@@ -34,6 +34,27 @@
           />
         </div>
 
+        <n-divider title-placement="center">背景主题</n-divider>
+
+        <div class="drawer-setting-item align-items-top menu-mode">
+          <div
+            v-for="item in bgConfig"
+            :key="item.imgUrl"
+            class="drawer-setting-item-style align-items-top theme-bg"
+            @click="changeThemeBg(item)"
+          >
+            <n-tooltip placement="bottom">
+              <template #trigger>
+                <img :src="item.imgUrl" alt="" />
+              </template>
+              <span>{{ item.themeName }}</span>
+            </n-tooltip>
+          </div>
+        </div>
+
+        <n-alert type="info" :showIcon="true">
+          <p>注意在使用背景主题时 请先选中背景主题色</p>
+        </n-alert>
         <n-divider title-placement="center">导航栏模式</n-divider>
         <div class="drawer-setting-item align-items-top menu-mode">
           <template v-for="(item, index) in ThemeConfig" :key="item">
@@ -104,36 +125,14 @@
           </div>
         </div>
 
-        <n-divider title-placement="center">背景主题</n-divider>
-
-        <div class="drawer-setting-item align-items-top menu-mode">
-          <div
-            v-for="item in bgConfig"
-            :key="item.imgUrl"
-            class="drawer-setting-item-style align-items-top theme-bg"
-            @click="changeThemeBg(item)"
-          >
-            <n-tooltip placement="bottom">
-              <template #trigger>
-                <img :src="item.imgUrl" alt="" />
-              </template>
-              <span>{{ item.themeName }}</span>
-            </n-tooltip>
-            <!-- <n-badge
-              class="absolute top-7 right-2"
-              dot
-              color="#19be6b"
-              v-if="settingStore.navTheme === 'dark'"
-            /> -->
-          </div>
-        </div>
-
-        <n-alert type="info" :showIcon="true">
-          <p>注意在使用背景主题时 请先选中背景主题色</p>
-        </n-alert>
-
         <n-divider title-placement="center">界面功能</n-divider>
 
+        <div class="drawer-setting-item">
+          <div class="drawer-setting-item-title"> 背景主题色 </div>
+          <div class="drawer-setting-item-action">
+            <n-switch v-model:value="bgThemeOpen" />
+          </div>
+        </div>
         <div class="drawer-setting-item">
           <div class="drawer-setting-item-title"> 分割菜单 </div>
           <div class="drawer-setting-item-action">
@@ -141,12 +140,6 @@
               :disabled="settingStore.navMode !== 'horizontal-mix'"
               v-model:value="settingStore.menuSetting.mixMenu"
             />
-          </div>
-        </div>
-        <div class="drawer-setting-item">
-          <div class="drawer-setting-item-title"> 背景主题色 </div>
-          <div class="drawer-setting-item-action">
-            <n-switch v-model:value="bgThemeOpen" />
           </div>
         </div>
         <div class="drawer-setting-item">
@@ -244,7 +237,7 @@ export default defineComponent({
     const settingStore = useProjectSettingStore()
     const designStore = useDesignSettingStore()
     const notification = useNotification()
-    const bgThemeOpen = ref(false)
+    const bgThemeOpen = ref(true)
     const state = reactive({
       width: props.width,
       title: props.title,

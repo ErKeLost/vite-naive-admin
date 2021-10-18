@@ -4,6 +4,7 @@
       v-if="
         isMixMenuNoneSub &&
         (navMode === 'vertical' || navMode === 'horizontal-mix') &&
+        // content 为内容模式
         navMode !== 'content'
       "
       show-trigger="bar"
@@ -28,7 +29,7 @@
         :position="fixedHeader"
         v-if="navMode !== 'content'"
       >
-        <AdnyHeader v-model:collapsed="collapsed" />
+        <AdnyHeader v-model:collapsed="collapsed" :inverted="inverted" />
       </n-layout-header>
       <n-layout-content
         class="layout-content"
@@ -42,7 +43,9 @@
             'fluid-header': fixedHeader === 'static'
           }"
         >
-          <AdnyTag />
+          <div class="layout-content-main-tag">
+            <AdnyTag />
+          </div>
           <div
             class="main-view"
             :class="{
@@ -169,13 +172,6 @@ onMounted(() => {
     position: relative;
     z-index: 13;
     transition: all 0.2s ease-in-out;
-    // background: v-bind(color);
-    // background-image: url(https://w.wallhaven.cc/full/e7/wallhaven-e7ek7k.jpg);
-    // background-image: url(https://w.wallhaven.cc/full/wq/wallhaven-wqdglr.jpg);
-    // background-image: url(https://w.wallhaven.cc/full/6o/wallhaven-6ow9xw.jpg);
-    // background-image: url(https://w.wallhaven.cc/full/x8/wallhaven-x8d56o.jpg);
-    // background-image: url(https://w.wallhaven.cc/full/9m/wallhaven-9m9p1x.png);
-    // background-image: url(https://w.wallhaven.cc/full/y8/wallhaven-y826gd.png);
   }
 
   .layout-sider-fix {
@@ -213,6 +209,10 @@ onMounted(() => {
   margin: 10px;
   position: relative;
   padding-top: 64px;
+  .layout-content-main-tag {
+    // background: #000;
+    // height: 40px;
+  }
 }
 .layout-content-main-padding {
   padding-top: 0;

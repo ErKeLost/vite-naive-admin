@@ -1,20 +1,10 @@
 <template>
-  <!-- <NMenu
-      :options="menuOptions"
-      :mode="mode"
-      :collapsed="collapsed"
-      :collapsed-width="64"
-      :collapsed-icon-size="20"
-      :indent="24"
-      :expanded-keys="openKeys"
-      :value="getSelectedKeys"
-      @update:value="clickMenuItem"
-      @update:expanded-keys="menuExpanded"
-    /> -->
   <NMenu
     class="menu-class"
     :inverted="inverted"
     :options="menus"
+    :mode="mode"
+    :collapsed="collapsed"
     :collapsed-width="64"
     :collapsed-icon-size="20"
     :indent="24"
@@ -34,15 +24,23 @@ import { useAsyncRouteStore } from '@/store/modules/asyncRoute'
 import { generatorMenu, generatorMenuMix, generatorMenuDynamic } from '@/utils'
 import { constantRouterList } from '@/router'
 import { useTabsViewStore } from '@/store/modules/tabsView'
-defineProps<{}>()
+withDefaults(
+  defineProps<{
+    mode?: string
+    collapsed?: boolean
+    location?: string
+  }>(),
+  {
+    mode: 'vertical',
+    location: 'left'
+  }
+)
 const loginStore = useLoginStore()
 const dynamicMenu = generatorMenuDynamic(loginStore.userMenus)
 const constantMenu = generatorMenu(constantRouterList)
 const menus = computed(() => {
   return [...dynamicMenu, ...constantMenu]
 })
-console.log(loginStore.userMenus)
-console.log(dynamicMenu)
 
 // const result = constantMenu
 const settingStore = useProjectSettingStore()
@@ -58,7 +56,6 @@ const inverted = computed(() => {
 const changeRouter = (key: any, item: any) => {
   router.push({ path: item.url })
   tabsViewStore.addTabs(item)
-  console.log(item)
 }
 </script>
 

@@ -1,59 +1,60 @@
 <template>
-  <div class="tabs-view-main">
-    <div ref="navWrap" class="tabs-card">
-      <span
-        class="tabs-card-prev"
-        @click="scrollPrev"
-        :class="{ 'tabs-card-prev-hide': !scrollable }"
-      >
-        <n-icon size="16" color="#515a6e">
-          <LeftOutlined />
-        </n-icon>
-      </span>
-      <span
-        class="tabs-card-next"
-        @click="scrollNext"
-        :class="{ 'tabs-card-next-hide': !scrollable }"
-      >
-        <n-icon size="16" color="#515a6e">
-          <RightOutlined />
-        </n-icon>
-      </span>
-      <div ref="navScroll" class="tabs-card-scroll">
-        <Draggable :list="tabsList" animation="300" item-key="id" class="flex">
-          <template #item="{ element }">
-            <div
-              :id="`tag${element.fullPath.split('/').join('\/')}`"
-              class="tabs-card-scroll-item"
-              :style="{ border: `1px solid ${color}` }"
-              :class="{ 'active-item': $route.fullPath === element.fullPath }"
-              @click.stop="changePage(element)"
-            >
-              <span>{{ element.meta.title }}</span>
-              <n-icon size="14" v-if="element.fullPath !== home">
-                <CloseOutlined />
-              </n-icon>
-            </div>
-          </template>
-        </Draggable>
-      </div>
-    </div>
-    <div class="tabs-close">
-      <n-dropdown trigger="hover" placement="bottom-end" :options="TabsMenuOptions">
-        <div class="tabs-close-btn">
+  <div class="tabs-view" :style="getChangeStyle">
+    <div class="tabs-view-main">
+      <div ref="navWrap" class="tabs-card">
+        <span
+          class="tabs-card-prev"
+          @click="scrollPrev"
+          :class="{ 'tabs-card-prev-hide': !scrollable }"
+        >
           <n-icon size="16" color="#515a6e">
-            <DownOutlined />
+            <LeftOutlined />
           </n-icon>
+        </span>
+        <span
+          class="tabs-card-next"
+          @click="scrollNext"
+          :class="{ 'tabs-card-next-hide': !scrollable }"
+        >
+          <n-icon size="16" color="#515a6e">
+            <RightOutlined />
+          </n-icon>
+        </span>
+        <div ref="navScroll" class="tabs-card-scroll">
+          <Draggable :list="tabsList" animation="300" item-key="id" class="flex">
+            <template #item="{ element }">
+              <div
+                :id="`tag${element.fullPath.split('/').join('\/')}`"
+                class="tabs-card-scroll-item"
+                :class="{ 'active-item': $route.fullPath === element.fullPath }"
+                @click.stop="changePage(element)"
+              >
+                <span>{{ element.meta.title }}</span>
+                <n-icon size="15" v-if="element.fullPath !== home">
+                  <CloseOutlined />
+                </n-icon>
+              </div>
+            </template>
+          </Draggable>
         </div>
-      </n-dropdown>
+      </div>
+      <div class="tabs-close">
+        <n-dropdown trigger="hover" placement="bottom-end" :options="TabsMenuOptions">
+          <div class="tabs-close-btn">
+            <n-icon size="16" color="#515a6e">
+              <DownOutlined />
+            </n-icon>
+          </div>
+        </n-dropdown>
+      </div>
+      <n-dropdown
+        :show="showDropdown"
+        :x="dropdownX"
+        :y="dropdownY"
+        placement="bottom-start"
+        :options="TabsMenuOptions"
+      />
     </div>
-    <n-dropdown
-      :show="showDropdown"
-      :x="dropdownX"
-      :y="dropdownY"
-      placement="bottom-start"
-      :options="TabsMenuOptions"
-    />
   </div>
 </template>
 
@@ -79,17 +80,21 @@ import { useDesignSetting } from '@/hooks/setting/useDesignSetting'
 import { useProjectSettingStore } from '@/store/modules/projectSetting'
 import Draggable from 'vuedraggable'
 import { useDesignSettingStore } from '@/store/modules/designSetting'
+import { useProjectSetting } from '@/hooks/setting/useProjectSetting'
 
-defineProps<{
+const props = defineProps<{
   collapsed?: boolean
 }>()
 const designStore = useDesignSettingStore()
+const { getNavMode, getHeaderSetting, getMenuSetting, getMultiTabsSetting } = useProjectSetting()
 const color = computed(() => designStore.appTheme)
+const settingStore = useProjectSettingStore()
+
 const handleClose = () => {}
 const tabsViewStore = useTabsViewStore()
 const route = useRoute()
 const isCurrent = ref(false)
-const scrollable = ref(false)
+let scrollable = ref(false)
 console.log(route)
 const dropdownX = ref(0)
 const dropdownY = ref(0)
@@ -147,7 +152,29 @@ const tabsList: any = computed(() => tabsViewStore.tabsList)
 window.addEventListener('beforeunload', () => {
   storage.set(TABS_ROUTES, JSON.stringify(tabsList.value))
 })
-
+const isMixMenuNoneSub = computed(() => {
+  const mixMenu = settingStore.menuSetting.mixMenu
+  const currentRoute = useRoute()
+  const navMode = unref(getNavMode)
+  if (unref(navMode) != 'horizontal-mix') return true
+  return !(unref(navMode) === 'horizontal-mix' && mixMenu && currentRoute.meta.isRoot)
+})
+const getChangeStyle = computed(() => {
+  const { collapsed } = props
+  const navMode = unref(getNavMode)
+  const { minMenuWidth, menuWidth }: any = unref(getMenuSetting)
+  const { fixed }: any = unref(getMultiTabsSetting)
+  let lenNum =
+    navMode === 'horizontal' || !isMixMenuNoneSub.value
+      ? '0px'
+      : collapsed
+      ? `${minMenuWidth}px`
+      : `${menuWidth}px`
+  return {
+    left: lenNum,
+    width: `calc(100% - ${!fixed ? '0px' : lenNum})`
+  }
+})
 onMounted(() => {
   const containerWidth = navScroll.value.offsetWidth
   const navWidth = navScroll.value.scrollWidth
@@ -159,6 +186,29 @@ const changePage = (ele: any) => {
   const { fullPath } = ele
   if (fullPath === route.fullPath) return
   router.push({ path: fullPath })
+}
+watch(
+  () => route.fullPath,
+  (to) => {
+    updateNavScroll()
+  },
+  { immediate: true }
+)
+/**
+ * @param autoScroll 是否开启自动滚动功能
+ */
+async function updateNavScroll(autoScroll?: boolean) {
+  await nextTick()
+  if (!navScroll.value) return
+  const containerWidth = navScroll.value.offsetWidth
+  const navWidth = navScroll.value.scrollWidth
+  console.log(containerWidth)
+  console.log(navWidth)
+  if (containerWidth < navWidth) {
+    scrollable.value = true
+  } else {
+    scrollable.value = false
+  }
 }
 </script>
 
@@ -258,7 +308,7 @@ const changePage = (ele: any) => {
         }
 
         .active-item {
-          color: v-bind(color);
+          color: v-bind(getAppTheme);
         }
       }
     }
