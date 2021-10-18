@@ -2,9 +2,8 @@
   <n-layout class="layout" :position="fixedMenu" has-sider>
     <n-layout-sider
       v-if="
-        isMixMenuNoneSub &&
         (navMode === 'vertical' || navMode === 'horizontal-mix') &&
-        // content 为内容模式
+        // content 为内容模式 内容模式时 移除layout sider
         navMode !== 'content'
       "
       show-trigger="bar"
@@ -21,8 +20,9 @@
       :style="{ backgroundImage: `url(${designStore.bgTheme})` }"
     >
       <AdnyLogo :collapsed="collapsed" />
-      <AdnySlideMenu />
+      <AdnySlideMenu v-model:collapsed="collapsed" v-model:location="getMenuLocation" />
     </n-layout-sider>
+
     <n-layout :inverted="inverted" :native-scrollbar="false">
       <n-layout-header
         :inverted="getHeaderInverted"
@@ -44,7 +44,7 @@
           }"
         >
           <div class="layout-content-main-tag">
-            <AdnyTag />
+            <AdnyTag v-if="isMultiTabs" v-model:collapsed="collapsed" />
           </div>
           <div
             class="main-view"
@@ -58,6 +58,7 @@
           </div>
         </div>
       </n-layout-content>
+      <n-back-top :right="100" />
     </n-layout>
   </n-layout>
 </template>
@@ -87,59 +88,66 @@ const designStore = useDesignSettingStore()
 const bgTheme = computed(() => designStore.bgTheme)
 const color = computed(() => designStore.appTheme)
 const navMode = getNavMode
+// header 定位
 const fixedHeader = computed(() => {
   const { fixed } = unref(getHeaderSetting)
   return fixed ? 'absolute' : 'static'
 })
 
-const isMixMenuNoneSub = computed(() => {
-  const mixMenu = settingStore.menuSetting.mixMenu
-  const currentRoute = useRoute()
-  if (unref(navMode) != 'horizontal-mix') return true
-  if (unref(navMode) === 'horizontal-mix' && mixMenu && currentRoute.meta.isRoot) {
-    return false
-  }
-  return true
-})
+// 默认 不开启 分割菜单 2021.10.18
+// // 分割菜单
+// const isMixMenuNoneSub = computed(() => {
+//   // 默认 false
+//   const mixMenu = settingStore.menuSetting.mixMenu
+//   // 还要判断当前 路由 是否为 根路由
+//   const currentRoute = useRoute()
+//   if (unref(navMode) != 'horizontal-mix') return true
+//   if (unref(navMode) === 'horizontal-mix' && mixMenu && currentRoute.meta.isRoot) {
+//     return false
+//   }
+//   return true
+// })
 
+// 菜单 定位
 const fixedMenu = computed(() => {
   const { fixed } = unref(getHeaderSetting)
   return fixed ? 'absolute' : 'static'
 })
 
+// 是否展示 tagview 组件
 const isMultiTabs = computed(() => {
   return unref(getMultiTabsSetting).show
 })
 
+// fixed 布局 是否 fixed
 const fixedMulti = computed(() => {
   return unref(getMultiTabsSetting).fixed
 })
 
+// 翻转颜色 给 header 主题 判断  文本颜色 是否翻转
 const inverted = computed(() => {
   return ['dark', 'header-dark'].includes(unref(getNavTheme))
 })
 
+// ??? header 反转色
 const getHeaderInverted = computed(() => {
+  // 根据 暗黑 和 亮色 来 判断颜色是否翻转  默认dark
   const navTheme = unref(getNavTheme)
   return ['light', 'header-dark'].includes(navTheme) ? unref(inverted) : !unref(inverted)
 })
 
+// 判断 是否在 collapsed 状态下 动态修改 菜单 宽度
 const leftMenuWidth = computed(() => {
   const { minMenuWidth, menuWidth } = unref(getMenuSetting)
   return collapsed.value ? minMenuWidth : menuWidth
 })
 
-const getChangeStyle = computed(() => {
-  const { minMenuWidth, menuWidth } = unref(getMenuSetting)
-  return {
-    'padding-left': collapsed.value ? `${minMenuWidth}px` : `${menuWidth}px`
-  }
-})
-
+// 菜单位置 目前 没什么屌用
 const getMenuLocation = computed(() => {
   return 'left'
 })
 
+// 监听 浏览器宽度 来 动态修改 菜单 折叠情况
 const watchWidth = () => {
   const Width = document.body.clientWidth
   if (Width <= 950) {
@@ -147,6 +155,7 @@ const watchWidth = () => {
   } else collapsed.value = false
 }
 
+// 监听 resize 方法  挂在 loading组件
 onMounted(() => {
   window.addEventListener('resize', watchWidth)
   //挂载在 window 方便与在js中使用
