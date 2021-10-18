@@ -17,7 +17,7 @@
       :native-scrollbar="false"
       :inverted="inverted"
       class="layout-sider"
-      :style="{ backgroundImage: `url(${designStore.bgTheme})` }"
+      :style="{ backgroundImage: `url(${systemBgTheme})` }"
     >
       <AdnyLogo :collapsed="collapsed" />
       <AdnySlideMenu v-model:collapsed="collapsed" v-model:location="getMenuLocation" />
@@ -28,6 +28,8 @@
         :inverted="getHeaderInverted"
         :position="fixedHeader"
         v-if="navMode !== 'content'"
+        class="layout-header"
+        :style="{ backgroundImage: `url(${designStore.bgTheme})` }"
       >
         <AdnyHeader v-model:collapsed="collapsed" :inverted="inverted" />
       </n-layout-header>
@@ -72,6 +74,7 @@ import { useLoadingBar } from 'naive-ui'
 import { useRoute } from 'vue-router'
 import { useProjectSettingStore } from '@/store/modules/projectSetting'
 import { useDesignSettingStore } from '@/store/modules/designSetting'
+import { systemBgTheme } from './hooks'
 const collapsed = ref<boolean>(false)
 const { getDarkTheme } = useDesignSetting()
 const {
@@ -85,8 +88,6 @@ const {
 
 const settingStore = useProjectSettingStore()
 const designStore = useDesignSettingStore()
-const bgTheme = computed(() => designStore.bgTheme)
-const color = computed(() => designStore.appTheme)
 const navMode = getNavMode
 // header 定位
 const fixedHeader = computed(() => {
@@ -181,6 +182,9 @@ onMounted(() => {
     position: relative;
     z-index: 13;
     transition: all 0.2s ease-in-out;
+  }
+  .layout-header {
+    transition: all 0.5s ease-in-out;
   }
 
   .layout-sider-fix {
