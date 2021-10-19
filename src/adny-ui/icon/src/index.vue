@@ -1,6 +1,6 @@
 <template>
   <div :class="{ filp: turn === true }">
-    <i :class="`mdi mdi-${icon} text-${size}xl`" :style="`color: ${color}`"></i>
+    <i :class="`mdi mdi-${icon}`" :style="{ color, fontSize: `${size}px` }"></i>
   </div>
 </template>
 <script lang="ts">

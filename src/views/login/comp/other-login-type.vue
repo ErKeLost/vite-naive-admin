@@ -5,10 +5,10 @@
     <span class="h-px w-16 bg-gray-200"></span>
   </div>
   <div class="flex flex-row justify-center items-center space-x-10">
-    <adny-icon icon="wechat" size="3" color="#67C23A"></adny-icon>
-    <adny-icon icon="github" size="3"></adny-icon>
-    <adny-icon icon="instagram" size="3" color="#F56C6C"></adny-icon>
-    <adny-icon icon="facebook" size="3" color="#409EFF"></adny-icon>
+    <adny-icon icon="wechat" size="30" color="#67C23A"></adny-icon>
+    <adny-icon icon="github" size="30"></adny-icon>
+    <adny-icon icon="instagram" size="30" color="#F56C6C"></adny-icon>
+    <adny-icon icon="facebook" size="30" color="#409EFF"></adny-icon>
   </div>
 </template>
 

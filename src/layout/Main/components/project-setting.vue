@@ -253,6 +253,9 @@ export default defineComponent({
     watch(
       () => designStore.darkTheme,
       (to) => {
+        if (to) {
+          designStore.bgTheme = ''
+        }
         settingStore.navTheme = to ? 'header-dark' : 'dark'
       }
     )
@@ -263,7 +266,6 @@ export default defineComponent({
       if (!newValue) {
         designStore.bgTheme = ''
       }
-      return
     })
     function openDrawer() {
       state.isDrawer = true
