@@ -254,7 +254,7 @@ export default defineComponent({
       () => designStore.darkTheme,
       (to) => {
         if (to) {
-          designStore.bgTheme = ''
+          bgThemeOpen.value = false
         }
         settingStore.navTheme = to ? 'header-dark' : 'dark'
       }
@@ -276,6 +276,7 @@ export default defineComponent({
     }
 
     function togNavTheme(theme: any) {
+      bgThemeOpen.value = false
       settingStore.navTheme = theme
       if (settingStore.navMode === 'horizontal' && ['light'].includes(theme)) {
         settingStore.navTheme = 'dark'

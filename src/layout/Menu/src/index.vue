@@ -28,11 +28,9 @@ withDefaults(
   defineProps<{
     mode?: string
     collapsed?: boolean
-    location?: string
   }>(),
   {
-    mode: 'vertical',
-    location: 'left'
+    mode: 'vertical'
   }
 )
 const loginStore = useLoginStore()
