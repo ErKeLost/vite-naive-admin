@@ -7,7 +7,7 @@
     >
       <div class="logo" v-if="navMode === 'horizontal'">
         <img src="~@/assets/images/unknown.svg" alt="" />
-        <h2 v-show="!collapsed" class="title">ERKELOST DESIGN</h2>
+        <!-- <h2 v-show="!collapsed" class="title">ERKELOST DESIGN</h2> -->
       </div>
       <AdnySlideMenu mode="horizontal" :inverted="getInverted" />
     </div>
@@ -17,11 +17,11 @@
         class="layout-header-trigger layout-header-trigger-min"
         @click="() => $emit('update:collapsed', !collapsed)"
       >
-        <AdnyIcon icon="menu-open" size="2" turn v-if="collapsed" />
-        <AdnyIcon icon="menu-open" size="2" v-else />
+        <AdnyIcon icon="menu-open" size="25" turn v-if="collapsed" />
+        <AdnyIcon icon="menu-open" size="25" v-else />
       </div>
       <div class="layout-header-trigger layout-header-trigger-min">
-        <AdnyIcon icon="refresh" size="2"></AdnyIcon>
+        <AdnyIcon icon="refresh" size="25"></AdnyIcon>
       </div>
     </div>
     <div class="layout-header-right flex">
@@ -33,21 +33,10 @@
         <n-tooltip placement="bottom">
           <template #trigger>
             <div v-on="item.eventObject || {}">
-              <AdnyIcon :icon="item.icon" size="2" />
+              <AdnyIcon :icon="item.icon" size="25" :color="item.color" />
             </div>
           </template>
           <span>{{ item.tips }}</span>
-        </n-tooltip>
-      </div>
-      <!-- 切换全屏 -->
-      <div class="layout-header-trigger layout-header-trigger-min">
-        <n-tooltip placement="bottom">
-          <template #trigger>
-            <div>
-              <AdnyIcon icon="fullscreen" size="2" />
-            </div>
-          </template>
-          <span>全屏</span>
         </n-tooltip>
       </div>
       <!-- 个人中心 -->
@@ -110,7 +99,13 @@ const iconList = [
     tips: 'youtube',
     eventObject: {
       click: () => window.open('https://youtube.com')
-    }
+    },
+    color: 'red'
+  },
+  {
+    icon: 'fullscreen',
+    tips: '全屏',
+    eventObject: {}
   }
 ]
 const avatarOptions = [
@@ -123,11 +118,7 @@ const avatarOptions = [
     key: 2
   }
 ]
-const openSetting = () => {
-  const { openDrawer } = drawerSetting.value
-  openDrawer()
-}
-const avatarSelect = (value) => {
+const avatarSelect = (value: number) => {
   if (value === 2) {
     router.push({ path: '/login' })
     loginStore.logOut()

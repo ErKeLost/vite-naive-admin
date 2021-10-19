@@ -2,6 +2,7 @@ import { RouteRecordRaw } from 'vue-router'
 import { Layout } from '@/router/constant'
 import { ProjectOutlined } from '@vicons/antd'
 import { renderIcon, renderNew } from '@/utils/index'
+import setting from '@/settings/projectSetting'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -22,7 +23,7 @@ const routes: Array<RouteRecordRaw> = [
         name: `about_index`,
         meta: {
           title: '库',
-          extra: renderNew(),
+          extra: setting.navMode === 'vertical' ? renderNew() : '',
           activeMenu: 'about_index',
           url: '/main/library'
         },

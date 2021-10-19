@@ -14,8 +14,8 @@ export function renderIcon(icon) {
 /**
  * render new Tag
  * */
-const newTagColors = { color: '#f90', textColor: '#fff', borderColor: '#f90' }
-export function renderNew(type = 'warning', text = 'vue-adny', color: object = newTagColors) {
+const newTagColors = { color: '#f90', textColor: '#fff' }
+export function renderNew(type = 'warning', text = 'vue-adny', color: object = newTagColors, bordered = false) {
   return () =>
     h(
       NTag as any,
@@ -23,12 +23,13 @@ export function renderNew(type = 'warning', text = 'vue-adny', color: object = n
         type,
         round: true,
         size: 'small',
-        color
+        color,
+        bordered
       },
       { default: () => text }
     )
 }
-export function renderCli(type = 'warning', text = 'adny-cli', color: object = newTagColors) {
+export function renderCli(type = 'info', text = 'adny-cli', color: object = newTagColors, bordered = false) {
   return () =>
     h(
       NTag as any,
@@ -36,7 +37,8 @@ export function renderCli(type = 'warning', text = 'adny-cli', color: object = n
         type,
         round: true,
         size: 'small',
-        color
+        color,
+        bordered
       },
       { default: () => text }
     )

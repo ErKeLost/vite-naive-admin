@@ -2,6 +2,10 @@ import { RouteRecordRaw } from 'vue-router'
 import { Layout } from '@/router/constant'
 import { ProjectOutlined } from '@vicons/antd'
 import { renderIcon, renderCli } from '@/utils/index'
+import setting from '@/settings/projectSetting'
+import { computed, watch } from 'vue'
+const headerSetting = computed(() => setting.navMode)
+console.log(headerSetting.value)
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -22,7 +26,7 @@ const routes: Array<RouteRecordRaw> = [
         name: `cli_index`,
         meta: {
           title: '脚手架',
-          extra: renderCli(),
+          extra: headerSetting.value === 'vertical' ? renderCli() : {},
           activeMenu: 'about_index',
           url: '/main/cli'
         },
