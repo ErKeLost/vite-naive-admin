@@ -20,7 +20,7 @@
       :style="{ backgroundImage: `url(${systemBgTheme})` }"
     >
       <AdnyLogo :collapsed="collapsed" />
-      <AdnySlideMenu v-model:collapsed="collapsed" v-model:location="getMenuLocation" />
+      <AdnySlideMenu v-model:collapsed="collapsed" />
     </n-layout-sider>
 
     <n-layout :inverted="inverted" :native-scrollbar="false">
@@ -145,10 +145,6 @@ const leftMenuWidth = computed(() => {
   return collapsed.value ? minMenuWidth : menuWidth
 })
 
-// 菜单位置 目前 没什么屌用
-const getMenuLocation = computed(() => {
-  return 'left'
-})
 
 // 监听 浏览器宽度 来 动态修改 菜单 折叠情况
 const watchWidth = () => {

@@ -152,10 +152,6 @@ const getChangeStyle = computed(() => {
     width: `calc(100% - ${collapsed ? `${minMenuWidth}px` : `${menuWidth}px`})`
   }
 })
-
-const getMenuLocation = computed(() => {
-  return 'header'
-})
 </script>
 
 <style scoped lang="less">
