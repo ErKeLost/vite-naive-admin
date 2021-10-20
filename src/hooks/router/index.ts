@@ -1,5 +1,8 @@
 import { RouteRecordRaw, Router } from 'vue-router'
 import { sortRoute } from '@/utils/sort/sort'
+import { createAddRouter } from '@/hooks/router'
+
+
 
 // 获取全部路由对象
 export function getAllRouter(fileList: [], routerList: RouteRecordRaw[]) {
