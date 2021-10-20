@@ -9,7 +9,6 @@ import {
 } from '@/service/login/login'
 import { generateRouter } from '@/hooks/menu/useMenu'
 import { defineStore } from 'pinia'
-import { resolveRouter } from '@/hooks/menu/useMenu'
 import { RouteRecordRaw } from 'vue-router'
 export interface ILoginState {
   isLoginComponent: boolean
@@ -41,12 +40,9 @@ export const useLoginStore = defineStore({
       this.userInfo = loginUserInfo.data
       localStorage.setItem('USER_INFO', JSON.stringify(this.userInfo))
       const loginUserMenus = await accountUserMenusRequest(id)
-      // const clone = resolveRouter(loginUserMenus.data)
       // 给第一次菜单 添加 图标
       this.userMenus = loginUserMenus.data
-      // console.log(clone)
 
-      // this.userMenus = loginUserMenus.data
       const result = mapMenusToRoutes(this.userMenus)
       // 登录添加所有路由 路径 以供访问 动态路径
 

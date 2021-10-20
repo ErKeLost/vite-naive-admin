@@ -22,42 +22,16 @@ const routerIcon = [
 ]
 
 // 解析路由 不好！！！！！
-function resolveRouter(routerList: any) {
-  routerList.forEach((item: any, index: number) => {
-    // item.
-    if (item.type === 1) {
-      item.icon = routerIcon[index]
-    }
-    if (item.children && item.children.length > 0 && item.type === 1) {
-      resolveRouter(item.children)
-    }
-    if (item.type === 2) {
-      // item.permissions = item.children
-      // delete item.children
-    }
-  })
-  return routerList
-}
 function setUpLoginStore() {
   const loginStore = useLoginStore()
   loginStore.userInfo = JSON.parse(localStorage.getItem('USER_INFO')!)
   loginStore.userMenus = JSON.parse(localStorage.getItem('USER_MENUS')!)
-  // if (loginStore.userMenus !== null) {
-  //   loginStore.userMenus.forEach((item: any, index: number) => {
-  //     // item.icon = routerIcon[index]
-  //   })
-  // }
+
   if (loginStore.userMenus !== null) {
     const result = mapMenusToRoutes([...loginStore.userMenus])
     createAddRouter(router, 'main', result)
     createAddRouter(router, 'main', fiallyRouter)
-    // result.forEach((route) => {
-    //   router.addRoute('main', route)
-    // })
-    // fiallyRouter.forEach((route) => {
-    //   router.addRoute('main', route)
-    // })
   }
 }
 
-export { setUpLoginStore, resolveRouter }
+export { setUpLoginStore }
