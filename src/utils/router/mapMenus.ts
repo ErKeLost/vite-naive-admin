@@ -9,14 +9,16 @@ export function mapMenusToRoutes(userMenus: any): RouteRecordRow[] {
   const allRoutes: RouteRecordRow[] = []
   const mainRouterFile = import.meta.globEager('../../router/main/**/*.ts')
   Object.values(mainRouterFile).forEach((key) => {
-    allRoutes.push(...key.default)
+    allRoutes.push(key.default)
   })
+  console.log(allRoutes)
+
   // 根据菜单获取的router添加
   // 递归获取路由
   function _recurseGetRouter(menus: any[], allRoutes: any[]) {
     for (const menu of menus) {
       if (menu.type === 2) {
-        const route = allRoutes.find((route) => route.meta.url === menu.url)
+        const route = allRoutes.find((route) => route.path === menu.url)
         if (route) routes.push(route)
       } else {
         _recurseGetRouter(menu.children, allRoutes)
@@ -24,6 +26,7 @@ export function mapMenusToRoutes(userMenus: any): RouteRecordRow[] {
     }
   }
   _recurseGetRouter(userMenus, allRoutes)
+  // 返回 当前 账户 能 拿到的 路由
   return routes
 }
 export function filterRouter(routerMap: Array<any>) {

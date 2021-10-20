@@ -21,7 +21,7 @@ import { computed, ref } from 'vue'
 import { useProjectSettingStore } from '@/store/modules/projectSetting'
 import { useProjectSetting } from '@/hooks/setting/useProjectSetting'
 import { useAsyncRouteStore } from '@/store/modules/asyncRoute'
-import { generatorMenu, generatorMenuMix, generatorMenuDynamic } from '@/utils'
+import { generatorMenu, generatorMenuDynamic } from '@/utils'
 import { constantRouterList } from '@/router'
 import { useTabsViewStore } from '@/store/modules/tabsView'
 withDefaults(
@@ -36,9 +36,11 @@ withDefaults(
 const loginStore = useLoginStore()
 const dynamicMenu = generatorMenuDynamic(loginStore.userMenus)
 const constantMenu = generatorMenu(constantRouterList)
+console.log(dynamicMenu)
+
 const menus = computed(() => {
   // 重构 路由 错误问题  历史 遗留问题
-  return [...dynamicMenu, ...constantMenu.slice(4)]
+  return [...dynamicMenu, ...constantMenu]
   // return [...dynamicMenu, ...constantMenu]
 })
 // const result = constantMenu

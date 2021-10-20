@@ -6,6 +6,14 @@ import { isObject } from './is/index'
 import { cloneDeep } from 'lodash-es'
 import { RouteRecordRow } from 'vue-router'
 import { getAllRouter, _recurseClidrenRouter, createRouterGuards } from '@/hooks/router/index'
+import {
+  DashboardOutlined,
+  BellOutlined,
+  AccountBookOutlined,
+  WechatOutlined
+} from '@vicons/antd'
+import { renderIcon } from '@/utils'
+
 /**
  * render 图标
  * */
@@ -53,17 +61,55 @@ export function generatorMenuDynamic(routerList: any[]) {
   const routes: RouteRecordRow[] = []
 
   // 先加载默认所有的router
-  const allRoutes: RouteRecordRow[] = []
-  const mainRouterFile = import.meta.globEager('../router/main/**/*.ts')
-  const constantRouter = getAllRouter(mainRouterFile, allRoutes)
-  for (const menu of routerList) {
-    const route = filterRouter(constantRouter).find((item) => item.meta.title === menu.name)
-    if (route) routes.push(route)
-  }
+  // const allRoutes: RouteRecordRow[] = []
+  // const mainRouterFile = import.meta.globEager('../router/main/**/*.ts')
+  // const constantRouter = getAllRouter(mainRouterFile, allRoutes)
+  // console.log(constantRouter)
+  console.log(routerList)
+
+  // for (const menu of routerList) {
+  //   const route = filterRouter(constantRouter).find((item) => item.meta.title === menu.name)
+  //   if (route) routes.push(route)
+  // }
+  // console.log(routes)
+
   // // 生成菜单
-  const result = generatorMenu(routes)
+  const result = generateDynamic(routerList)
+  console.log(result)
   return result
 }
+const iconList = [
+  renderIcon(DashboardOutlined),
+  renderIcon(BellOutlined),
+  renderIcon(AccountBookOutlined),
+  renderIcon(WechatOutlined)
+]
+export function generateDynamic(routerMap: Array<any>) {
+  return filterRouter(routerMap).map((item, index) => {
+    const currentMenu = {
+      // ...item,
+      name: item.name,
+      label: item.name,
+      icon: item.type === 1 ? iconList[index] : null,
+      fullPath: item.url,
+      url: item.url,
+      title: item.name,
+      meta: {
+        title: item.name
+      }
+      // meta: item.meta
+      // children: null
+    }
+    // 是否有子菜单，并递归处理
+    if (item.children && item.children.length > 0 && item.type !== 2) {
+      // Recursion
+      currentMenu.children = generateDynamic(item.children)
+    }
+    return currentMenu
+  })
+}
+
+
 export function generatorMenu(routerMap: Array<any>) {
   return filterRouter(routerMap).map((item) => {
     const isRoot = isRootRouter(item)
