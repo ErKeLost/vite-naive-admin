@@ -5,7 +5,6 @@ import { renderIcon, renderCli } from '@/utils/index'
 import setting from '@/settings/projectSetting'
 import { computed, watch } from 'vue'
 const headerSetting = computed(() => setting.navMode)
-console.log(headerSetting.value)
 
 const routes: Array<RouteRecordRaw> = [
   {

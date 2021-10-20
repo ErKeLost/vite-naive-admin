@@ -134,7 +134,6 @@ const inverted = computed(() => {
 const getHeaderInverted = computed(() => {
   // 根据 暗黑 和 亮色 来 判断颜色是否翻转  默认dark
   const navTheme = unref(getNavTheme)
-  console.log(['light', 'header-dark'].includes(navTheme) ? unref(inverted) : !unref(inverted))
 
   return ['light', 'header-dark'].includes(navTheme) ? unref(inverted) : !unref(inverted)
 })
@@ -144,7 +143,6 @@ const leftMenuWidth = computed(() => {
   const { minMenuWidth, menuWidth } = unref(getMenuSetting)
   return collapsed.value ? minMenuWidth : menuWidth
 })
-
 
 // 监听 浏览器宽度 来 动态修改 菜单 折叠情况
 const watchWidth = () => {
