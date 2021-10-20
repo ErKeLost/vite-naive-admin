@@ -95,7 +95,6 @@ const tabsViewStore = useTabsViewStore()
 const route = useRoute()
 const isCurrent = ref(false)
 let scrollable = ref(false)
-console.log(route)
 const dropdownX = ref(0)
 const dropdownY = ref(0)
 const showDropdown = ref(false)
@@ -143,11 +142,9 @@ try {
 } catch (e) {
   routes = [getSimpleRoute(route)]
 }
-console.log(routes)
 
 // 初始化标签页
 tabsViewStore.initTabs(routes)
-console.log(tabsViewStore.tabsList)
 const tabsList: any = computed(() => tabsViewStore.tabsList)
 window.addEventListener('beforeunload', () => {
   storage.set(TABS_ROUTES, JSON.stringify(tabsList.value))
@@ -178,8 +175,8 @@ const getChangeStyle = computed(() => {
 onMounted(() => {
   const containerWidth = navScroll.value.offsetWidth
   const navWidth = navScroll.value.scrollWidth
-  console.log(navWidth)
-  console.log(containerWidth)
+  // console.log(navWidth)
+  // console.log(containerWidth)
 })
 
 const changePage = (ele: any) => {
@@ -202,8 +199,8 @@ async function updateNavScroll(autoScroll?: boolean) {
   if (!navScroll.value) return
   const containerWidth = navScroll.value.offsetWidth
   const navWidth = navScroll.value.scrollWidth
-  console.log(containerWidth)
-  console.log(navWidth)
+  // console.log(containerWidth)
+  // console.log(navWidth)
   if (containerWidth < navWidth) {
     scrollable.value = true
   } else {

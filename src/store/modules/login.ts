@@ -41,12 +41,15 @@ export const useLoginStore = defineStore({
       this.userInfo = loginUserInfo.data
       localStorage.setItem('USER_INFO', JSON.stringify(this.userInfo))
       const loginUserMenus = await accountUserMenusRequest(id)
-      const clone = resolveRouter(loginUserMenus.data)
+      // const clone = resolveRouter(loginUserMenus.data)
       // 给第一次菜单 添加 图标
-      this.userMenus = [...clone]
+      this.userMenus = loginUserMenus.data
+      // console.log(clone)
+
       // this.userMenus = loginUserMenus.data
       const result = mapMenusToRoutes(this.userMenus)
       // 登录添加所有路由 路径 以供访问 动态路径
+
       createAddRouter(router, 'main', result)
       createAddRouter(router, 'main', fiallyRouter)
       // 屏蔽函数 对象 只能解析字符串  防止 用户刷新 图标消失

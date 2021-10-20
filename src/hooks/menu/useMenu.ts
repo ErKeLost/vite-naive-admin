@@ -32,8 +32,8 @@ function resolveRouter(routerList: any) {
       resolveRouter(item.children)
     }
     if (item.type === 2) {
-      item.permissions = item.children
-      delete item.children
+      // item.permissions = item.children
+      // delete item.children
     }
   })
   return routerList
@@ -42,11 +42,11 @@ function setUpLoginStore() {
   const loginStore = useLoginStore()
   loginStore.userInfo = JSON.parse(localStorage.getItem('USER_INFO')!)
   loginStore.userMenus = JSON.parse(localStorage.getItem('USER_MENUS')!)
-  if (loginStore.userMenus !== null) {
-    loginStore.userMenus.forEach((item: any, index: number) => {
-      item.icon = routerIcon[index]
-    })
-  }
+  // if (loginStore.userMenus !== null) {
+  //   loginStore.userMenus.forEach((item: any, index: number) => {
+  //     // item.icon = routerIcon[index]
+  //   })
+  // }
   if (loginStore.userMenus !== null) {
     const result = mapMenusToRoutes([...loginStore.userMenus])
     createAddRouter(router, 'main', result)

@@ -1,6 +1,6 @@
 import { RouteRecordRaw } from 'vue-router'
 import { Layout } from '@/router/constant'
-import { SettingOutlined } from '@vicons/antd'
+import { WechatOutlined } from '@vicons/antd'
 import { renderIcon } from '@/utils/index'
 
 /**
@@ -14,38 +14,38 @@ import { renderIcon } from '@/utils/index'
  * @param meta.sort 排序越小越排前
  *
  * */
-const routes: Array<RouteRecordRaw> = [
+
+const routes: RouteRecordRaw[] = [
   {
-    path: '/setting',
-    name: 'Setting',
-    redirect: '/setting/account',
+    path: '/main/story',
+    name: 'chat',
+    redirect: '/main/story/chat',
     component: Layout,
     meta: {
-      title: '设置页面',
-      icon: renderIcon(SettingOutlined),
-      sort: 5
+      title: '随便聊聊',
+      url: '/main/story/chat',
+      icon: renderIcon(WechatOutlined)
     },
     children: [
       {
-        path: '/main/account',
-        name: 'setting-account',
+        path: '/main/story/chat',
+        name: 'story-chat',
         meta: {
-          title: '个人设置',
-          url: '/main/account'
+          title: '你的故事',
+          url: '/main/story/chat'
         },
-        component: () => import('@/views/modules/setting/account/index.vue')
+        component: () => import('@/views/main/story/chat/chat.vue')
       },
       {
-        path: '/main/systemOwn',
-        name: 'setting-system',
+        path: '/main/story/list',
+        name: 'story-list',
         meta: {
-          title: '系统设置',
-          url: '/main/systemOwn'
+          title: '故事列表',
+          url: '/main/story/list'
         },
-        component: () => import('@/views/modules/setting/system/index.vue')
-      }
+        component: () => import('@/views/main/story/list/list.vue')
+      },
     ]
   }
 ]
-
 export default routes

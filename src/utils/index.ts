@@ -4,6 +4,8 @@ import { NIcon, NTag } from 'naive-ui'
 import { PageEnum } from '@/enums/pageEnum'
 import { isObject } from './is/index'
 import { cloneDeep } from 'lodash-es'
+import { RouteRecordRow } from 'vue-router'
+import { getAllRouter, _recurseClidrenRouter, createRouterGuards } from '@/hooks/router/index'
 /**
  * render 图标
  * */
@@ -48,22 +50,19 @@ export function renderCli(type = 'info', text = 'adny-cli', color: object = newT
  * 递归组装菜单格式
  */
 export function generatorMenuDynamic(routerList: any[]) {
-  return filterRouter(routerList).map((item) => {
-    const info = item
-    const currentMenu = {
-      ...info,
-      meta: {
-        title: info.name
-      },
-      fullPath: info.url
-    }
-    // 是否有子菜单，并递归处理
-    if (info.children && info.children.length > 0) {
-      // Recursion
-      currentMenu.children = generatorMenuDynamic(info.children)
-    }
-    return currentMenu
-  })
+  const routes: RouteRecordRow[] = []
+
+  // 先加载默认所有的router
+  const allRoutes: RouteRecordRow[] = []
+  const mainRouterFile = import.meta.globEager('../router/main/**/*.ts')
+  const constantRouter = getAllRouter(mainRouterFile, allRoutes)
+  for (const menu of routerList) {
+    const route = filterRouter(constantRouter).find((item) => item.meta.title === menu.name)
+    if (route) routes.push(route)
+  }
+  // // 生成菜单
+  const result = generatorMenu(routes)
+  return result
 }
 export function generatorMenu(routerMap: Array<any>) {
   return filterRouter(routerMap).map((item) => {
