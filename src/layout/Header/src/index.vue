@@ -79,7 +79,6 @@ const drawerSetting = ref(null)
 // const userStore = useUserStore()
 
 const changeCollapsed = () => {
-  console.log(props.collapsed)
   emit('update:collapsed', props.collapsed)
 }
 const iconList = [

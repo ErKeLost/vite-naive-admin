@@ -21,6 +21,9 @@
     "@vicons/ionicons5": "^0.11.0",
     "animate.css": "^4.1.1",
     "axios": "^0.22.0",
+    "echarts": "^5.2.1",
+    "element-resize-detector": "^1.2.3",
+    "gsap": "^3.8.0",
     "mockjs": "^1.1.0",
     "pinia": "^2.0.0-rc.12",
     "vue": "^3.2.16",
@@ -31,6 +34,7 @@
   "devDependencies": {
     "@mdi/font": "^6.2.95",
     "@vitejs/plugin-vue": "^1.9.3",
+    "@vitejs/plugin-vue-jsx": "^1.2.0",
     "autoprefixer": "^10.3.7",
     "commitizen": "^4.2.4",
     "cross-env": "^7.0.3",

@@ -2,6 +2,29 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import { App } from 'vue'
 import { RouteRecordRaw } from 'vue-router'
 import { getAllRouter, _recurseClidrenRouter, createRouterGuards } from '@/hooks/router/index'
+import { Layout } from './constant'
+export const REDIRECT_NAME = 'Redirect';
+
+export const RedirectRoute = {
+  path: '/redirect',
+  name: REDIRECT_NAME,
+  component: Layout,
+  meta: {
+    title: REDIRECT_NAME,
+    hideBreadcrumb: true,
+  },
+  children: [
+    {
+      path: '/redirect/:path(.*)',
+      name: REDIRECT_NAME,
+      component: () => import('@/views/redirect/index.vue'),
+      meta: {
+        title: REDIRECT_NAME,
+        hideBreadcrumb: true,
+      },
+    },
+  ],
+};
 
 // 定义module模块  和  路由
 const modules = import.meta.globEager('./modules/**/*.ts')
@@ -15,6 +38,7 @@ const fiallyRouter = _recurseClidrenRouter(constantRouter, constRouter)
 
 
 const routes: RouteRecordRaw[] = [
+  RedirectRoute,
   {
     path: '/',
     redirect: '/main'
@@ -41,9 +65,11 @@ const router = createRouter({
   history: createWebHashHistory()
 })
 
-export { constantRouterList, fiallyRouter }
-export function setupRouter(app: App) {
+function setupRouter(app: App) {
   app.use(router)
   createRouterGuards(router)
 }
+
+export { constantRouterList, fiallyRouter, setupRouter }
+
 export default router

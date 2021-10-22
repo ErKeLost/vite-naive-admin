@@ -1,19 +1,12 @@
 <template>
-  <div>
-    <n-card title="带封面的卡片">
-      <template #cover>
-        <img src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg" />
-      </template>
-      卡片内容
-    </n-card>
-  </div>
+  <div> <AdnyHeader /> <CardBarChart /> <CardLineChart /></div>
 </template>
 
 <script setup lang="ts">
+import AdnyHeader from './comp/header.vue'
+import CardBarChart from './comp/cardBarChart.vue'
+import CardLineChart from './comp/cardLineChart.vue'
 </script>
 
-<style scoped lang="less">
-.n-card {
-  max-width: 300px;
-}
+<style scoped>
 </style>

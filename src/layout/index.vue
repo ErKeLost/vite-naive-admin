@@ -53,7 +53,7 @@
             :class="{
               'main-view-fix': fixedMulti,
               noMultiTabs: !isMultiTabs,
-              'mt-3': !isMultiTabs
+              'mt-0': !isMultiTabs
             }"
           >
             <AdnyMain />
@@ -94,21 +94,6 @@ const fixedHeader = computed(() => {
   const { fixed } = unref(getHeaderSetting)
   return fixed ? 'absolute' : 'static'
 })
-
-// 默认 不开启 分割菜单 2021.10.18
-// // 分割菜单
-// const isMixMenuNoneSub = computed(() => {
-//   // 默认 false
-//   const mixMenu = settingStore.menuSetting.mixMenu
-//   // 还要判断当前 路由 是否为 根路由
-//   const currentRoute = useRoute()
-//   if (unref(navMode) != 'horizontal-mix') return true
-//   if (unref(navMode) === 'horizontal-mix' && mixMenu && currentRoute.meta.isRoot) {
-//     return false
-//   }
-//   return true
-// })
-
 // 菜单 定位
 const fixedMenu = computed(() => {
   const { fixed } = unref(getHeaderSetting)
@@ -235,7 +220,7 @@ onMounted(() => {
 }
 
 .main-view-fix {
-  padding-top: 14px;
+  // padding-top: 14px;
 }
 
 .noMultiTabs {

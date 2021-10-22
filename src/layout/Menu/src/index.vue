@@ -36,12 +36,10 @@ withDefaults(
 const loginStore = useLoginStore()
 const dynamicMenu = generatorMenuDynamic(loginStore.userMenus)
 const constantMenu = generatorMenu(constantRouterList)
-console.log(dynamicMenu)
 
 const menus = computed(() => {
   // 重构 路由 错误问题  历史 遗留问题
   return [...dynamicMenu, ...constantMenu]
-  // return [...dynamicMenu, ...constantMenu]
 })
 // const result = constantMenu
 const settingStore = useProjectSettingStore()

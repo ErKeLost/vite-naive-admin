@@ -65,7 +65,7 @@ export function generatorMenuDynamic(routerList: any[]) {
   // const mainRouterFile = import.meta.globEager('../router/main/**/*.ts')
   // const constantRouter = getAllRouter(mainRouterFile, allRoutes)
   // console.log(constantRouter)
-  console.log(routerList)
+  // console.log(routerList)
 
   // for (const menu of routerList) {
   //   const route = filterRouter(constantRouter).find((item) => item.meta.title === menu.name)
@@ -75,7 +75,6 @@ export function generatorMenuDynamic(routerList: any[]) {
 
   // // 生成菜单
   const result = generateDynamic(routerList)
-  console.log(result)
   return result
 }
 const iconList = [

@@ -11,8 +11,6 @@ export function mapMenusToRoutes(userMenus: any): RouteRecordRow[] {
   Object.values(mainRouterFile).forEach((key) => {
     allRoutes.push(key.default)
   })
-  console.log(allRoutes)
-
   // 根据菜单获取的router添加
   // 递归获取路由
   function _recurseGetRouter(menus: any[], allRoutes: any[]) {

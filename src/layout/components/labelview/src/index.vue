@@ -1,21 +1,13 @@
 <template>
   <div class="tabs-view" :style="getChangeStyle">
     <div class="tabs-view-main">
-      <div ref="navWrap" class="tabs-card">
-        <span
-          class="tabs-card-prev"
-          @click="scrollPrev"
-          :class="{ 'tabs-card-prev-hide': !scrollable }"
-        >
+      <div ref="navWrap" class="tabs-card" :class="{ 'tabs-card-scrollable': scrollable }">
+        <span class="tabs-card-prev" :class="{ 'tabs-card-prev-hide': !scrollable }">
           <n-icon size="16" color="#515a6e">
             <LeftOutlined />
           </n-icon>
         </span>
-        <span
-          class="tabs-card-next"
-          @click="scrollNext"
-          :class="{ 'tabs-card-next-hide': !scrollable }"
-        >
+        <span class="tabs-card-next" :class="{ 'tabs-card-prev-hide': !scrollable }">
           <n-icon size="16" color="#515a6e">
             <RightOutlined />
           </n-icon>
@@ -26,11 +18,12 @@
               <div
                 :id="`tag${element.fullPath.split('/').join('\/')}`"
                 class="tabs-card-scroll-item"
-                :class="{ 'active-item': $route.fullPath === element.fullPath }"
+                :class="{ 'active-item': currentRoute === element.fullPath }"
                 @click.stop="changePage(element)"
+                @contextmenu="handleContextMenu($event, element)"
               >
                 <span>{{ element.meta.title }}</span>
-                <n-icon size="15" v-if="element.fullPath !== home">
+                <n-icon size="15" v-if="element.fullPath !== home" @click.stop="deleteTab(element)">
                   <CloseOutlined />
                 </n-icon>
               </div>
@@ -39,7 +32,12 @@
         </div>
       </div>
       <div class="tabs-close">
-        <n-dropdown trigger="hover" placement="bottom-end" :options="TabsMenuOptions">
+        <n-dropdown
+          trigger="hover"
+          placement="bottom-end"
+          @select="closeHandleSelect"
+          :options="TabsMenuOptions"
+        >
           <div class="tabs-close-btn">
             <n-icon size="16" color="#515a6e">
               <DownOutlined />
@@ -51,6 +49,7 @@
         :show="showDropdown"
         :x="dropdownX"
         :y="dropdownY"
+        @select="closeHandleSelect"
         placement="bottom-start"
         :options="TabsMenuOptions"
       />
@@ -63,7 +62,6 @@ import { reactive, computed, ref, toRefs, unref, provide, watch, onMounted, next
 import { useRoute, useRouter } from 'vue-router'
 import { storage } from '@/utils/Storage'
 import { TABS_ROUTES } from '@/store/mutation-types'
-import { useMessage } from 'naive-ui'
 import { useTabsViewStore } from '@/store/modules/tabsView'
 import { PageEnum } from '@/enums/pageEnum'
 import {
@@ -81,6 +79,8 @@ import { useProjectSettingStore } from '@/store/modules/projectSetting'
 import Draggable from 'vuedraggable'
 import { useDesignSettingStore } from '@/store/modules/designSetting'
 import { useProjectSetting } from '@/hooks/setting/useProjectSetting'
+import func from '../../../../../vue-temp/vue-editor-bridge'
+import { useMessage } from 'naive-ui'
 
 const props = defineProps<{
   collapsed?: boolean
@@ -88,13 +88,16 @@ const props = defineProps<{
 const designStore = useDesignSettingStore()
 const { getNavMode, getHeaderSetting, getMenuSetting, getMultiTabsSetting } = useProjectSetting()
 const color = computed(() => designStore.appTheme)
-const settingStore = useProjectSettingStore()
-
-const handleClose = () => {}
 const tabsViewStore = useTabsViewStore()
+const settingStore = useProjectSettingStore()
+const tabsList: any = computed(() => {
+  return tabsViewStore.tabsList
+})
+const handleClose = () => {}
+const message = useMessage()
 const route = useRoute()
 const isCurrent = ref(false)
-let scrollable = ref(false)
+const scrollable = ref(false)
 const dropdownX = ref(0)
 const dropdownY = ref(0)
 const showDropdown = ref(false)
@@ -102,11 +105,39 @@ const navScroll: any = ref(null)
 const checked = ref(false)
 const router = useRouter()
 const home = PageEnum.BASE_HOME
-const getSimpleRoute = (route) => {
+const currentRoute = ref('')
+let routes = []
+const getSimpleRoute = (route: any) => {
   const { fullPath, hash, meta, name, params, path, query } = route
   return { fullPath, hash, meta, name, params, path, query }
 }
-let routes = []
+function removeTab(deleteRouter: any) {
+  if (tabsList.value.length === 1) {
+    return message.warning('这已经是最后一页，不能再关闭了！')
+  }
+  tabsViewStore.closeCurrentTab(deleteRouter)
+  // 如果关闭的是当前页
+  if (currentRoute.value === deleteRouter.fullPath) {
+    const current = tabsList.value[Math.max(0, tabsList.value.length - 1)]
+    currentRoute.value = current.fullPath
+    router.push({ path: current.fullPath })
+  }
+}
+const deleteTab = (e) => {
+  const { fullPath } = e
+  const deleteRouter = tabsList.value.find((item) => item.fullPath === fullPath)
+  removeTab(deleteRouter)
+}
+const handleContextMenu = (e, item) => {
+  e.preventDefault()
+  showDropdown.value = false
+  isCurrent.value = router.currentRoute.value.fullPath === item.fullPath
+  nextTick().then(() => {
+    showDropdown.value = true
+    dropdownX.value = e.clientX
+    dropdownY.value = e.clientY
+  })
+}
 const TabsMenuOptions = computed(() => {
   const isDisabled = unref(tabsList).length <= 1
   return [
@@ -136,6 +167,13 @@ const TabsMenuOptions = computed(() => {
   ]
 })
 
+// 刷新页面
+const reloadPage = () => {
+  router.push({
+    path: '/redirect' + unref(route).fullPath
+  })
+}
+
 try {
   const routesStr = storage.get(TABS_ROUTES) as string | null | undefined
   routes = routesStr ? JSON.parse(routesStr) : [getSimpleRoute(route)]
@@ -145,7 +183,7 @@ try {
 
 // 初始化标签页
 tabsViewStore.initTabs(routes)
-const tabsList: any = computed(() => tabsViewStore.tabsList)
+
 window.addEventListener('beforeunload', () => {
   storage.set(TABS_ROUTES, JSON.stringify(tabsList.value))
 })
@@ -169,7 +207,7 @@ const getChangeStyle = computed(() => {
       : `${menuWidth}px`
   return {
     left: lenNum,
-    width: `calc(100% - ${!fixed ? '0px' : lenNum})`
+    width: `calc(100% - ${fixed ? '0px' : '0px'})`
   }
 })
 onMounted(() => {
@@ -178,7 +216,13 @@ onMounted(() => {
   // console.log(navWidth)
   // console.log(containerWidth)
 })
-
+watch(
+  route,
+  (to) => {
+    currentRoute.value = to.fullPath
+  },
+  { immediate: true }
+)
 const changePage = (ele: any) => {
   const { fullPath } = ele
   if (fullPath === route.fullPath) return
@@ -207,14 +251,39 @@ async function updateNavScroll(autoScroll?: boolean) {
     scrollable.value = false
   }
 }
+const closeHandleSelect = (key) => {
+  console.log(key)
+
+  switch (key) {
+    //刷新
+    case '1':
+      reloadPage()
+      break
+    //关闭
+    case '2':
+      break
+    //关闭其他
+    case '3':
+      break
+    //关闭所有
+    case '4':
+      break
+  }
+  updateNavScroll()
+  showDropdown.value = false
+}
 </script>
 
 <style lang="less" scoped>
 .tabs-view {
   width: 100%;
-  padding: 6px 0;
+  user-select: none;
+  -moz-user-select: none;
+  padding: 0 0px 16px 0;
   display: flex;
   transition: all 0.2s ease-in-out;
+  border-radius: 8px;
+  overflow: hidden;
 
   &-main {
     height: 32px;
@@ -236,7 +305,6 @@ async function updateNavScroll(autoScroll?: boolean) {
         position: absolute;
         line-height: 32px;
         cursor: pointer;
-
         .n-icon {
           display: flex;
           align-items: center;
@@ -251,6 +319,7 @@ async function updateNavScroll(autoScroll?: boolean) {
       }
 
       .tabs-card-next {
+        z-index: 99;
         right: 0;
       }
 
@@ -305,14 +374,15 @@ async function updateNavScroll(autoScroll?: boolean) {
         }
 
         .active-item {
-          color: v-bind(getAppTheme);
+          color: v-bind(color);
+          box-sizing: border-box;
         }
       }
     }
 
     .tabs-card-scrollable {
-      padding: 0 32px;
       overflow: hidden;
+      padding: 0 32px;
     }
   }
 
@@ -325,7 +395,7 @@ async function updateNavScroll(autoScroll?: boolean) {
     background: var(--color);
     border-radius: 2px;
     cursor: pointer;
-    //margin-right: 10px;
+    // margin-right: 10px;
 
     &-btn {
       color: var(--color);
