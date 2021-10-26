@@ -1,5 +1,5 @@
 - ## License
-- ![Image text](assets/images/../../src/assets/images/avator.jpg)
+- ![Image text](https://note.youdao.com/yws/res/3/WEBRESOURCEf144833ada57e92f7c27cd5bbaec7b7f)
 
 # 完成度 🚀🚀🚀
 
