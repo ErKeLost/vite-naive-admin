@@ -1,3 +1,6 @@
+- ## License
+- ![Image text](assets/images/../../src/assets/images/avator.jpg)
+
 # 完成度 🚀🚀🚀
 
 ## 2021.10.20
