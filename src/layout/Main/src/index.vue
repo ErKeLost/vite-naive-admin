@@ -1,12 +1,14 @@
 <template>
   <AdnyThemeMenu />
-  <RouterView>
-    <template #default="{ Component, route }">
-      <transition :name="getTransitionName" mode="out-in" appear>
-        <component :is="Component" :key="route.fullPath" />
-      </transition>
-    </template>
-  </RouterView>
+  <div class="main">
+    <RouterView>
+      <template #default="{ Component, route }">
+        <transition :name="getTransitionName" mode="out-in" appear>
+          <component :is="Component" :key="route.fullPath" />
+        </transition>
+      </template>
+    </RouterView>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -22,4 +24,8 @@ const getTransitionName = computed(() => {
 })
 </script>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.main {
+  // padding: 0 30px;
+}
+</style>

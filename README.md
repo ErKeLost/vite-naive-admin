@@ -1,4 +1,12 @@
+- ## License
+- ![Image text](https://note.youdao.com/yws/res/3/WEBRESOURCEf144833ada57e92f7c27cd5bbaec7b7f)
+
 # 完成度 🚀🚀🚀
+
+## 2021.10.20
+
+- ### 重构路由 bug + 1
+
 
 ## 2021.10.18
 

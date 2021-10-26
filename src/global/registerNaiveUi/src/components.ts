@@ -31,7 +31,11 @@ import {
   NBadge,
   NColorPicker,
   NTag,
-  NBackTop
+  NBackTop,
+  NCol,
+  NRow,
+  NTabs,
+  NTabPane
 } from 'naive-ui'
 
 export const components = [
@@ -68,5 +72,9 @@ export const components = [
   NBadge,
   NColorPicker,
   NTag,
-  NBackTop
+  NBackTop,
+  NCol,
+  NRow,
+  NTabs,
+  NTabPane
 ]

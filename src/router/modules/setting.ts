@@ -36,11 +36,11 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/modules/setting/account/index.vue')
       },
       {
-        path: '/main/system',
+        path: '/main/systemOwn',
         name: 'setting-system',
         meta: {
           title: '系统设置',
-          url: '/main/system'
+          url: '/main/systemOwn'
         },
         component: () => import('@/views/modules/setting/system/index.vue')
       }

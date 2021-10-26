@@ -53,7 +53,7 @@
             :class="{
               'main-view-fix': fixedMulti,
               noMultiTabs: !isMultiTabs,
-              'mt-3': !isMultiTabs
+              'mt-0': !isMultiTabs
             }"
           >
             <AdnyMain />
@@ -94,21 +94,6 @@ const fixedHeader = computed(() => {
   const { fixed } = unref(getHeaderSetting)
   return fixed ? 'absolute' : 'static'
 })
-
-// 默认 不开启 分割菜单 2021.10.18
-// // 分割菜单
-// const isMixMenuNoneSub = computed(() => {
-//   // 默认 false
-//   const mixMenu = settingStore.menuSetting.mixMenu
-//   // 还要判断当前 路由 是否为 根路由
-//   const currentRoute = useRoute()
-//   if (unref(navMode) != 'horizontal-mix') return true
-//   if (unref(navMode) === 'horizontal-mix' && mixMenu && currentRoute.meta.isRoot) {
-//     return false
-//   }
-//   return true
-// })
-
 // 菜单 定位
 const fixedMenu = computed(() => {
   const { fixed } = unref(getHeaderSetting)
@@ -134,7 +119,6 @@ const inverted = computed(() => {
 const getHeaderInverted = computed(() => {
   // 根据 暗黑 和 亮色 来 判断颜色是否翻转  默认dark
   const navTheme = unref(getNavTheme)
-  console.log(['light', 'header-dark'].includes(navTheme) ? unref(inverted) : !unref(inverted))
 
   return ['light', 'header-dark'].includes(navTheme) ? unref(inverted) : !unref(inverted)
 })
@@ -144,7 +128,6 @@ const leftMenuWidth = computed(() => {
   const { minMenuWidth, menuWidth } = unref(getMenuSetting)
   return collapsed.value ? minMenuWidth : menuWidth
 })
-
 
 // 监听 浏览器宽度 来 动态修改 菜单 折叠情况
 const watchWidth = () => {
@@ -217,7 +200,7 @@ onMounted(() => {
 }
 
 .layout-content-main {
-  margin: 10px;
+  margin: 10px 10px;
   position: relative;
   padding-top: 64px;
   .layout-content-main-tag {
@@ -237,7 +220,7 @@ onMounted(() => {
 }
 
 .main-view-fix {
-  padding-top: 14px;
+  // padding-top: 14px;
 }
 
 .noMultiTabs {

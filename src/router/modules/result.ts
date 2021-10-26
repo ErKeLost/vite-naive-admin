@@ -16,7 +16,7 @@ import { renderIcon } from '@/utils/index'
  * */
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/result',
+    path: '/main',
     name: 'Result',
     redirect: '/result/success',
     component: Layout,
@@ -27,7 +27,7 @@ const routes: Array<RouteRecordRaw> = [
     },
     children: [
       {
-        path: '/main/success',
+        path: 'success',
         name: 'result-success',
         meta: {
           title: '成功页',
@@ -36,7 +36,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/modules/result/success/index.vue')
       },
       {
-        path: '/main/fail',
+        path: 'fail',
         name: 'result-fail',
         meta: {
           title: '失败页',
@@ -45,7 +45,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/modules/result/fail/index.vue')
       },
       {
-        path: '/main/info',
+        path: 'info',
         name: 'result-info',
         meta: {
           title: '信息页',

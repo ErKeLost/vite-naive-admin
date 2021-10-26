@@ -1,9 +1,19 @@
-import { h, unref } from 'vue'
+import { h, unref, computed } from 'vue'
 import type { App, Plugin } from 'vue'
 import { NIcon, NTag } from 'naive-ui'
 import { PageEnum } from '@/enums/pageEnum'
 import { isObject } from './is/index'
 import { cloneDeep } from 'lodash-es'
+import { RouteRecordRow } from 'vue-router'
+import { getAllRouter, _recurseClidrenRouter, createRouterGuards } from '@/hooks/router/index'
+import {
+  DashboardOutlined,
+  BellOutlined,
+  AccountBookOutlined,
+  WechatOutlined
+} from '@vicons/antd'
+import { renderIcon } from '@/utils'
+
 /**
  * render 图标
  * */
@@ -48,23 +58,41 @@ export function renderCli(type = 'info', text = 'adny-cli', color: object = newT
  * 递归组装菜单格式
  */
 export function generatorMenuDynamic(routerList: any[]) {
-  return filterRouter(routerList).map((item) => {
-    const info = item
-    const currentMenu = {
-      ...info,
+  const routes: RouteRecordRow[] = []
+  // // 生成菜单
+  const result = generateDynamic(routerList)
+  return result
+}
+const iconList = [
+  renderIcon(DashboardOutlined),
+  renderIcon(BellOutlined),
+  renderIcon(AccountBookOutlined),
+  renderIcon(WechatOutlined)
+]
+export function generateDynamic(routerMap: Array<any>) {
+  return filterRouter(routerMap).map((item, index) => {
+    const currentMenu: any = {
+      // ...item,
+      name: item.name,
+      label: item.name,
+      icon: item.type === 1 ? iconList[index] : null,
+      fullPath: item.url,
+      url: item.url,
+      title: item.name,
       meta: {
-        title: info.name
-      },
-      fullPath: info.url
+        title: item.name
+      }
     }
     // 是否有子菜单，并递归处理
-    if (info.children && info.children.length > 0) {
+    if (item.children && item.children.length > 0 && item.type !== 2) {
       // Recursion
-      currentMenu.children = generatorMenuDynamic(info.children)
+      currentMenu.children = generateDynamic(item.children)
     }
     return currentMenu
   })
 }
+
+
 export function generatorMenu(routerMap: Array<any>) {
   return filterRouter(routerMap).map((item) => {
     const isRoot = isRootRouter(item)
@@ -242,3 +270,7 @@ export function lighten(color: string, amount: number) {
     amount
   )}${addLight(color.substring(4, 6), amount)}`
 }
+
+
+// 获取 全局主题
+

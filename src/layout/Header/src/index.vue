@@ -6,7 +6,7 @@
       v-if="navMode === 'horizontal' || (navMode === 'horizontal-mix' && mixMenu)"
     >
       <div class="logo" v-if="navMode === 'horizontal'">
-        <img src="~@/assets/images/unknown.svg" alt="" />
+        <img src="~@/assets/images/unknown.svg" alt />
         <!-- <h2 v-show="!collapsed" class="title">ERKELOST DESIGN</h2> -->
       </div>
       <AdnySlideMenu mode="horizontal" :inverted="getInverted" />
@@ -79,7 +79,6 @@ const drawerSetting = ref(null)
 // const userStore = useUserStore()
 
 const changeCollapsed = () => {
-  console.log(props.collapsed)
   emit('update:collapsed', props.collapsed)
 }
 const iconList = [

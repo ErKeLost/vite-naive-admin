@@ -280,12 +280,10 @@ export default defineComponent({
       settingStore.navTheme = theme
       if (settingStore.navMode === 'horizontal' && ['light'].includes(theme)) {
         settingStore.navTheme = 'dark'
-        console.log(settingStore.navTheme)
       }
     }
 
     function togTheme(color) {
-      console.log(color)
       designStore.appTheme = color
     }
 

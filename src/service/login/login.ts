@@ -24,3 +24,9 @@ export function accountUserMenusRequest(id: number) {
     url: `${LoginApi.AccountUserMenus}/${id}/menu`
   })
 }
+
+export function test(url: any) {
+  return AdnyRequest.get({
+    url
+  })
+}

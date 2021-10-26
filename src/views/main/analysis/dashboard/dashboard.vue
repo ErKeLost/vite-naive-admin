@@ -1,8 +1,9 @@
 <template>
-  <div> 我是dashboard</div>
+  <div class="tab">woshi</div>
 </template>
 
 <script setup lang="ts">
+
 </script>
 
 <style scoped>
