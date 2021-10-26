@@ -200,7 +200,7 @@ onMounted(() => {
 }
 
 .layout-content-main {
-  margin: 10px;
+  margin: 10px 10px;
   position: relative;
   padding-top: 64px;
   .layout-content-main-tag {

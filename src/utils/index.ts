@@ -1,4 +1,4 @@
-import { h, unref } from 'vue'
+import { h, unref, computed } from 'vue'
 import type { App, Plugin } from 'vue'
 import { NIcon, NTag } from 'naive-ui'
 import { PageEnum } from '@/enums/pageEnum'
@@ -59,20 +59,6 @@ export function renderCli(type = 'info', text = 'adny-cli', color: object = newT
  */
 export function generatorMenuDynamic(routerList: any[]) {
   const routes: RouteRecordRow[] = []
-
-  // 先加载默认所有的router
-  // const allRoutes: RouteRecordRow[] = []
-  // const mainRouterFile = import.meta.globEager('../router/main/**/*.ts')
-  // const constantRouter = getAllRouter(mainRouterFile, allRoutes)
-  // console.log(constantRouter)
-  // console.log(routerList)
-
-  // for (const menu of routerList) {
-  //   const route = filterRouter(constantRouter).find((item) => item.meta.title === menu.name)
-  //   if (route) routes.push(route)
-  // }
-  // console.log(routes)
-
   // // 生成菜单
   const result = generateDynamic(routerList)
   return result
@@ -85,7 +71,7 @@ const iconList = [
 ]
 export function generateDynamic(routerMap: Array<any>) {
   return filterRouter(routerMap).map((item, index) => {
-    const currentMenu = {
+    const currentMenu: any = {
       // ...item,
       name: item.name,
       label: item.name,
@@ -96,8 +82,6 @@ export function generateDynamic(routerMap: Array<any>) {
       meta: {
         title: item.name
       }
-      // meta: item.meta
-      // children: null
     }
     // 是否有子菜单，并递归处理
     if (item.children && item.children.length > 0 && item.type !== 2) {
@@ -286,3 +270,7 @@ export function lighten(color: string, amount: number) {
     amount
   )}${addLight(color.substring(4, 6), amount)}`
 }
+
+
+// 获取 全局主题
+

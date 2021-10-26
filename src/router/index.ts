@@ -34,7 +34,7 @@ const constantRouterList: RouteRecordRaw[] = []
 // 拿到 路由 进行递归
 const constantRouter = getAllRouter(modules, constantRouterList)
 // 获取需要添加到路由中的 所有路由
-const fiallyRouter = _recurseClidrenRouter(constantRouter, constRouter)
+const finallyRouter = _recurseClidrenRouter(constantRouter, constRouter)
 
 
 const routes: RouteRecordRaw[] = [
@@ -70,6 +70,6 @@ function setupRouter(app: App) {
   createRouterGuards(router)
 }
 
-export { constantRouterList, fiallyRouter, setupRouter }
+export { constantRouterList, finallyRouter, setupRouter }
 
 export default router

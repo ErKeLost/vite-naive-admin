@@ -33,7 +33,9 @@ import {
   NTag,
   NBackTop,
   NCol,
-  NRow
+  NRow,
+  NTabs,
+  NTabPane
 } from 'naive-ui'
 
 export const components = [
@@ -72,5 +74,7 @@ export const components = [
   NTag,
   NBackTop,
   NCol,
-  NRow
+  NRow,
+  NTabs,
+  NTabPane
 ]

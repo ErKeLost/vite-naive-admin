@@ -26,6 +26,6 @@ const getTransitionName = computed(() => {
 
 <style scoped lang="less">
 .main {
-  // padding: 0 150px;
+  // padding: 0 30px;
 }
 </style>

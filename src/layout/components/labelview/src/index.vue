@@ -17,7 +17,7 @@
             <template #item="{ element }">
               <div
                 :id="`tag${element.fullPath.split('/').join('\/')}`"
-                class="tabs-card-scroll-item"
+                class="tabs-card-scroll-item chrome-tab"
                 :class="{ 'active-item': currentRoute === element.fullPath }"
                 @click.stop="changePage(element)"
                 @contextmenu="handleContextMenu($event, element)"
@@ -93,7 +93,7 @@ const settingStore = useProjectSettingStore()
 const tabsList: any = computed(() => {
   return tabsViewStore.tabsList
 })
-const handleClose = () => {}
+const handleClose = () => { }
 const message = useMessage()
 const route = useRoute()
 const isCurrent = ref(false)
@@ -203,8 +203,8 @@ const getChangeStyle = computed(() => {
     navMode === 'horizontal' || !isMixMenuNoneSub.value
       ? '0px'
       : collapsed
-      ? `${minMenuWidth}px`
-      : `${menuWidth}px`
+        ? `${minMenuWidth}px`
+        : `${menuWidth}px`
   return {
     left: lenNum,
     width: `calc(100% - ${fixed ? '0px' : '0px'})`
@@ -279,7 +279,7 @@ const closeHandleSelect = (key) => {
   width: 100%;
   user-select: none;
   -moz-user-select: none;
-  padding: 0 0px 16px 0;
+  padding: 0 0px 12px 0;
   display: flex;
   transition: all 0.2s ease-in-out;
   border-radius: 8px;
@@ -295,7 +295,7 @@ const closeHandleSelect = (key) => {
       -webkit-box-flex: 1;
       flex-grow: 1;
       flex-shrink: 1;
-      overflow: hidden;
+      // overflow: hidden;
       position: relative;
 
       .tabs-card-prev,
@@ -330,15 +330,15 @@ const closeHandleSelect = (key) => {
 
       &-scroll {
         white-space: nowrap;
-        overflow: hidden;
+        // overflow: hidden;
 
         &-item {
           background: var(--color);
           color: var(--text-color);
           height: 32px;
           padding: 6px 16px 4px;
-          border-radius: 3px;
-          margin-right: 6px;
+          border-radius: 5px;
+          margin-right: 10px;
           cursor: pointer;
           display: inline-block;
           position: relative;
@@ -381,7 +381,7 @@ const closeHandleSelect = (key) => {
     }
 
     .tabs-card-scrollable {
-      overflow: hidden;
+      // overflow: hidden;
       padding: 0 32px;
     }
   }
@@ -424,6 +424,9 @@ const closeHandleSelect = (key) => {
 
 .tabs-view-fixed-header {
   top: 0;
+}
+.chrome-tab {
+  box-shadow: 0 2px 10px 0 rgb(94 86 105 / 15%);
 }
 </style>
 

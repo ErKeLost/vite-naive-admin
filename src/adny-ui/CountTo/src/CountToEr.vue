@@ -4,13 +4,7 @@
       <div class="counter-card-header">
         <span class="counter-title">{{ title }}</span>
       </div>
-      <div>
-        <i
-          v-if="countIcon"
-          :class="[countIcon, size]"
-          :style="{ color: iconColor }"
-          class="iconFont"
-        ></i>
+      <div class="counter-card">
         <span :style="{ color, fontSize }" :class="[size]">{{ animationCounterFixed }}</span>
         <span class="counter-rate-class" v-if="risingRate || declineRate">
           <span style="color: #67c23a" v-if="risingRate">
@@ -22,6 +16,12 @@
             <span>{{ `${declineRate}%` }}</span>
           </span>
         </span>
+        <i
+          v-if="countIcon"
+          :class="[`mdi mdi-${countIcon}`]"
+          :style="{ color: iconColor, fontSize: size }"
+          class="iconFont"
+        ></i>
       </div>
     </div>
     <div>
@@ -130,7 +130,7 @@ export default defineComponent({
   justify-content: space-between;
   align-items: center;
   .iconFont {
-    margin-right: 10px;
+    margin-left: 10px;
     // color: #fba;
   }
   .normal {
@@ -159,7 +159,7 @@ export default defineComponent({
   // padding: 20px;
 }
 .counter-title {
-  font-family: 'open sans', Helvetica, Arial, sans-serif;
+  font-family: "open sans", Helvetica, Arial, sans-serif;
   font-weight: 600;
   color: #8c8c8c;
   font-size: 14px;
@@ -169,5 +169,9 @@ export default defineComponent({
 }
 .counter-rate-class {
   margin-left: 10px;
+}
+.counter-card {
+  display: flex;
+  align-items: center;
 }
 </style>

@@ -1,16 +1,14 @@
 <template>
-  <adny-card :bordered="false" class="dashboard-bar-line header-solid">
-    <div class="dashboard-card-title">
-      <div>
-        <h6>Sales Overview😎😎</h6>
-        <p>than last year <span class="text-success">+66%</span></p>
-      </div>
-      <div>
-        <i class="mdi mdi-dots-vertical icon-dot"></i>
-      </div>
+  <n-card class="dashboard-bar-line header-solid shadow-md">
+    <template #cover>
+      <bar-echart class="dashboard-bar-line-chart" height="200px"></bar-echart>
+    </template>
+    <div class="flex mt-4 justify-between">
+      <n-button>随机刷新</n-button>
+      <n-button>添加一条</n-button>
+      <n-button>移除一条</n-button>
     </div>
-    <bar-echart height="340px"></bar-echart>
-  </adny-card>
+  </n-card>
 </template>
 
 <script lang="ts">
@@ -27,31 +25,16 @@ export default defineComponent({
 })
 </script>
 <style lang="less" scoped>
-.text-success {
-  color: #67c23a;
+.dashboard-bar-line-chart {
+  border-radius: 6px;
 }
 .dashboard-bar-line {
+  overflow: hidden;
+  border-radius: 6px;
   h6,
   p {
     font-size: 20px;
     margin: 15px;
   }
-}
-.dashboard-card-title {
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-  img {
-    height: 200px;
-    position: absolute;
-    top: -20%;
-    right: 15%;
-    // z-index: 999;
-  }
-}
-.icon-dot {
-  font-size: 30px;
-  border-radius: 50%;
-  padding: 3px 10px;
 }
 </style>
