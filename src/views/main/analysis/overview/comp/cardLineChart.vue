@@ -3,11 +3,7 @@
     <template #cover>
       <bar-echart class="dashboard-bar-line-chart" height="200px"></bar-echart>
     </template>
-    <div class="flex mt-4 justify-between">
-      <n-button>随机刷新</n-button>
-      <n-button>添加一条</n-button>
-      <n-button>移除一条</n-button>
-    </div>
+    <div class="flex mt-4 justify-between"></div>
   </n-card>
 </template>
 

@@ -6,6 +6,11 @@
       </div>
       <div class="counter-card">
         <span :style="{ color, fontSize }" :class="[size]">{{ animationCounterFixed }}</span>
+        <span
+          :style="{ color, fontSize, paddingLeft: '10px' }"
+          :class="[size]"
+          v-if="suffix"
+        >{{ suffix }}</span>
         <span class="counter-rate-class" v-if="risingRate || declineRate">
           <span style="color: #67c23a" v-if="risingRate">
             <i class="mdi mdi-arrow-up"></i>
@@ -34,6 +39,7 @@
 import { defineComponent } from 'vue'
 import gsap from 'gsap'
 const props = {
+  suffix: { type: String },
   title: { type: String },
   startValue: { type: String, default: '0' },
   endValue: { type: String, default: '0' },

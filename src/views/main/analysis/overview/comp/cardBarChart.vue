@@ -4,11 +4,7 @@
     <template #cover>
       <line-echart height="200px" class="dashboard-line-echart"></line-echart>
     </template>
-    <div class="flex mt-4 justify-between">
-      <n-button>随机刷新</n-button>
-      <n-button>添加一条</n-button>
-      <n-button>移除一条</n-button>
-    </div>
+    <div class="flex mt-4 justify-between"></div>
   </n-card>
   <!-- Active Users Card -->
 </template>

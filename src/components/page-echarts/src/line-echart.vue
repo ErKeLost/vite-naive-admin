@@ -1,11 +1,6 @@
 <template>
   <div class="rose-echart">
-    <adny-echart
-      class="radio-border"
-      :width="width"
-      :height="height"
-      :options="options"
-    ></adny-echart>
+    <adny-echart class="radio-border" :width="width" :height="height" :options="options"></adny-echart>
   </div>
 </template>
 
@@ -14,6 +9,9 @@ import { computed } from 'vue'
 import AdnyEchart from '@/adny-ui/echart'
 import { IDataType } from '../types'
 import * as echarts from 'echarts'
+import { useDesignSettingStore } from '@/store/modules/designSetting'
+const designStore = useDesignSettingStore()
+const color = computed(() => designStore.appTheme)
 defineProps<{
   values?: any[]
   xlabels?: string[]
@@ -22,27 +20,7 @@ defineProps<{
 }>()
 const options = computed(() => {
   return {
-    backgroundColor: new echarts.graphic.LinearGradient(
-      0,
-      0,
-      1,
-      0,
-      [
-        {
-          offset: 0,
-          color: '#00369E'
-        },
-        {
-          offset: 0.5,
-          color: '#005CFD'
-        },
-        {
-          offset: 1,
-          color: '#A18DFF'
-        }
-      ],
-      false
-    ),
+    backgroundColor: color.value,
     title: {
       textStyle: {
         fontWeight: 'normal',
@@ -117,7 +95,7 @@ const options = computed(() => {
           width: 3
         },
         itemStyle: {
-          color: 'rgb(0,196,132)',
+          color: '#fba',
           borderColor: 'rgba(0,196,132,0.2)',
           extraCssText: 'box-shadow: 8px 8px 8px rgba(0, 0, 0, 1);',
           borderWidth: 10
@@ -134,3 +112,7 @@ const options = computed(() => {
   border-radius: 15px;
 }
 </style>
+
+.radio-border {
+  border-radius: 15px;
+}

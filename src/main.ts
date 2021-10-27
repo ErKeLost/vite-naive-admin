@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import './styles/tailwind.css'
+import i18n from '@/i18n'
 import 'animate.css'
 // mdi图标库
 import '@mdi/font/css/materialdesignicons.css'
@@ -19,5 +20,5 @@ setupStore(app)
 setUpLoginStore()
 // 使用路由
 setupRouter(app)
-app.use(pluginRegisterComponents)
+app.use(pluginRegisterComponents).use(i18n)
 app.mount('#app')

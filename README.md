@@ -1,5 +1,4 @@
-- ## License
-- ![Image text](https://note.youdao.com/yws/res/3/WEBRESOURCEf144833ada57e92f7c27cd5bbaec7b7f)
+- ## License MIT
 
 # 完成度 🚀🚀🚀
 

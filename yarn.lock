@@ -374,6 +374,44 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.0.tgz#87de7af9c231826fdd68ac7258f77c429e0e5fcf"
   integrity sha512-wdppn25U8z/2yiaT6YGquE6X8sSv7hNMWSXYSSU1jGv/yd6XqjXgTDJ8KP4NgjTXfJ3GbRjeeb8RTV7a/VpM+w==
 
+"@intlify/core-base@9.2.0-beta.15":
+  version "9.2.0-beta.15"
+  resolved "https://registry.npmmirror.com/@intlify/core-base/download/@intlify/core-base-9.2.0-beta.15.tgz#557eed344a0ba2273e1f61758854a5b67f1e3ef0"
+  integrity sha1-VX7tNEoLoic+H2F1iFSltn8ePvA=
+  dependencies:
+    "@intlify/devtools-if" "9.2.0-beta.15"
+    "@intlify/message-compiler" "9.2.0-beta.15"
+    "@intlify/shared" "9.2.0-beta.15"
+    "@intlify/vue-devtools" "9.2.0-beta.15"
+
+"@intlify/devtools-if@9.2.0-beta.15":
+  version "9.2.0-beta.15"
+  resolved "https://registry.npmmirror.com/@intlify/devtools-if/download/@intlify/devtools-if-9.2.0-beta.15.tgz#e118aca64148906f6171c10a951aa32e488788a2"
+  integrity sha1-4RispkFIkG9hccEKlRqjLkiHiKI=
+  dependencies:
+    "@intlify/shared" "9.2.0-beta.15"
+
+"@intlify/message-compiler@9.2.0-beta.15":
+  version "9.2.0-beta.15"
+  resolved "https://registry.npmmirror.com/@intlify/message-compiler/download/@intlify/message-compiler-9.2.0-beta.15.tgz#cec73087ba3fa2f47313824eedbab28c1c62030f"
+  integrity sha1-zscwh7o/ovRzE4JO7bqyjBxiAw8=
+  dependencies:
+    "@intlify/shared" "9.2.0-beta.15"
+    source-map "0.6.1"
+
+"@intlify/shared@9.2.0-beta.15":
+  version "9.2.0-beta.15"
+  resolved "https://registry.npmmirror.com/@intlify/shared/download/@intlify/shared-9.2.0-beta.15.tgz#5903eba79495f5733fda20782338d5c9fe2dd088"
+  integrity sha1-WQPrp5SV9XM/2iB4IzjVyf4t0Ig=
+
+"@intlify/vue-devtools@9.2.0-beta.15":
+  version "9.2.0-beta.15"
+  resolved "https://registry.npmmirror.com/@intlify/vue-devtools/download/@intlify/vue-devtools-9.2.0-beta.15.tgz#b5b47fd8c5b6f2222046a3e64a3026bbc76a4bbc"
+  integrity sha1-tbR/2MW28iIgRqPmSjAmu8dqS7w=
+  dependencies:
+    "@intlify/core-base" "9.2.0-beta.15"
+    "@intlify/shared" "9.2.0-beta.15"
+
 "@jest/types@^26.6.2":
   version "26.6.2"
   resolved "https://registry.yarnpkg.com/@jest/types/-/types-26.6.2.tgz#bef5a532030e1d88a2f5a6d933f84e97226ed48e"
@@ -671,7 +709,7 @@
     "@vue/compiler-dom" "3.2.19"
     "@vue/shared" "3.2.19"
 
-"@vue/devtools-api@^6.0.0-beta.11", "@vue/devtools-api@^6.0.0-beta.14", "@vue/devtools-api@^6.0.0-beta.18":
+"@vue/devtools-api@^6.0.0-beta.11", "@vue/devtools-api@^6.0.0-beta.13", "@vue/devtools-api@^6.0.0-beta.14", "@vue/devtools-api@^6.0.0-beta.18":
   version "6.0.0-beta.19"
   resolved "https://registry.yarnpkg.com/@vue/devtools-api/-/devtools-api-6.0.0-beta.19.tgz#f8e88059daa424515992426a0c7ea5cde07e99bf"
   integrity sha512-ObzQhgkoVeoyKv+e8+tB/jQBL2smtk/NmC9OmFK8UqdDpoOdv/Kf9pyDWL+IFyM7qLD2C75rszJujvGSPSpGlw==
@@ -3426,15 +3464,15 @@ source-map-support@^0.5.17:
     buffer-from "^1.0.0"
     source-map "^0.6.0"
 
+source-map@0.6.1, source-map@^0.6.0, source-map@^0.6.1, source-map@~0.6.0:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
+  integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
+
 source-map@^0.5.0:
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
   integrity sha1-igOdLRAh0i0eoUyA2OpGi6LvP8w=
-
-source-map@^0.6.0, source-map@^0.6.1, source-map@~0.6.0:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
-  integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
 
 sourcemap-codec@^1.4.4:
   version "1.4.8"
@@ -3921,6 +3959,16 @@ vue-demi@*:
   version "0.11.4"
   resolved "https://registry.yarnpkg.com/vue-demi/-/vue-demi-0.11.4.tgz#6101992fe4724cf5634018a16e953f3052e94e2a"
   integrity sha512-/3xFwzSykLW2HiiLie43a+FFgNOcokbBJ+fzvFXd0r2T8MYohqvphUyDQ8lbAwzQ3Dlcrb1c9ykifGkhSIAk6A==
+
+vue-i18n@^9.2.0-beta.15:
+  version "9.2.0-beta.15"
+  resolved "https://registry.npmmirror.com/vue-i18n/download/vue-i18n-9.2.0-beta.15.tgz#0d1a5802d32e098c09859b15ca6401bec038a52c"
+  integrity sha1-DRpYAtMuCYwJhZsVymQBvsA4pSw=
+  dependencies:
+    "@intlify/core-base" "9.2.0-beta.15"
+    "@intlify/shared" "9.2.0-beta.15"
+    "@intlify/vue-devtools" "9.2.0-beta.15"
+    "@vue/devtools-api" "^6.0.0-beta.13"
 
 vue-router@^4.0.11:
   version "4.0.11"

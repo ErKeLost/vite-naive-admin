@@ -1,27 +1,20 @@
 <template>
   <div>
-    <!-- <n-grid :y-gap="24" :x-gap="24" item-responsive responsive="screen">
-      <n-gi span="xs:24 m:24 xl:24">
+    <n-dropdown trigger="hover" @select="handleSelect" :options="options">
+      <n-button>国际化</n-button>
+    </n-dropdown>
+    <div>{{ tm('title') }}</div>
+    <n-grid cols="2" item-responsive responsive="screen" :x-gap="12" :y-gap="8">
+      <n-gi span="xs:2 m:2 xl:2">
         <AdnyHeader />
       </n-gi>
-      <n-gi span="xs:24 m:12 xl:12">
-        <CardBarChart />
-      </n-gi>
-      <n-gi span="xs:24 m:12 xl:12">
-        <CardLineChart />
-      </n-gi>
-    </n-grid>-->
-    <n-grid cols="1 s:2 m:3 l:4 xl:4 2xl:4" responsive="screen" :x-gap="12" :y-gap="8">
-      <n-gi span="xs:24 m:24 xl:24">
-        <AdnyHeader />
-      </n-gi>
-      <n-gi span="xs:24 m:12 xl:12">
+      <n-gi span="xs:2 s:2 m:2 xl:2">
         <AdnyCenter />
       </n-gi>
-      <n-gi span="xs:24 m:12 xl:2">
+      <n-gi span="xs:2 m:2 xl:1">
         <CardLineChart />
       </n-gi>
-      <n-gi span="xs:24 m:12 xl:2">
+      <n-gi span="xs:2 m:2 xl:1">
         <CardBarChart />
       </n-gi>
     </n-grid>
@@ -33,6 +26,24 @@ import AdnyHeader from './comp/header.vue'
 import AdnyCenter from './comp/center.vue'
 import CardLineChart from './comp/cardLineChart.vue'
 import CardBarChart from './comp/cardBarChart.vue'
+import { i18n } from '@/i18n'
+import { useI18n } from "vue-i18n";
+import { reactive } from 'vue'
+const { tm } = useI18n();
+const handleSelect = (key: string, value: string) => {
+  // useI18n().locale.value = 'en-US'
+  console.log(value.value);
+
+  i18n.global.locale.value = value.value
+}
+const options = [{
+  value: 'zh-CN',
+  label: '中文',
+},
+{
+  value: 'en-US',
+  label: 'English',
+}]
 </script>
 
 <style scoped>
