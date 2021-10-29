@@ -41,6 +41,11 @@
       </div>
       <!-- 个人中心 -->
       <div class="layout-header-trigger layout-header-trigger-min">
+        <n-dropdown trigger="hover" @select="langSelect" :options="langOptions">
+          <AdnyIcon icon="translate" size="" />
+        </n-dropdown>
+      </div>
+      <div class="layout-header-trigger layout-header-trigger-min">
         <n-dropdown trigger="hover" @select="avatarSelect" :options="avatarOptions">
           <div class="avatar">
             <n-avatar
@@ -57,6 +62,7 @@
 </template>
 
 <script setup lang="ts">
+import { i18n } from '@/i18n'
 import { AdnySlideMenu } from '@/layout'
 import { useProjectSetting } from '@/hooks/setting/useProjectSetting'
 import { NDialogProvider, useDialog, useMessage } from 'naive-ui'
@@ -117,11 +123,28 @@ const avatarOptions = [
     key: 2
   }
 ]
+const langOptions = [
+  {
+    label: '简体中文',
+    key: 'zh-CN'
+  },
+  {
+    label: 'English',
+    key: 'en-US'
+  }
+]
 const avatarSelect = (value: number) => {
   if (value === 2) {
     router.push({ path: '/login' })
     loginStore.logOut()
     localStorage.clear()
+  }
+}
+const langSelect = (value: number) => {
+  if (value === 'zh-CN') {
+    i18n.global.locale.value = 'zh-CN'
+  } else {
+    i18n.global.locale.value = 'en-US'
   }
 }
 const { navMode, navTheme, headerSetting, crumbsSetting } = toRefs(

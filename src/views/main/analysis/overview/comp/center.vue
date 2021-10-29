@@ -33,6 +33,8 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useDesignSettingStore } from '@/store/modules/designSetting'
+import { useI18n } from "vue-i18n";
+const { tm } = useI18n();
 const designStore = useDesignSettingStore()
 const color = computed(() => designStore.appTheme)
 const cardList = [
@@ -107,7 +109,7 @@ const cardList = [
     ]
   },
   {
-    title: '埃克罗斯特',
+    title: tm('erkelost'),
     titleIcon: 'facebook',
     declineRate: '6.8',
     endValue: '32',

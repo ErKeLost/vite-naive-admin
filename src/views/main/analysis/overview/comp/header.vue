@@ -20,9 +20,9 @@
             </n-gi>
             <n-gi span="s:2 m:3 l:3 xl:3">
               <div class="flex px-10 flex-col justify-between mt-4">
-                <span class="text-3xl text-gray-400">Erkelost & Adny</span>
-                <span class="py-2 text-1xl text-gray-400">Product Designer</span>
-                <span class="py-2 name">Adny.com</span>
+                <span class="text-3xl text-gray-400">{{ tm('erkelost') }} & {{ tm('adny') }}</span>
+                <span class="py-2 text-1xl text-gray-400">{{ tm('product')}}</span>
+                <span class="py-2 name">{{ tm('adny')}}.com</span>
                 <n-space>
                   <n-tag size="small" closable>Adny-Nuxt</n-tag>
                   <n-tag size="small" type="success" closable>Adny-Design</n-tag>
@@ -70,27 +70,33 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useI18n } from "vue-i18n";
 import { useDesignSettingStore } from '@/store/modules/designSetting'
+import file1 from '@/assets/images/file1.svg'
+import file2 from '@/assets/images/file2.svg'
+import file3 from '@/assets/images/file3.svg'
+import file4 from '@/assets/images/file4.svg'
+const { tm } = useI18n();
 const designStore = useDesignSettingStore()
 const color = computed(() => designStore.appTheme)
 const fileList = [
   {
-    src: 'https://templates-flatlogic.herokuapp.com/vue-material/img/folder-pink.ca4eda18.svg',
+    src: file1,
     file: 'ADNY-UI',
     count: 156
   },
   {
-    src: 'https://templates-flatlogic.herokuapp.com/vue-material/img/folder-blue.f2a0a032.svg',
+    src: file2,
     file: 'ADNY-CLI',
     count: 59
   },
   {
-    src: 'https://templates-flatlogic.herokuapp.com/vue-material/img/folder-yellow.d553d1c6.svg',
+    src: file3,
     file: 'ADNY-FRAME',
     count: 78
   },
   {
-    src: 'https://templates-flatlogic.herokuapp.com/vue-material/img/folder-green.3bc0a33b.svg',
+    src: file4,
     file: 'ADNY-ADMIN',
     count: 138
   }

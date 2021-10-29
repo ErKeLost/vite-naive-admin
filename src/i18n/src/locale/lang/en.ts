@@ -1,3 +1,7 @@
 export const enLang = {
-  title: 'title'
+  projectSet: 'Project Set',
+  file: 'Submit Document Today',
+  adny: 'ADNY',
+  erkelost: 'ERKELOST',
+  product: 'product Designer'
 }

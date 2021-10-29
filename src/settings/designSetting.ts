@@ -22,7 +22,7 @@ export const appThemeList: string[] = [
 
 const setting = {
   //深色主题
-  darkTheme: true,
+  darkTheme: false,
   //系统主题色
   appTheme: '#C22DF0FF',
   //系统内置主题色列表

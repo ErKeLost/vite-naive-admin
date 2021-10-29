@@ -1,9 +1,5 @@
 <template>
   <div>
-    <n-dropdown trigger="hover" @select="handleSelect" :options="options">
-      <n-button>国际化</n-button>
-    </n-dropdown>
-    <div>{{ tm('title') }}</div>
     <n-grid cols="2" item-responsive responsive="screen" :x-gap="12" :y-gap="8">
       <n-gi span="xs:2 m:2 xl:2">
         <AdnyHeader />
@@ -30,7 +26,7 @@ import { i18n } from '@/i18n'
 import { useI18n } from "vue-i18n";
 import { reactive } from 'vue'
 const { tm } = useI18n();
-const handleSelect = (key: string, value: string) => {
+const handleSelect = (key: string, value: any) => {
   // useI18n().locale.value = 'en-US'
   console.log(value.value);
 
