@@ -35,7 +35,10 @@ import {
   NCol,
   NRow,
   NTabs,
-  NTabPane
+  NTabPane,
+  NRadio,
+  NRadioGroup,
+  NCheckboxGroup
 } from 'naive-ui'
 
 export const components = [
@@ -76,5 +79,9 @@ export const components = [
   NCol,
   NRow,
   NTabs,
-  NTabPane
+  NTabPane,
+  NCheckbox,
+  NCheckboxGroup,
+  NRadio,
+  NRadioGroup,
 ]

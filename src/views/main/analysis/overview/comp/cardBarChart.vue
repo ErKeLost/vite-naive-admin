@@ -2,9 +2,9 @@
   <!-- Active Users Card -->
   <n-card class="dashboard-bar-chart shadow-md">
     <template #cover>
-      <line-echart height="200px" class="dashboard-line-echart"></line-echart>
+      <line-echart class="dashboard-line-echart"></line-echart>
     </template>
-    <div class="flex mt-4 justify-between"></div>
+    <!-- <div class="flex mt-4 justify-between"></div> -->
   </n-card>
   <!-- Active Users Card -->
 </template>

@@ -1,9 +1,9 @@
 <template>
   <n-card class="dashboard-bar-line header-solid shadow-md">
     <template #cover>
-      <bar-echart class="dashboard-bar-line-chart" height="200px"></bar-echart>
+      <bar-echart class="dashboard-bar-line-chart"></bar-echart>
     </template>
-    <div class="flex mt-4 justify-between"></div>
+    <!-- <div class="flex mt-4 justify-between"></div> -->
   </n-card>
 </template>
 
