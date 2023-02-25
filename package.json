@@ -17,7 +17,7 @@
     "*.{vue,js,ts,tsx}": "eslint --fix"
   },
   "dependencies": {
-    "@vicons/antd": "^0.11.0",
+    "@vicons/antd": "^0.12.0",
     "@vicons/ionicons5": "^0.11.0",
     "animate.css": "^4.1.1",
     "axios": "^0.22.0",
